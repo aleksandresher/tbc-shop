@@ -22,7 +22,7 @@ export default function RootLayout({
   params: { locale },
 }: PageProps) {
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>
         <ReactQueryProvider>
           <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
