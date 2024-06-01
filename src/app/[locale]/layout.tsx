@@ -4,6 +4,7 @@ import "../globals.css";
 import { I18nProviderClient } from "../locales/client";
 import { ReactNode } from "react";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
+import MainProvider from "../providers/SessionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <ReactQueryProvider>
-          <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
+          <I18nProviderClient locale={locale}>
+            <MainProvider>{children}</MainProvider>
+          </I18nProviderClient>
         </ReactQueryProvider>
       </body>
     </html>
