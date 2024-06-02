@@ -1,14 +1,11 @@
 import LocaleChange from "../components/language/LocalChange";
-import Login from "../components/authorization/Login";
-import SignOut from "../components/authorization/SignOut";
+import AuthorizationWrapper from "../components/authorization/AuthorizationWrapper";
 
-export default function Home() {
+export default function Home({ params }: { params: { locale: string } }) {
   return (
-    <main className="flex gap-4  ">
+    <main className="flex gap-4 justify-end px-12 py-4  ">
       <LocaleChange />
-      <h1>Home page</h1>
-
-      <SignOut />
+      <AuthorizationWrapper locale={params.locale} />
     </main>
   );
 }

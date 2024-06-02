@@ -25,6 +25,7 @@ export default function Login() {
   const router = useRouter();
   const { data, status: session } = useSession();
   const [providers, setProviders] = useState<Provider[]>([]);
+  console.log(data, session);
 
   useEffect(() => {
     if (data?.user) {
@@ -53,17 +54,20 @@ export default function Login() {
     formState: { errors },
   } = useForm<UserProps>();
 
-  //   const onSubmit = (formData: UserProps) => {
-  //     console.log(formData);
-  //     // mutation.mutate(formData);
-  //   };
+  const onSubmit = async (formData: UserProps) => {
+    console.log(formData);
+    signIn("credentials", {
+      email: formData.email,
+      password: formData.password,
+    });
+  };
   return (
     <div className="flex flex-col items-center p-12 gap-4">
       <div className="w-4/5 flex justify-start">
         <h1 className="text-[32px] font-tbc-bold">ავტორიზაცია</h1>
       </div>
       {/* <form onSubmit={handleSubmit(onSubmit)} className="w-4/5 mt-7"> */}
-      <form className="w-4/5 mt-7">
+      <form className="w-4/5 mt-7" onSubmit={handleSubmit(onSubmit)}>
         <div className=" flex flex-col gap-4">
           <div className="w-full flex items-center gap-2">
             <input
@@ -96,7 +100,7 @@ export default function Login() {
           <p className=" font-tbc-bold">პაროლის აღდგენა</p>
         </div>
         <div className="w-full flex justify-center items-center bg-[#3c74ff] text-white p-4 rounded-[25px] hover:bg-[#5a88fd] cursor-pointer">
-          შესვლა
+          <button type="submit">შესვლა</button>
         </div>
       </form>
       <div className="w-4/5 flex justify-between mt-6">
