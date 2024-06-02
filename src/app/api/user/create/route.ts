@@ -1,6 +1,10 @@
 import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
+import { EmailTemplate } from "../../../components/EmailTemplate";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -18,15 +22,20 @@ export async function POST(req: Request) {
       );
     }
 
-    // const hashedPassword = createHash("sha256")
-    //   .update(body.password)
-    //   .digest("hex");
-
     const hashedPassword = await bcrypt.hash(body.password, 12);
-    console.log("hashed password", hashedPassword);
+
     const newUser =
       await sql`INSERT INTO users (name, email, password) VALUES (${body.name}, ${body.email}, ${hashedPassword});`;
-    console.log(newUser);
+
+    const { data, error } = await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: [body.email],
+      subject: "Hello world",
+      react: EmailTemplate({ firstName: "John" }) as React.ReactElement,
+    });
+    if (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
     return NextResponse.json({
       user: newUser,
       message: "User created successfully",
