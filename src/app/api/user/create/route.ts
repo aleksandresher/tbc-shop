@@ -26,12 +26,15 @@ export async function POST(req: Request) {
 
     const newUser =
       await sql`INSERT INTO users (name, email, password) VALUES (${body.name}, ${body.email}, ${hashedPassword});`;
-
+    const token = bcrypt.genSaltSync();
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: [body.email],
-      subject: "Hello world",
-      react: EmailTemplate({ firstName: "John" }) as React.ReactElement,
+      subject: "verify email",
+      react: EmailTemplate({
+        firstName: body.name,
+        message: `http://localhost:3000/api/email-verify?email=${body.email}&token=${token}`,
+      }) as React.ReactElement,
     });
     if (error) {
       return NextResponse.json({ error }, { status: 500 });
