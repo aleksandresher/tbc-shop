@@ -9,11 +9,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log("body", body);
+    // console.log("body", body);
 
     const { rows: users } =
       await sql`SELECT * FROM users WHERE email = ${body.email}`;
-    console.log(users);
+    // console.log(users);
 
     if (users.length > 0) {
       return NextResponse.json(
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const hashedPassword = await bcrypt.hash(body.password, 12);
     const token = bcrypt.genSaltSync();
-    console.log("token while creating user", token);
+    // console.log("token while creating user", token);
 
     const newUser =
       await sql`INSERT INTO users (name, email, password, token) VALUES (${body.name}, ${body.email}, ${hashedPassword}, ${token});`;

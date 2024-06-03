@@ -27,3 +27,17 @@ export async function createUser(userData: UserProps) {
     throw error;
   }
 }
+
+export async function getProducts({ email }: { email: string }) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/get-products?email=${email}`,
+      {}
+    );
+    const { products } = await response.json();
+    return products.rows;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
