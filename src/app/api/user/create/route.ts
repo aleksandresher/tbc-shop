@@ -23,10 +23,11 @@ export async function POST(req: Request) {
     }
 
     const hashedPassword = await bcrypt.hash(body.password, 12);
+    const token = bcrypt.genSaltSync();
 
     const newUser =
-      await sql`INSERT INTO users (name, email, password) VALUES (${body.name}, ${body.email}, ${hashedPassword});`;
-    const token = bcrypt.genSaltSync();
+      await sql`INSERT INTO users (name, email, password, token) VALUES (${body.name}, ${body.email}, ${hashedPassword}, ${token});`;
+
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: [body.email],

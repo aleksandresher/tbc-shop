@@ -12,6 +12,6 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   <div>
     <h1>Welcome, {firstName}!</h1>
     <p>Follow link bellow to verify your account on tbc-shop</p>
-    <a>{message}</a>
+    <a href={message}>{message}</a>
   </div>
 );
