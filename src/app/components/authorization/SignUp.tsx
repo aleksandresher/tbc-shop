@@ -17,6 +17,7 @@ export default function SignUp() {
   const onSubmit = async (data: UserProps) => {
     try {
       const response = await fetch("/api/user/create", {
+        cache: "no-cache",
         method: "POST",
         headers: {
           "Content-Type": "application/json",

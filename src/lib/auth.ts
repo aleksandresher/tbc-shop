@@ -6,6 +6,8 @@ import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 
+export const dynamic = "force-dynamic";
+
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/en/login",
@@ -28,7 +30,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials;
         console.log("email", email, "password", password);
         const user = await sql`SELECT * FROM users WHERE email = ${email}`;
-        console.log("user", user);
+        // console.log("user", user);
 
         const passwordsMatch = await bcrypt.compare(
           password,
@@ -37,11 +39,16 @@ export const authOptions: NextAuthOptions = {
         console.log("match", passwordsMatch);
 
         if (user && passwordsMatch) {
-          return {
-            id: user.rows[0].id,
-            name: user.rows[0].name,
-            email: user.rows[0].email,
-          };
+          if (user.rows[0].isverified) {
+            return {
+              id: user.rows[0].id,
+              name: user.rows[0].name,
+              email: user.rows[0].email,
+              isverified: user.rows[0].isverified,
+            };
+          } else {
+            throw new Error("User not verified");
+          }
         } else {
           throw new Error("Invalid credentials");
         }
@@ -74,10 +81,27 @@ export const authOptions: NextAuthOptions = {
         return false;
       }
     },
+    async session({ session, token }) {
+      session.user = {
+        ...session.user,
+        id: token.id,
+        email: token.email,
+        name: token.name,
+        isverified: token.isverified,
+      };
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.isverified = user.isverified;
+      }
+      return token;
+    },
   },
-
   session: {
     strategy: "jwt",
   },
-  // Additional configuration will be added here
 };

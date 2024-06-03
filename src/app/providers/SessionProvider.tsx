@@ -7,6 +7,8 @@ interface MainProviderProps {
       name: string;
       email: string;
       image: string;
+      id: string;
+      isverified: boolean;
     };
     expires: string;
   } | null;

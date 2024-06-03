@@ -24,6 +24,7 @@ export async function POST(req: Request) {
 
     const hashedPassword = await bcrypt.hash(body.password, 12);
     const token = bcrypt.genSaltSync();
+    console.log("token while creating user", token);
 
     const newUser =
       await sql`INSERT INTO users (name, email, password, token) VALUES (${body.name}, ${body.email}, ${hashedPassword}, ${token});`;
