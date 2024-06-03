@@ -66,7 +66,7 @@ export const authOptions: NextAuthOptions = {
           if (users.length === 0) {
             console.log(user);
             const result =
-              await sql`INSERT INTO users (name, email) VALUES (${user.name}, ${user.email}) RETURNING id`;
+              await sql`INSERT INTO users (name, email, isverified) VALUES (${user.name}, ${user.email}, true) RETURNING id`;
             console.log("New user created:", result);
             return true;
           } else {
