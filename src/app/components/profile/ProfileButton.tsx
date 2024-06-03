@@ -14,6 +14,7 @@ import {
 
 export default function ProfileButton({ locale }: { locale: string }) {
   const { data, status: session } = useSession();
+  console.log(data);
 
   return (
     <DropdownMenu>
@@ -34,7 +35,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`${locale}/dashboard`}>Dashboard</Link>
+          <Link href={`${locale}/dashboard/${data?.user.id}`}>Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>

@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -66,8 +67,7 @@ export const authOptions: NextAuthOptions = {
           if (users.length === 0) {
             console.log(user);
             const result =
-              await sql`INSERT INTO users (name, email, isverified) VALUES (${user.name}, ${user.email}, true) RETURNING id`;
-            console.log("New user created:", result);
+              await sql`INSERT INTO users (name, email, isverified, providerId) VALUES (${user.name}, ${user.email}, true, ${user.id}) RETURNING id`;
             return true;
           } else {
             console.log("User already exists with email:", user.email);
@@ -81,7 +81,8 @@ export const authOptions: NextAuthOptions = {
         return false;
       }
     },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
+      console.log("token", token, user, session);
       session.user = {
         ...session.user,
         id: token.id,
@@ -90,8 +91,11 @@ export const authOptions: NextAuthOptions = {
         isverified: token.isverified,
       };
       return session;
+
+      //   110762457640271535622
     },
     async jwt({ token, user }) {
+      //   console.log("token", token);
       if (user) {
         token.id = user.id;
         token.email = user.email;
