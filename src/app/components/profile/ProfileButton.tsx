@@ -11,10 +11,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
 
 export default function ProfileButton({ locale }: { locale: string }) {
+  const [userId, setUserId] = useState("");
   const { data, status: session } = useSession();
-  console.log(data);
+  const email = data?.user.email as string;
+  async function getUser({ email }: { email: string }) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/get-user?email=${email}`,
+        {}
+      );
+      const { user } = await response.json();
+      setUserId(user.id);
+      return user;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  }
+
+  useEffect(() => {
+    getUser({ email });
+  }, [data]);
 
   return (
     <DropdownMenu>
@@ -35,7 +55,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`${locale}/dashboard/${data?.user.id}`}>Dashboard</Link>
+          <Link href={`${locale}/dashboard/${userId}`}>Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>

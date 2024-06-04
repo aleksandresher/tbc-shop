@@ -5,7 +5,7 @@ export default function Dashboard({ params }: { params: { userId: string } }) {
   return (
     <div className="py-18">
       <CreateProduct />
-      <ProductListWrapper />
+      <ProductListWrapper userId={params.userId} />
     </div>
   );
 }

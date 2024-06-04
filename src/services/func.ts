@@ -28,14 +28,14 @@ export async function createUser(userData: UserProps) {
   }
 }
 
-export async function getProducts({ email }: { email: string }) {
+export async function getProducts({ id }: { id: string }) {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/get-products?email=${email}`,
-      {}
+      `http://localhost:3000/api/get-products?id=${id}`
     );
     const { products } = await response.json();
-    return products.rows;
+    console.log("products", products);
+    return products;
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
