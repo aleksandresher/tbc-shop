@@ -14,7 +14,7 @@ export default function ProdoctList({ id }: { id: string }) {
   }
   return (
     <section>
-      <ProductTable data={data} />
+      <ProductTable data={data} userId={id} />
     </section>
   );
 }

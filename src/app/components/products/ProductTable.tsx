@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import EditProduct from "./edit/ProductEditor";
 
 interface Product {
   id: string;
@@ -17,9 +18,10 @@ interface Product {
 
 interface ProductTableProps {
   data: Product[];
+  userId: string;
 }
 
-export default function ProductTable({ data }: ProductTableProps) {
+export default function ProductTable({ data, userId }: ProductTableProps) {
   return (
     <Table>
       <TableCaption>A list of your products.</TableCaption>
@@ -32,11 +34,17 @@ export default function ProductTable({ data }: ProductTableProps) {
       </TableHeader>
       <TableBody>
         {data?.map((product: Product) => (
-          <TableRow id={product.id}>
+          <TableRow key={product.id}>
             <TableCell className="font-medium">{product.title}</TableCell>
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.price}</TableCell>
-            <TableCell>Edit</TableCell>
+            <TableCell>
+              <EditProduct
+                product={product}
+                userId={userId}
+                productId={product.id}
+              />
+            </TableCell>
             <TableCell>Delete</TableCell>
           </TableRow>
         ))}
