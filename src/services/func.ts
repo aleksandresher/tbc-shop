@@ -31,7 +31,8 @@ export async function createUser(userData: UserProps) {
 export async function getProducts({ id }: { id: string }) {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/get-products?id=${id}`
+      `http://localhost:3000/api/get-products?id=${id}`,
+      { cache: "no-cache" }
     );
     const { products } = await response.json();
     console.log("products", products);

@@ -1,6 +1,8 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
   const id = query.get("id");

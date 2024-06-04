@@ -1,4 +1,3 @@
-"use client";
 import ProdoctList from "./ProductList";
 
 export default function ProductListWrapper({ userId }: { userId: string }) {

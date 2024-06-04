@@ -3,9 +3,6 @@ import { useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
@@ -22,9 +19,10 @@ interface UserType {
 }
 
 const CreateProduct = () => {
+  const queryClient = useQueryClient();
   const { data, status } = useSession();
   const userEmail = data?.user?.email;
-  const queryClient = useQueryClient();
+
   const {
     register,
     handleSubmit,
@@ -49,7 +47,9 @@ const CreateProduct = () => {
 
       const userData = await response.json();
 
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      console.log("created");
+
       setOpen(false);
       console.log("Product created successfully:", userData);
     } catch (error) {
