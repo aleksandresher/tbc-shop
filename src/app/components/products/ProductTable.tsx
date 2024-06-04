@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import EditProduct from "./edit/ProductEditor";
+import DeleteProduct from "./delete/DeleteProduct";
 
 interface Product {
   id: string;
@@ -45,7 +46,9 @@ export default function ProductTable({ data, userId }: ProductTableProps) {
                 productId={product.id}
               />
             </TableCell>
-            <TableCell>Delete</TableCell>
+            <TableCell>
+              <DeleteProduct productId={product.id} userId={userId} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
