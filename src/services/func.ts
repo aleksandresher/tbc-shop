@@ -54,3 +54,19 @@ export async function getAllProduct() {
     return [];
   }
 }
+
+export async function loadProductsByCategory({
+  category,
+}: {
+  category: string;
+}) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/${category}/all`);
+    const { items } = await response.json();
+
+    return items;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
