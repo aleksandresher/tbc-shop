@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCart } from "@/services/func";
 import DecreaseButton from "./DecreaseBtn";
 import IncreaseButton from "./IncreaseBtn";
+import DeleteButton from "./DeleteBtn";
 
 interface ItemProps {
   cart_id: number;
@@ -55,7 +56,7 @@ export default function Cart() {
             <span className="flex justify-center">
               ${Number(cartItem.price) * cartItem.quantity}
             </span>
-            {/* <DeleteButton product_id={cartItem.product_id} /> */}
+            <DeleteButton product_id={cartItem.product_id} />
           </div>
         ))}
       </div>
