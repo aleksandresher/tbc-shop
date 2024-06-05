@@ -1,7 +1,9 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request, res: NextResponse) {
+export const revalidate = 0;
+
+export async function POST(request: Request) {
   const { productId, userId, product_type } = await request.json();
 
   if (!productId || !userId || !product_type) {
@@ -19,7 +21,7 @@ export async function POST(request: Request, res: NextResponse) {
     if (existingCartItem.length > 0) {
       return NextResponse.json(
         { error: "Product already in cart" },
-        { status: 400 }
+        { status: 409 }
       );
     } else {
       await sql`

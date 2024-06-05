@@ -22,14 +22,15 @@ export default function Cart() {
 
   return (
     <div>
-      {data.items.map((item: any) => (
+      {JSON.stringify(data)}
+      {/* {data.items.map((item: any) => (
         <div key={item.cart_id}>
           <h3>{item.title}</h3>
           <p>{item.description}</p>
           <p>{item.price}</p>
           <p>Quantity: {item.quantity}</p>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
