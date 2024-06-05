@@ -48,7 +48,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
             width={30}
             height={30}
             alt="user image"
-            className="rounded-lg"
+            className="rounded-[6px]"
           />
         ) : (
           <Image src="/auth.png" width={30} height={30} alt="user icon" />
