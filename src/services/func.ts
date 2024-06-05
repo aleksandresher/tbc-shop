@@ -70,3 +70,11 @@ export async function loadProductsByCategory({
     return [];
   }
 }
+
+export async function getCart({ userId }: { userId: string }) {
+  const response = await fetch(`/api/cart/get?user_id=${userId}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch cart items");
+  }
+  return response.json();
+}

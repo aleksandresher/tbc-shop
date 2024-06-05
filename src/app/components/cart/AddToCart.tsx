@@ -1,3 +1,6 @@
+"use client";
+import { useQueryClient } from "@tanstack/react-query";
+
 export default function AddToCart({
   productId,
   userId,
@@ -7,6 +10,7 @@ export default function AddToCart({
   userId: number;
   product_type: string;
 }) {
+  const queryClient = useQueryClient();
   const clickHandler = async () => {
     try {
       const response = await fetch("/api/cart/add", {
@@ -22,6 +26,7 @@ export default function AddToCart({
       }
 
       const responseData = await response.json();
+      queryClient.invalidateQueries({ queryKey: ["cart"] });
 
       console.log("Product added to cart successfully:", responseData);
     } catch (error) {

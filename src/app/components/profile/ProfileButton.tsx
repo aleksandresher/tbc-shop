@@ -24,7 +24,10 @@ export default function ProfileButton({ locale }: { locale: string }) {
         {}
       );
       const { user } = await response.json();
+
       setUserId(user.id);
+      localStorage.setItem("userId", user.id);
+
       return user;
     } catch (error) {
       console.error("Error fetching products:", error);
