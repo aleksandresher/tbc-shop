@@ -29,7 +29,7 @@ interface ProductTableProps {
   productId: string;
 }
 
-const EditProduct = ({ product, userId, productId }: ProductTableProps) => {
+const EditFaceProduct = ({ product, userId, productId }: ProductTableProps) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +42,7 @@ const EditProduct = ({ product, userId, productId }: ProductTableProps) => {
 
   const onSubmit = async (data: Product) => {
     try {
-      const response = await fetch(`/api/product/edit`, {
+      const response = await fetch(`/api/product/edit/face`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const EditProduct = ({ product, userId, productId }: ProductTableProps) => {
       }
 
       const productData = await response.json();
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["face"] });
       setOpen(false);
       console.log("product edited successfully:", productData);
     } catch (error) {
@@ -154,4 +154,4 @@ const EditProduct = ({ product, userId, productId }: ProductTableProps) => {
   );
 };
 
-export default EditProduct;
+export default EditFaceProduct;

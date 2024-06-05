@@ -5,6 +5,7 @@ export async function DELETE(req: NextRequest) {
   const query = req.nextUrl.searchParams;
   const userId = query.get("userId");
   const productId = query.get("productId");
+  const category = query.get("category");
   console.log("userId", userId, "productId", productId);
 
   try {

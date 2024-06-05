@@ -1,9 +1,9 @@
-import ProdoctList from "./ProductList";
+import ProductsTabs from "./ProductsTab";
 
 export default function ProductListWrapper({ userId }: { userId: string }) {
   return (
     <section>
-      <ProdoctList id={userId} />
+      <ProductsTabs id={userId} />
     </section>
   );
 }

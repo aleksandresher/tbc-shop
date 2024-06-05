@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -7,22 +8,34 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import EditProduct from "./edit/ProductEditor";
+import EditBodyProduct from "./edit/BodyProductEditor";
 import DeleteProduct from "./delete/DeleteProduct";
+import { useQuery } from "@tanstack/react-query";
+import { getBodyProducts } from "@/services/func";
 
 interface Product {
   id: string;
   title: string;
   description: string;
   price: number;
+  category: string;
+  numberofvotes: number;
+  totalvotes: number;
 }
 
-interface ProductTableProps {
-  data: Product[];
-  userId: string;
+interface BodyProductTableProps {
+  id: string;
 }
 
-export default function ProductTable({ data, userId }: ProductTableProps) {
+export default function BodyProductTable({ id }: BodyProductTableProps) {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["body"],
+    queryFn: () => getBodyProducts({ id }),
+  });
+
+  if (isLoading) {
+    return <div>loading</div>;
+  }
   return (
     <Table>
       <TableCaption>A list of your products.</TableCaption>
@@ -40,14 +53,14 @@ export default function ProductTable({ data, userId }: ProductTableProps) {
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.price}</TableCell>
             <TableCell>
-              <EditProduct
+              <EditBodyProduct
                 product={product}
-                userId={userId}
+                userId={id}
                 productId={product.id}
               />
             </TableCell>
             <TableCell>
-              <DeleteProduct productId={product.id} userId={userId} />
+              <DeleteProduct productId={product.id} userId={id} />
             </TableCell>
           </TableRow>
         ))}
