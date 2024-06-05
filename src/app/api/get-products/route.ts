@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const { rows: products } =
-      await sql`SELECT * FROM products WHERE user_id = ${id} ORDER BY id`;
+      await sql`SELECT * FROM products WHERE user_id = ${id} ORDER BY`;
 
     return NextResponse.json({ products }, { status: 200 });
   } catch (error) {

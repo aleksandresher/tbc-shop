@@ -42,3 +42,15 @@ export async function getProducts({ id }: { id: string }) {
     return [];
   }
 }
+
+export async function getAllProduct() {
+  try {
+    const response = await fetch(`http://localhost:3000/api/allproduct`);
+    const { products } = await response.json();
+    console.log("products", products);
+    return products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
