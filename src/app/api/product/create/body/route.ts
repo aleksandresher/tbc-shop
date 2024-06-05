@@ -13,13 +13,15 @@ export async function POST(request: Request) {
       await sql`SELECT * FROM users WHERE email = ${userEmail}`;
     if (users.length > 0) {
       const userId = users[0].id;
-      await sql`INSERT INTO products (title, description, category, price, user_id) VALUES (${title}, ${description}, ${category},${price}, ${userId});`;
+      await sql`INSERT INTO bodyproducts (title, description, category, price, user_id) VALUES (${title}, ${description}, ${category},${price}, ${userId});`;
     }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
 
-  const products = await sql`SELECT * FROM products;`;
+  const products = await sql`SELECT * FROM bodyproducts;`;
 
   return NextResponse.json({ products }, { status: 200 });
 }
+
+// id, title, description, category, price, numberofvotes, totalvotes, user_id
