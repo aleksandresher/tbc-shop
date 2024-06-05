@@ -1,7 +1,11 @@
+import AddToCart from "../../cart/AddToCart";
+
 interface Card {
+  id: number;
   title: string;
   price: number;
   description: string;
+  category: string;
 }
 
 interface CardProps {
@@ -14,6 +18,7 @@ export default function SingleProductCard({ item }: CardProps) {
       <h1>{item.title}</h1>
       <p>{item.price}</p>
       <p>{item.description}</p>
+      <AddToCart productId={item.id} userId={12} product_type={item.category} />
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { getAllProduct } from "@/services/func";
 import SingleProductCard from "../card/SingleProductCard";
 
 interface Product {
-  id: string;
+  id: number;
   title: string;
   price: number;
   category: string;

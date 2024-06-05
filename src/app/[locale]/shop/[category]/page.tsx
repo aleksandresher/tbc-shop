@@ -50,7 +50,7 @@ export default function GenericCategory() {
         <div className="w-4/5 flex-grow">
           <div className=" grid grid-cols-4 gap-4 ">
             {data?.map((item) => {
-              return <SingleProductCard item={item} key={item._id} />;
+              return <SingleProductCard item={item} key={item.id} />;
             })}
           </div>
         </div>
