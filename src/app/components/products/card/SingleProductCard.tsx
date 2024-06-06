@@ -19,7 +19,7 @@ export default function SingleProductCard({ item }: CardProps) {
       <h1>{item.title}</h1>
       <p>{item.price}</p>
       <p>{item.description}</p>
-      <AddToCart productId={item.id} userId={12} product_type={item.category} />
+      <AddToCart productId={item.id} product_type={item.category} />
       <RateProduct productId={Number(item.id)} category={item.category} />
     </section>
   );

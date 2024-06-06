@@ -4,23 +4,23 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function AddToCart({
   productId,
-  userId,
   product_type,
 }: {
   productId: number;
-  userId: number;
   product_type: string;
 }) {
   const queryClient = useQueryClient();
 
   const addToCart = async () => {
     console.log("Attempting to add to cart");
+    console.log("productId:", productId);
+    console.log("product_type:", product_type);
     const response = await fetch("/api/cart/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productId, userId, product_type }),
+      body: JSON.stringify({ productId, product_type }),
     });
 
     if (!response.ok) {
@@ -42,7 +42,7 @@ export default function AddToCart({
         (oldCart: { items: any[] } | undefined) => ({
           items: [
             ...(oldCart?.items || []),
-            { id: Math.random(), productId, userId, product_type, quantity: 1 },
+            { id: Math.random(), productId, product_type, quantity: 1 },
           ],
         })
       );

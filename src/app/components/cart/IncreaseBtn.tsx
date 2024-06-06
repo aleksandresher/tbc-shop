@@ -3,10 +3,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function IncreaseButton({ productId }: { productId: number }) {
   const queryClient = useQueryClient();
-  let userId = "";
-  if (typeof window !== "undefined") {
-    userId = localStorage.getItem("userId") || "";
-  }
 
   const increaseQuantity = async (productId: number) => {
     const response = await fetch("/api/cart/increase", {
@@ -14,7 +10,7 @@ export default function IncreaseButton({ productId }: { productId: number }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productId, userId }),
+      body: JSON.stringify({ productId }),
     });
 
     if (!response.ok) {

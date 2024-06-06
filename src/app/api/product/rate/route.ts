@@ -1,22 +1,16 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 export async function POST(req: NextRequest) {
-  const { userId, productId, rating, category } = await req.json();
-  console.log(
-    "userId",
-    userId,
-    "productId",
-    productId,
-    "rating",
-    rating,
-    "category",
-    category
-  );
+  const { productId, rating, category } = await req.json();
+  const token = await getToken({ req, secret });
+  const userId = token?.id;
 
   const productIdNumber = parseInt(productId);
   const ratingNumber = parseInt(rating);
-  console.log("num id", productIdNumber, "ratin", ratingNumber);
 
   if (!userId || !productId || !rating) {
     return NextResponse.json(

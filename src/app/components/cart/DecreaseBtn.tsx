@@ -9,10 +9,6 @@ export default function DecreaseButton({
   quantity: number;
 }) {
   const queryClient = useQueryClient();
-  let userId = "";
-  if (typeof window !== "undefined") {
-    userId = localStorage.getItem("userId") || "";
-  }
 
   const decreaseQuantity = async (productId: number) => {
     const response = await fetch("/api/cart/decrease", {
@@ -20,7 +16,7 @@ export default function DecreaseButton({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productId, userId }),
+      body: JSON.stringify({ productId }),
     });
 
     if (!response.ok) {

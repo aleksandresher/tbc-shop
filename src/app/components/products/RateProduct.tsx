@@ -16,10 +16,6 @@ export default function RateProduct({
 }) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  let userId = "";
-  if (typeof window !== "undefined") {
-    userId = localStorage.getItem("userId") || "";
-  }
 
   const {
     register,
@@ -36,7 +32,6 @@ export default function RateProduct({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: userId,
           productId: productId,
           category,
           rating: data.rating,

@@ -23,14 +23,10 @@ interface Product {
   amount: number;
 }
 
-interface FaceProductTableProps {
-  id: string;
-}
-
-export default function FaceProductTable({ id }: FaceProductTableProps) {
+export default function FaceProductTable() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["face"],
-    queryFn: () => getFaceProducts({ id }),
+    queryFn: () => getFaceProducts(),
   });
 
   if (isLoading) {
@@ -55,14 +51,10 @@ export default function FaceProductTable({ id }: FaceProductTableProps) {
             <TableCell>{product.price}</TableCell>
             <TableCell>{product.amount}</TableCell>
             <TableCell>
-              <EditFaceProduct
-                product={product}
-                userId={id}
-                productId={product.id}
-              />
+              <EditFaceProduct product={product} productId={product.id} />
             </TableCell>
             <TableCell>
-              <DeleteProduct productId={product.id} userId={id} />
+              <DeleteProduct productId={product.id} />
             </TableCell>
           </TableRow>
         ))}

@@ -1,16 +1,19 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 export async function DELETE(req: NextRequest) {
+  const token = await getToken({ req, secret });
+  const id = token?.id;
+
   const query = req.nextUrl.searchParams;
-  const userId = query.get("userId");
   const productId = query.get("productId");
   const category = query.get("category");
-  console.log("userId", userId, "productId", productId);
 
   try {
-    if (!userId || !productId)
-      throw new Error("userId and productId are required");
+    if (!id || !productId) throw new Error("userId and productId are required");
 
     const { rows: product } =
       await sql`SELECT * FROM products WHERE id = ${productId};`;
@@ -18,7 +21,7 @@ export async function DELETE(req: NextRequest) {
     if (product.length === 0) {
       throw new Error("Product not found");
     }
-    if (product[0].user_id.toString() !== userId) {
+    if (product[0].user_id.toString() !== id) {
       console.log("error");
       throw new Error("Unauthorized");
     }

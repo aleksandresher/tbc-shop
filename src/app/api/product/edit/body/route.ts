@@ -1,5 +1,8 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 export async function PUT(req: NextRequest) {
   const { id, data } = await req.json();

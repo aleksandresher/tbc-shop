@@ -16,13 +16,9 @@ interface ItemProps {
 }
 
 export default function Cart() {
-  let userId = "";
-  if (typeof window !== "undefined") {
-    userId = localStorage.getItem("userId") || "";
-  }
   const { data, isLoading, error } = useQuery({
     queryKey: ["cart"],
-    queryFn: () => getCart({ userId }),
+    queryFn: () => getCart(),
   });
   if (isLoading) {
     return <div>Loading...</div>;
@@ -35,7 +31,6 @@ export default function Cart() {
   return (
     <section className="w-[400px] flex flex-col gap-2">
       <h1 className=" font-bold">Shopping cart</h1>
-      {/* {JSON.stringify(data)} */}
       <p>You have {data?.items?.length} item in your cart</p>
       <div className="flex flex-col gap-3">
         {data?.items?.map((cartItem: ItemProps) => (

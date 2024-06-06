@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
+
 export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
-  const query = req.nextUrl.searchParams;
-  const id = query.get("id");
+  const token = await getToken({ req, secret });
+  const id = token?.id;
 
   try {
     if (!id) {
@@ -15,8 +19,6 @@ export async function GET(req: NextRequest) {
     const { rows: products } = await sql`
       SELECT * FROM faceproducts WHERE user_id = ${id}
     `;
-
-    console.log(products);
 
     return NextResponse.json({ products }, { status: 200 });
   } catch (err) {

@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FaceProductTable from "./FaceProductsTable";
 import BodyProductTable from "./BodyProductsTable";
 
-export default function ProductsTabs({ id }: { id: string }) {
+export default function ProductsTabs() {
   return (
     <Tabs defaultValue="face" className="w-full">
       <TabsList>
@@ -11,10 +11,10 @@ export default function ProductsTabs({ id }: { id: string }) {
         <TabsTrigger value="body">Body Products</TabsTrigger>
       </TabsList>
       <TabsContent value="face">
-        <FaceProductTable id={id} />
+        <FaceProductTable />
       </TabsContent>
       <TabsContent value="body">
-        <BodyProductTable id={id} />
+        <BodyProductTable />
       </TabsContent>
     </Tabs>
   );

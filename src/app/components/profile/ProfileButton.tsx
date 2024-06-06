@@ -14,7 +14,6 @@ import {
 import { useEffect, useState } from "react";
 
 export default function ProfileButton({ locale }: { locale: string }) {
-  const [userId, setUserId] = useState("");
   const { data, status: session } = useSession();
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
@@ -24,9 +23,6 @@ export default function ProfileButton({ locale }: { locale: string }) {
         {}
       );
       const { user } = await response.json();
-
-      setUserId(user.id);
-      localStorage.setItem("userId", user.id);
 
       return user;
     } catch (error) {
@@ -58,7 +54,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`${locale}/dashboard/${userId}`}>Dashboard</Link>
+          <Link href={`${locale}/dashboard`}>Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>

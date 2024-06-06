@@ -9,6 +9,7 @@ interface MainProviderProps {
       image: string;
       id: string;
       isverified: boolean;
+      token: string;
     };
     expires: string;
   } | null;

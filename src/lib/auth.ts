@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/en/login",
   },
-  // Providers array will be configured in the next steps
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -29,15 +29,12 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials) return null;
         const { email, password } = credentials;
-        console.log("email", email, "password", password);
         const user = await sql`SELECT * FROM users WHERE email = ${email}`;
-        // console.log("user", user);
 
         const passwordsMatch = await bcrypt.compare(
           password,
           user.rows[0].password
         );
-        console.log("match", passwordsMatch);
 
         if (user && passwordsMatch) {
           if (user.rows[0].isverified) {
@@ -65,7 +62,6 @@ export const authOptions: NextAuthOptions = {
             await sql`SELECT * FROM users WHERE email = ${user.email}`;
 
           if (users.length === 0) {
-            console.log(user);
             const result =
               await sql`INSERT INTO users (name, email, isverified, providerId) VALUES (${user.name}, ${user.email}, true, ${user.id}) RETURNING id`;
             return true;
@@ -82,7 +78,6 @@ export const authOptions: NextAuthOptions = {
       }
     },
     async session({ session, token, user }) {
-      //   console.log("token", token, user, session);
       session.user = {
         ...session.user,
         id: token.id,
@@ -95,12 +90,14 @@ export const authOptions: NextAuthOptions = {
       //   110762457640271535622
     },
     async jwt({ token, user }) {
-      //   console.log("token", token);
       if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
-        token.isverified = user.isverified;
+        token = {
+          ...token,
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          isverified: user.isverified,
+        };
       }
       return token;
     },

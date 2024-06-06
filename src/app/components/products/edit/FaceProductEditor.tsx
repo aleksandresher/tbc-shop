@@ -25,11 +25,10 @@ interface Product {
 
 interface ProductTableProps {
   product: Product;
-  userId: string;
   productId: string;
 }
 
-const EditFaceProduct = ({ product, userId, productId }: ProductTableProps) => {
+const EditFaceProduct = ({ product, productId }: ProductTableProps) => {
   const {
     register,
     handleSubmit,
@@ -47,7 +46,7 @@ const EditFaceProduct = ({ product, userId, productId }: ProductTableProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data, userId, id: productId }),
+        body: JSON.stringify({ data, id: productId }),
       });
 
       if (!response.ok) {

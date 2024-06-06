@@ -1,10 +1,15 @@
 import { sql } from "@vercel/postgres";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 export const revalidate = 0;
 
-export async function POST(request: Request) {
-  const { productId, userId, product_type } = await request.json();
+export async function POST(req: NextRequest) {
+  const { productId, product_type } = await req.json();
+  const token = await getToken({ req, secret });
+  const userId = token?.id;
 
   if (!productId || !userId || !product_type) {
     return NextResponse.json(

@@ -35,7 +35,6 @@ export async function getProducts({ id }: { id: string }) {
       { cache: "no-cache" }
     );
     const { products } = await response.json();
-    console.log("products", products);
     return products;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -47,7 +46,6 @@ export async function getAllProduct() {
   try {
     const response = await fetch(`http://localhost:3000/api/allproduct`);
     const { products } = await response.json();
-    console.log("products", products);
     return products;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -71,18 +69,18 @@ export async function loadProductsByCategory({
   }
 }
 
-export async function getCart({ userId }: { userId: string }) {
-  const response = await fetch(`/api/cart/get?user_id=${userId}`);
+export async function getCart() {
+  const response = await fetch(`/api/cart/get`);
   if (!response.ok) {
     throw new Error("Failed to fetch cart items");
   }
   return response.json();
 }
 
-export async function getFaceProducts({ id }: { id: string }) {
+export async function getFaceProducts() {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/get-products/face?id=${id}`,
+      `http://localhost:3000/api/get-products/face`,
       { cache: "no-cache" }
     );
     const { products } = await response.json();
@@ -94,10 +92,10 @@ export async function getFaceProducts({ id }: { id: string }) {
   }
 }
 
-export async function getBodyProducts({ id }: { id: string }) {
+export async function getBodyProducts() {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/get-products/body?id=${id}`,
+      `http://localhost:3000/api/get-products/body`,
       { cache: "no-cache" }
     );
     const { products } = await response.json();

@@ -7,6 +7,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 import { useForm } from "react-hook-form";
 
@@ -19,11 +20,13 @@ interface Product {
 
 interface ProductTableProps {
   product: Product;
-  userId: string;
   productId: string;
 }
 
-const EditBodyProduct = ({ product, userId, productId }: ProductTableProps) => {
+const EditBodyProduct = ({ product, productId }: ProductTableProps) => {
+  const { data: session } = useSession();
+
+  console.log(session);
   const {
     register,
     handleSubmit,
@@ -41,7 +44,7 @@ const EditBodyProduct = ({ product, userId, productId }: ProductTableProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data, userId, id: productId }),
+        body: JSON.stringify({ data, id: productId }),
       });
 
       if (!response.ok) {

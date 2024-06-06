@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET;
 
 export const revalidate = 0;
 
 export async function GET(req: NextRequest) {
-  const query = req.nextUrl.searchParams;
-  const userId = query.get("user_id");
-
+  const token = await getToken({ req, secret });
+  const userId = token?.id;
   try {
     const { rows: cartItems } = await sql`
       SELECT 

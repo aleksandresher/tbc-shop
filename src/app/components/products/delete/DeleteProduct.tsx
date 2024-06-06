@@ -2,18 +2,12 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 
-export default function DeleteProduct({
-  userId,
-  productId,
-}: {
-  userId: string;
-  productId: string;
-}) {
+export default function DeleteProduct({ productId }: { productId: string }) {
   const queryClient = useQueryClient();
-  const deleteProduct = async (userId: string, productId: string) => {
+  const deleteProduct = async (productId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/product/delete?category&userId=${userId}&productId=${productId}`,
+        `http://localhost:3000/api/product/delete?category&productId=${productId}`,
         {
           method: "DELETE",
         }
@@ -32,10 +26,7 @@ export default function DeleteProduct({
     }
   };
   return (
-    <button
-      className="bg-red-300"
-      onClick={() => deleteProduct(userId, productId)}
-    >
+    <button className="bg-red-300" onClick={() => deleteProduct(productId)}>
       Delete
     </button>
   );

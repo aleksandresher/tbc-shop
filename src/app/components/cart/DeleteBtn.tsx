@@ -3,11 +3,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import DeleteIcon from "../svg/DeleteIcon";
 
 export default function DeleteButton({ product_id }: { product_id: number }) {
-  let userId = "";
-  if (typeof window !== "undefined") {
-    userId = localStorage.getItem("userId") || "";
-  }
-
   const queryClient = useQueryClient();
   const handleClick = async (productId: number) => {
     try {
@@ -16,7 +11,7 @@ export default function DeleteButton({ product_id }: { product_id: number }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId, userId }),
+        body: JSON.stringify({ productId }),
       });
 
       if (!response.ok) {

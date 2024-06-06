@@ -23,14 +23,10 @@ interface Product {
   totalvotes: number;
 }
 
-interface BodyProductTableProps {
-  id: string;
-}
-
-export default function BodyProductTable({ id }: BodyProductTableProps) {
+export default function BodyProductTable() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["body"],
-    queryFn: () => getBodyProducts({ id }),
+    queryFn: () => getBodyProducts(),
   });
 
   if (isLoading) {
@@ -53,14 +49,10 @@ export default function BodyProductTable({ id }: BodyProductTableProps) {
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.price}</TableCell>
             <TableCell>
-              <EditBodyProduct
-                product={product}
-                userId={id}
-                productId={product.id}
-              />
+              <EditBodyProduct product={product} productId={product.id} />
             </TableCell>
             <TableCell>
-              <DeleteProduct productId={product.id} userId={id} />
+              <DeleteProduct productId={product.id} />
             </TableCell>
           </TableRow>
         ))}
