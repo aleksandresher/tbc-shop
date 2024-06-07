@@ -3,6 +3,8 @@
 import { useSession } from "next-auth/react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import ImageUploadPage from "../../ImageUpload/ImageUploader";
+import { useState } from "react";
 
 interface UserType {
   title: string;
@@ -15,6 +17,7 @@ const BodyProductCreator = () => {
   const queryClient = useQueryClient();
   const { data, status } = useSession();
   const userEmail = data?.user?.email;
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const {
     register,
@@ -29,7 +32,7 @@ const BodyProductCreator = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, userEmail }),
+        body: JSON.stringify({ ...data, userEmail, imageUrl }),
       });
 
       if (!response.ok) {
@@ -133,6 +136,7 @@ const BodyProductCreator = () => {
           Create
         </button>
       </form>
+      <ImageUploadPage onUploadComplete={(url) => setImageUrl(url)} />
     </section>
   );
 };

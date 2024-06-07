@@ -12,6 +12,7 @@ import EditBodyProduct from "./edit/BodyProductEditor";
 import DeleteProduct from "./delete/DeleteProduct";
 import { useQuery } from "@tanstack/react-query";
 import { getBodyProducts } from "@/services/func";
+import Image from "next/image";
 
 interface Product {
   id: string;
@@ -21,6 +22,7 @@ interface Product {
   category: string;
   numberofvotes: number;
   totalvotes: number;
+  image: string;
 }
 
 export default function BodyProductTable() {
@@ -40,6 +42,7 @@ export default function BodyProductTable() {
           <TableHead>title</TableHead>
           <TableHead>description</TableHead>
           <TableHead>price</TableHead>
+          <TableHead>image</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -48,6 +51,14 @@ export default function BodyProductTable() {
             <TableCell className="font-medium">{product.title}</TableCell>
             <TableCell>{product.description}</TableCell>
             <TableCell>{product.price}</TableCell>
+            <TableCell>
+              <Image
+                src={product?.image || "/no-image.svg"}
+                width={50}
+                height={50}
+                alt="product image"
+              />
+            </TableCell>
             <TableCell>
               <EditBodyProduct product={product} productId={product.id} />
             </TableCell>
