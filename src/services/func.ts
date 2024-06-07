@@ -1,3 +1,5 @@
+import { Url } from "next/dist/shared/lib/router/router";
+
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface UserProps {
@@ -104,5 +106,27 @@ export async function getBodyProducts() {
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
+  }
+}
+
+export async function updateUser({ avatar }: { avatar: Url }) {
+  try {
+    const res = await fetch(`${URL}/api/user/update`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(avatar),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to update user");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
   }
 }

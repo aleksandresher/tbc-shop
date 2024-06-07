@@ -10,6 +10,7 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret });
   const id = token?.id;
+  console.log("id", id, "token", token);
 
   try {
     if (!id) {
