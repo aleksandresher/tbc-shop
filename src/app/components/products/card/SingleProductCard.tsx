@@ -24,7 +24,9 @@ export default function SingleProductCard({ item }: CardProps) {
       <p>{item.description}</p>
       <AddToCart productId={item.id} product_type={item.category} />
       <RateProduct productId={Number(item.id)} category={item.category} />
-      <Link href={`products/${item.category}/${item.id}`}>View Product</Link>
+      <Link href={`products/${item.category}/${item.id}/purchase`}>
+        View Product
+      </Link>
       {/* <span className="border border-gray-400">
         {" "}
         <Image
@@ -42,7 +44,6 @@ export default function SingleProductCard({ item }: CardProps) {
           src="https://res.cloudinary.com/dlku11fhn/image/upload/v1717839136/Custom_Shopify_Size-245_400x_nwuk6d.webp"
         />
       </span> */}
-      <a href="https://buy.stripe.com/test_eVag177L009le8EfYY">payment</a>
     </section>
   );
 }
