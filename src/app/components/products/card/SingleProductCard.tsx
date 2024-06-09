@@ -28,7 +28,7 @@ export default function SingleProductCard({ item }: CardProps) {
       <h1>The Ordinary</h1>
       <p>Mini Glycolic Acid 7% Toner</p>
 
-      <RateProduct productId={Number(item.id)} category={item.category} />
+      {/* <RateProduct productId={Number(item.id)} category={item.category} /> */}
       <p>$6.00</p>
       <AddToCart productId={item.id} product_type={item.category} />
       {/* <Link href={`products/${item.category}/${item.id}/purchase`}>

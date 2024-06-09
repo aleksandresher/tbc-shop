@@ -1,4 +1,7 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
+import RateProduct from "../RateProduct";
 
 export default function Single() {
   return (
@@ -15,6 +18,7 @@ export default function Single() {
 
         <p className="font-bold">$6.00</p>
       </div>
+      <RateProduct productId={3} category="body" />
     </section>
   );
 }

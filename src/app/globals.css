@@ -8,3 +8,6 @@
     @apply appearance-none;
   }
 }
+svg.star-svg {
+  display: inline;
+}
