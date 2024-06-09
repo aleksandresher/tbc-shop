@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 
-export function BrandsMenu() {
+export function BrandsMenu({ locale }: { locale: string }) {
   return (
     <section className="w-full">
       {" "}
@@ -102,7 +102,7 @@ export function BrandsMenu() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              Skincare
+              <Link href={`/${locale}/shop/skincare`}> Skincare</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
@@ -141,7 +141,7 @@ export function BrandsMenu() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              Hair
+              <Link href={`/${locale}/shop/hair`}> Hair</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
@@ -180,7 +180,7 @@ export function BrandsMenu() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              Bath & Body
+              <Link href={`/${locale}/shop/body`}> Bath & Body</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">

@@ -33,19 +33,19 @@ export default function MenuCarousel() {
           <Link href="">Brands</Link>
         </CarouselItem>
         <CarouselItem
-          key={2}
+          key={3}
           className="flex justify-center items-center basis-1/3 h-[50px] border border-gray-200"
         >
           <Link href="">Skincare</Link>
         </CarouselItem>
         <CarouselItem
-          key={2}
+          key={4}
           className="flex justify-center items-center basis-1/3 h-[50px] border border-gray-200"
         >
           <Link href="">Hair</Link>
         </CarouselItem>
         <CarouselItem
-          key={2}
+          key={5}
           className="flex justify-center items-center basis-1/3 h-[50px] border border-gray-200"
         >
           <Link href="">Bath & Body</Link>

@@ -19,14 +19,21 @@ interface CardProps {
 export default function SingleProductCard({ item }: CardProps) {
   return (
     <section className="flex flex-col border border-gray-200 p-3">
-      <h1>{item.title}</h1>
-      <p>{item.price}</p>
-      <p>{item.description}</p>
-      <AddToCart productId={item.id} product_type={item.category} />
+      <Image
+        src="https://res.cloudinary.com/dlku11fhn/image/upload/v1717965155/multi-beptide_omalm3.webp"
+        width={250}
+        height={250}
+        alt="oidinaru"
+      />
+      <h1>The Ordinary</h1>
+      <p>Mini Glycolic Acid 7% Toner</p>
+
       <RateProduct productId={Number(item.id)} category={item.category} />
-      <Link href={`products/${item.category}/${item.id}/purchase`}>
+      <p>$6.00</p>
+      <AddToCart productId={item.id} product_type={item.category} />
+      {/* <Link href={`products/${item.category}/${item.id}/purchase`}>
         View Product
-      </Link>
+      </Link> */}
       {/* <span className="border border-gray-400">
         {" "}
         <Image
