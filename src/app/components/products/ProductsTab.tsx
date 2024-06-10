@@ -7,8 +7,9 @@ export default function ProductsTabs() {
   return (
     <Tabs defaultValue="face" className="w-full">
       <TabsList>
-        <TabsTrigger value="face">Face Products</TabsTrigger>
-        <TabsTrigger value="body">Body Products</TabsTrigger>
+        <TabsTrigger value="face">Skin Products</TabsTrigger>
+        <TabsTrigger value="body">Hair Products</TabsTrigger>
+        <TabsTrigger value="body">Body & Wash Products</TabsTrigger>
       </TabsList>
       <TabsContent value="face">
         <FaceProductTable />

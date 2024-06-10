@@ -54,7 +54,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`${locale}/dashboard`}>Dashboard</Link>
+          <Link href={`/dashboard`}>Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>

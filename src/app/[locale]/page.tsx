@@ -7,13 +7,8 @@ export default function Home({ params }: { params: { locale: string } }) {
   console.log("locale from homme", params.locale);
   return (
     <section>
-      <HeaderWrapper locale={params.locale} />
       <MenuWraper locale={params.locale} />
       <Gallery />
-
-      {/* <AllProduct /> */}
-      {/* <CategoryWrapper locale={params.locale} /> */}
-      {/* <Single /> */}
     </section>
   );
 }

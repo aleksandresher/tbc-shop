@@ -5,6 +5,7 @@ import { I18nProviderClient } from "../locales/client";
 import { ReactNode } from "react";
 import ReactQueryProvider from "../providers/ReactQueryProvider";
 import MainProvider from "../providers/SessionProvider";
+import HeaderWrapper from "../components/header/HeaderWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryProvider>
           <I18nProviderClient locale={locale}>
-            <MainProvider>{children}</MainProvider>
+            <MainProvider>
+              <HeaderWrapper locale={locale} />
+              {children}
+            </MainProvider>
           </I18nProviderClient>
         </ReactQueryProvider>
       </body>

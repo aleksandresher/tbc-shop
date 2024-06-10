@@ -5,6 +5,7 @@ import LocaleChange from "../language/LocalChange";
 import AuthorizationWrapper from "../authorization/AuthorizationWrapper";
 import ContactWrapper from "./ContactWrapper";
 import ShopWrapper from "./ShopWrapper";
+import Link from "next/link";
 
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
@@ -13,7 +14,9 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
       style={{ gridTemplateColumns: "3fr 1fr 1fr" }}
     >
       <span className=" flex items-center md:justify-end gap-10 col-span-1">
-        <h1 className="hidden sm:block font-bold text-lg">Care</h1>
+        <Link href="/">
+          <h1 className="hidden sm:block font-bold text-lg">Care</h1>
+        </Link>
         <Search />
       </span>
 

@@ -10,8 +10,10 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import { useI18n } from "@/app/locales/client";
 
 export function BrandsMenu({ locale }: { locale: string }) {
+  const t = useI18n();
   return (
     <section className="w-full">
       {" "}
@@ -19,7 +21,7 @@ export function BrandsMenu({ locale }: { locale: string }) {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              New
+              {t("new")}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="w-full grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
@@ -63,37 +65,97 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              Brands
+              {t("brands")}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
+              <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-2 grid-rows-3">
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
+                      href={`/${locale}/shop`}
                       className="hover:underline hover:underline-offset-2"
                     >
-                      The Ordinary
+                      {t("all")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
+                      href={`/${locale}/shop?brand=${t("ordinary")}`}
                       className="hover:underline hover:underline-offset-2"
                     >
-                      ISISPHARMA
+                      {t("ordinary")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
+                      href={`/${locale}/shop?brand=${t("isispharma")}`}
                       className="hover:underline hover:underline-offset-2"
                     >
-                      AAVRANI
+                      {t("isispharma")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("nuxe")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("nuxe")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("fanola")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("fanola")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("avene")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("avene")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("echosline")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("echosline")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("svr")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("svr")}
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={`/${locale}/shop?brand=${t("mizon")}`}
+                      className="hover:underline hover:underline-offset-2"
+                    >
+                      {t("mizon")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
@@ -102,7 +164,7 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/skincare`}> Skincare</Link>
+              <Link href={`/${locale}/shop/skincare`}> {t("skincare")}</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
@@ -141,7 +203,7 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/hair`}> Hair</Link>
+              <Link href={`/${locale}/shop/hair`}> {t("hair")}</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
@@ -180,7 +242,7 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/body`}> Bath & Body</Link>
+              <Link href={`/${locale}/shop/body`}> {t("bath")}</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">

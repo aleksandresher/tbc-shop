@@ -56,7 +56,7 @@ export default function RateProduct({
     }
   };
   return (
-    <section>
+    <section className="flex items-center">
       <div className="App">
         <Rating
           onClick={handleRating}
@@ -64,6 +64,10 @@ export default function RateProduct({
           className="hidden"
         />
       </div>
+      <span className="flex gap-1">
+        <p>{total}</p>
+        <p>({amount})</p>
+      </span>
     </section>
   );
 }
