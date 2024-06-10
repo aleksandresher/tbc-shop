@@ -4,6 +4,7 @@ import BlogWrapper from "./BlogWrapper";
 import LocaleChange from "../language/LocalChange";
 import AuthorizationWrapper from "../authorization/AuthorizationWrapper";
 import ContactWrapper from "./ContactWrapper";
+import ShopWrapper from "./ShopWrapper";
 
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
@@ -17,6 +18,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
       </span>
 
       <span className="hidden sm:flex gap-4 justify-end items-center ">
+        <ShopWrapper locale={locale} />
         <BlogWrapper locale={locale} />
         <ContactWrapper locale={locale} />
       </span>

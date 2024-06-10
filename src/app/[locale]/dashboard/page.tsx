@@ -1,10 +1,10 @@
 import ProductListWrapper from "@/app/components/products/ProductListWrapper";
-import ProductCategoryMenu from "@/app/components/products/menu/ProductCategoryMenu";
+import ProductCreator from "@/app/components/products/create/ProductCreator";
 
 export default function Dashboard() {
   return (
     <div className="py-18">
-      <ProductCategoryMenu />
+      <ProductCreator />
       <ProductListWrapper />
     </div>
   );

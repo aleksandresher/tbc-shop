@@ -9,16 +9,19 @@ interface Product {
 }
 
 export default function RateProduct({
+  amount,
+  total,
   productId,
-  category,
 }: {
   productId: number;
-  category: string;
+  amount: number;
+  total: number;
 }) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
 
   const [rating, setRating] = useState(0);
+  const avarageRating = total / amount;
 
   const {
     register,
@@ -37,7 +40,6 @@ export default function RateProduct({
         },
         body: JSON.stringify({
           productId,
-          category,
           rating: rate,
         }),
       });
@@ -56,7 +58,11 @@ export default function RateProduct({
   return (
     <section>
       <div className="App">
-        <Rating onClick={handleRating} initialValue={3} className="hidden" />
+        <Rating
+          onClick={handleRating}
+          initialValue={avarageRating}
+          className="hidden"
+        />
       </div>
     </section>
   );

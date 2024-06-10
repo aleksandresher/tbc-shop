@@ -5,7 +5,8 @@ import { getToken } from "next-auth/jwt";
 const secret = process.env.NEXTAUTH_SECRET;
 
 export async function POST(req: NextRequest) {
-  const { productId, rating, category } = await req.json();
+  const { productId, rating } = await req.json();
+  console.log("productId", productId, "rating", rating);
   const token = await getToken({ req, secret });
   const userId = token?.id;
 
@@ -18,8 +19,7 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  const table = category === "face" ? "faceproducts" : "bodyproducts";
-  console.log("table", table);
+
   try {
     const { rowCount } = await sql`
       SELECT 1 FROM ratings WHERE user_id = ${userId} AND product_id = ${productIdNumber}
@@ -33,34 +33,15 @@ export async function POST(req: NextRequest) {
     }
 
     await sql`
-      INSERT INTO ratings (user_id, product_id, rating, category)
-      VALUES (${userId}, ${productIdNumber}, ${ratingNumber}, ${category})
+      INSERT INTO ratings (user_id, product_id, rating)
+      VALUES (${userId}, ${productIdNumber}, ${ratingNumber})
     `;
 
-    let table;
-    switch (category) {
-      case "face":
-        await sql`
-        UPDATE faceproducts
+    await sql` UPDATE products
           SET numberofvotes = numberofvotes + 1,
           totalvotes = totalvotes + ${ratingNumber}
           WHERE id = ${productIdNumber}
         `;
-        break;
-      case "body":
-        await sql`
-        UPDATE bodyproducts
-          SET numberofvotes = numberofvotes + 1,
-          totalvotes = totalvotes + ${ratingNumber}
-          WHERE id = ${productIdNumber}
-        `;
-        break;
-      default:
-        return NextResponse.json(
-          { error: "Invalid category" },
-          { status: 400 }
-        );
-    }
 
     return NextResponse.json(
       { message: "Rating submitted successfully" },

@@ -46,12 +46,15 @@ export async function getProducts({ id }: { id: string }) {
 
 export async function getAllProduct() {
   try {
-    const response = await fetch(`http://localhost:3000/api/allproduct`);
-    const { products } = await response.json();
-    return products;
+    const response = await fetch("http://localhost:3000/api/allproduct");
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    const data = await response.json();
+    return data.products || []; // Return an empty array if data.products is undefined
   } catch (error) {
     console.error("Error fetching products:", error);
-    return [];
+    throw error;
   }
 }
 
