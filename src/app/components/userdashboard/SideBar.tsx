@@ -6,7 +6,7 @@ import AddMyProduct from "./AddProduct";
 import { useState, useEffect } from "react";
 import { useCart } from "@/app/providers/ContextProvider";
 
-export default function UserSideBar() {
+export default function UserSideBar({ locale }: { locale: string }) {
   const [active, setActive] = useState("addproduct");
   const { opened } = useCart();
 
@@ -71,7 +71,7 @@ export default function UserSideBar() {
       </TabsList>
       <div className="w-full bg-[#fff]">
         <TabsContent value="myproducts" className="mt-0">
-          <MyProducts />
+          <MyProducts locale={locale} />
         </TabsContent>
         <TabsContent value="addproduct">
           <AddMyProduct />
