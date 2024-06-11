@@ -28,7 +28,6 @@ export default function Single({
         <span className="w-full flex">
           <h1>{item.brand}-</h1>
           <p> {item.title}</p>
-          <p>{item.currency}</p>
         </span>
 
         <p className="font-bold">
