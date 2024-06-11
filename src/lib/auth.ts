@@ -62,15 +62,25 @@ export const authOptions: NextAuthOptions = {
             await sql`SELECT * FROM users WHERE email = ${user.email}`;
 
           if (users.length === 0) {
-            const result =
-              await sql`INSERT INTO users (name, email, isverified, providerId) VALUES (${user.name}, ${user.email}, true, ${user.id}) RETURNING id`;
+            const result = await sql`
+              INSERT INTO users (name, email, isverified, providerId) 
+              VALUES (${user.name}, ${user.email}, true, ${user.id}) 
+              RETURNING id`;
             return true;
           } else {
+            const existingUser = users[0];
+            if (!existingUser.providerId) {
+              const updateResult = await sql`
+                UPDATE users 
+                SET providerId = ${user.id} 
+                WHERE email = ${user.email} 
+                RETURNING id`;
+            }
             console.log("User already exists with email:", user.email);
             return true;
           }
         } catch (error) {
-          console.error("Error inserting user data:", error);
+          console.error("Error inserting or updating user data:", error);
           return false;
         }
       } else {

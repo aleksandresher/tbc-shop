@@ -174,3 +174,18 @@ export async function checkUserAuthentication() {
     return "unauthenticated";
   }
 }
+
+export async function getMyProducts() {
+  try {
+    const response = await fetch("http://localhost:3000/api/products/all");
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    const data = await response.json();
+    console.log("data", data)
+    return data.products || []; 
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+}

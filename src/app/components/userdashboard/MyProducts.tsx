@@ -7,10 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import MyProductList from "./MyProductList";
 import MySearch from "./MySearch";
 
 export default function MyProducts() {
@@ -20,21 +17,14 @@ export default function MyProducts() {
       <Card>
         <CardHeader>
           <CardTitle>My products</CardTitle>
-          <CardDescription>
-            Make changes to your account here. Click save when you're done.
-          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <MySearch />
-
-          <div className="space-y-1">
-            <Label htmlFor="username">Username</Label>
-            <Input id="username" defaultValue="@peduarte" />
-          </div>
+          <MyProductList />
         </CardContent>
-        <CardFooter>
+        {/* <CardFooter>
           <Button>Save changes</Button>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
     </section>
   );
