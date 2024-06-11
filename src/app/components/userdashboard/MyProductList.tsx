@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { getMyProducts } from "@/services/func";
-import Single from "../products/card/Single";
+import MySingle from "./MySingle";
 
 interface LanguageObject {
   title: string;
@@ -12,6 +12,9 @@ interface LanguageObject {
   ldescription: string;
   price: number;
   currency: string;
+  image: string;
+  numberofvotes: number;
+  totalvotes: number;
 }
 
 interface Product {
@@ -22,15 +25,25 @@ interface Product {
   };
 }
 
+interface MappedProduct {
+  product_id: number;
+  size: number;
+  filteredLanguage: LanguageObject;
+  fullLanguages: {
+    en: LanguageObject;
+    ka: LanguageObject;
+  };
+}
+
 interface DataType {
   products: Product[];
 }
 
-interface ParamsType {
+interface MyProductListProps {
   locale: string;
 }
 
-export default function MyProductList({ locale }: { locale: string }) {
+export default function MyProductList({ locale }: MyProductListProps) {
   const { data, isLoading, error } = useQuery<DataType>({
     queryKey: ["myproducts"],
     queryFn: () => getMyProducts(),
@@ -43,19 +56,23 @@ export default function MyProductList({ locale }: { locale: string }) {
     <div>{error.message}</div>;
   }
 
-  const mappedData = Array.isArray(data)
+  const mappedData: MappedProduct[] = Array.isArray(data)
     ? data.map((product) => ({
         product_id: product.product_id,
-        languages:
+        size: product.size,
+        filteredLanguage:
           locale === "en" ? product.languages.en : product.languages.ka,
+        fullLanguages: product.languages,
       }))
     : [];
 
   return (
     <section className="grid grid-cols-4 gap-3">
-      {mappedData?.map((item: Product) => (
-        <Single
-          item={item.languages}
+      {mappedData?.map((item) => (
+        <MySingle
+          size={item.size}
+          item={item.filteredLanguage}
+          fullLanguages={item.fullLanguages}
           productId={item.product_id}
           key={item.product_id}
         />
