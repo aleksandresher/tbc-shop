@@ -24,9 +24,19 @@ export default function MyProducts({ locale }: { locale: string }) {
         <CardHeader>
           <CardTitle>My products</CardTitle>
           <div className="flex gap-2">
-            <button onClick={() => handleLanguageChange("ka")}>KA</button>
+            <button
+              onClick={() => handleLanguageChange("ka")}
+              className={`${language === "ka" ? "text-red-400" : "text-black"}`}
+            >
+              KA
+            </button>
             <p>/</p>
-            <button onClick={() => handleLanguageChange("en")}>EN</button>
+            <button
+              onClick={() => handleLanguageChange("en")}
+              className={`${language === "en" ? "text-red-400" : "text-black"}`}
+            >
+              EN
+            </button>
           </div>
         </CardHeader>
         <CardContent className="space-y-2">

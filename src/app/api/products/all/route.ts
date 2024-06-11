@@ -46,7 +46,8 @@ export async function GET(req: NextRequest) {
                   'currency', pt_en.currency,
                   'image', p.image,
                   'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes
+                  'totalvotes', p.totalvotes,
+                  'size', p.size
               ),
               'ka', jsonb_build_object(
                   'title', pt_ka.title,
@@ -59,7 +60,8 @@ export async function GET(req: NextRequest) {
                   'currency', pt_ka.currency,
                   'image', p.image,
                   'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes
+                  'totalvotes', p.totalvotes,
+                  'size', p.size
               )
           ) AS languages
       FROM
@@ -71,7 +73,9 @@ export async function GET(req: NextRequest) {
       WHERE
           pt_en.language = 'en' AND
           pt_ka.language = 'ka' AND
-          p.user_id = ${userresultid}`;
+          p.user_id = ${userresultid}
+           ORDER BY
+          p.creation_time DESC;`;
 
     console.log("products", products);
     return NextResponse.json({ products }, { status: 200 });

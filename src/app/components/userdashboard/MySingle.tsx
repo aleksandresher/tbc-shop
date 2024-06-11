@@ -16,6 +16,7 @@ interface LanguageObject {
   image: string;
   numberofvotes: number;
   totalvotes: number;
+  size: number;
 }
 
 interface FullLanguages {
@@ -24,12 +25,10 @@ interface FullLanguages {
 }
 interface MySingleProps {
   item: LanguageObject;
-  size: number;
   fullLanguages: FullLanguages;
   productId: number;
 }
 export default function MySingle({
-  size,
   item,
   fullLanguages,
   productId,
@@ -60,7 +59,7 @@ export default function MySingle({
 
       <MyRate amount={item.numberofvotes} total={item.totalvotes} />
       <span className="flex gap-2 pt-4">
-        <EditMyProduct wholeItem={fullLanguages} size={size} />
+        <EditMyProduct wholeItem={fullLanguages} productId={productId} />
         <Image
           src="/delete.svg"
           width={30}

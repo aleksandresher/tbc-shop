@@ -15,6 +15,7 @@ interface LanguageObject {
   image: string;
   numberofvotes: number;
   totalvotes: number;
+  size: number;
 }
 
 interface Product {
@@ -27,7 +28,6 @@ interface Product {
 
 interface MappedProduct {
   product_id: number;
-  size: number;
   filteredLanguage: LanguageObject;
   fullLanguages: {
     en: LanguageObject;
@@ -59,7 +59,6 @@ export default function MyProductList({ locale }: MyProductListProps) {
   const mappedData: MappedProduct[] = Array.isArray(data)
     ? data.map((product) => ({
         product_id: product.product_id,
-        size: product.size,
         filteredLanguage:
           locale === "en" ? product.languages.en : product.languages.ka,
         fullLanguages: product.languages,
@@ -70,7 +69,6 @@ export default function MyProductList({ locale }: MyProductListProps) {
     <section className="grid grid-cols-4 gap-3">
       {mappedData?.map((item) => (
         <MySingle
-          size={item.size}
           item={item.filteredLanguage}
           fullLanguages={item.fullLanguages}
           productId={item.product_id}

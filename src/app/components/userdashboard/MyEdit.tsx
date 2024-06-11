@@ -29,6 +29,7 @@ interface KaLanguageObject {
   image: string;
   numberofvotes: number;
   totalvotes: number;
+  size: number;
 }
 interface EnLanguageObject {
   title: string;
@@ -42,6 +43,7 @@ interface EnLanguageObject {
   image: string;
   numberofvotes: number;
   totalvotes: number;
+  size: number;
 }
 
 interface UserType {
@@ -66,10 +68,10 @@ interface UserType {
 
 const EditMyProduct = ({
   wholeItem,
-  size,
+  productId,
 }: {
   wholeItem: FullLanguages;
-  size: number;
+  productId: number;
 }) => {
   const { data: session } = useSession();
 
@@ -86,12 +88,12 @@ const EditMyProduct = ({
 
   const onSubmit = async (data: UserType) => {
     try {
-      const response = await fetch(`/api/product/edit/body`, {
+      const response = await fetch(`/api/products/edit`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        //   body: JSON.stringify({ data, id: productId }),
+        body: JSON.stringify({ data, productId: productId }),
       });
 
       if (!response.ok) {
@@ -99,7 +101,7 @@ const EditMyProduct = ({
       }
 
       const productData = await response.json();
-      queryClient.invalidateQueries({ queryKey: ["body"] });
+      queryClient.invalidateQueries({ queryKey: ["myproducts"] });
       setOpen(false);
       console.log("product edited successfully:", productData);
     } catch (error) {
@@ -124,9 +126,8 @@ const EditMyProduct = ({
           </button>
         </DialogTrigger>
         <div className="">
-          <DialogContent className="w-[1300px] bg-gray-300">
-            <p>{wholeItem["en"].brand}</p>
-            <form>
+          <DialogContent className=" w-screen bg-gray-300">
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex w-full">
                 <section className="flex flex-col p-3 gap-4 w-1/2">
                   <div className="flex flex-col gap-1">
@@ -281,7 +282,7 @@ const EditMyProduct = ({
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                         id="size"
-                        defaultValue={size}
+                        defaultValue={wholeItem.en.size}
                         type="number"
                         {...register("size", {
                           required: "size is required",
@@ -468,7 +469,7 @@ const EditMyProduct = ({
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                         id="size"
-                        defaultValue={size}
+                        defaultValue={wholeItem.ka.size}
                         type="number"
                         {...register("size", {
                           required: "ზომა სავალდებულოა",
