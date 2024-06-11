@@ -4,7 +4,7 @@ import UserSideBar from "@/app/components/userdashboard/SideBar";
 
 export default function Dashboard() {
   return (
-    <div className="py-18">
+    <div className="pt-8 px-14 bg-[#f1f3f6] h-lvh">
       <UserSideBar />
       {/* <ProductCreator /> */}
       {/* <ProductListWrapper /> */}

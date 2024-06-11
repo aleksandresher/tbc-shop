@@ -7,6 +7,7 @@ import ReactQueryProvider from "../providers/ReactQueryProvider";
 import MainProvider from "../providers/SessionProvider";
 import HeaderWrapper from "../components/header/HeaderWrapper";
 const inter = Inter({ subsets: ["latin"] });
+import { CartProvider } from "../providers/ContextProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,8 +30,10 @@ export default function RootLayout({
         <ReactQueryProvider>
           <I18nProviderClient locale={locale}>
             <MainProvider>
-              <HeaderWrapper locale={locale} />
-              {children}
+              <CartProvider>
+                <HeaderWrapper locale={locale} />
+                {children}
+              </CartProvider>
             </MainProvider>
           </I18nProviderClient>
         </ReactQueryProvider>

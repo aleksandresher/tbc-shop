@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import MySearch from "./MySearch";
 
 export default function MyProducts() {
   return (
@@ -24,10 +25,8 @@ export default function MyProducts() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" defaultValue="Pedro Duarte" />
-          </div>
+          <MySearch />
+
           <div className="space-y-1">
             <Label htmlFor="username">Username</Label>
             <Input id="username" defaultValue="@peduarte" />
