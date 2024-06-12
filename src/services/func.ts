@@ -182,10 +182,18 @@ export async function getMyProducts() {
       throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-    console.log("data", data)
-    return data.products || []; 
+    console.log("data", data);
+    return data.products || [];
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
   }
+}
+
+export async function getUser() {
+  const response = await fetch(`/api/user/get`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch user");
+  }
+  return response.json();
 }

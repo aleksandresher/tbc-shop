@@ -6,11 +6,9 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 export const revalidate = 0;
 
-export async function PUT(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret });
   const email = token?.email;
-  const { data } = await req.json();
-  const { name } = data;
 
   try {
     if (!email) {
@@ -18,23 +16,20 @@ export async function PUT(req: NextRequest) {
     }
 
     const result = await sql`
-      UPDATE users
-      SET  name=${name}
-      WHERE email = ${email}
-    `;
+    SELECT name, image, email
+    FROM users
+    WHERE email = ${email}
+  `;
 
     if (result.rowCount === 0) {
-      return NextResponse.json({ error: "user not found" }, { status: 404 });
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { message: "user updated successfully" },
-      { status: 200 }
-    );
+    return NextResponse.json(result.rows[0], { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to update user" },
+      { error: "Failed to retrieve user" },
       { status: 500 }
     );
   }

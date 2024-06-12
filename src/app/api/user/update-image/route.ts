@@ -4,37 +4,34 @@ import { getToken } from "next-auth/jwt";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-export const revalidate = 0;
-
 export async function PUT(req: NextRequest) {
   const token = await getToken({ req, secret });
   const email = token?.email;
-  const { data } = await req.json();
-  const { name } = data;
+  const { imageUrl } = await req.json();
 
   try {
     if (!email) {
-      return NextResponse.json({ error: "email is required" }, { status: 400 });
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     const result = await sql`
       UPDATE users
-      SET  name=${name}
+      SET image = ${imageUrl}
       WHERE email = ${email}
     `;
 
     if (result.rowCount === 0) {
-      return NextResponse.json({ error: "user not found" }, { status: 404 });
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     return NextResponse.json(
-      { message: "user updated successfully" },
+      { message: "User image updated successfully" },
       { status: 200 }
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to update user" },
+      { error: "Failed to update user image" },
       { status: 500 }
     );
   }

@@ -5,6 +5,7 @@ import MyProducts from "./MyProducts";
 import AddMyProduct from "./AddProduct";
 import { useState, useEffect } from "react";
 import { useCart } from "@/app/providers/ContextProvider";
+import MyInfoPage from "./MyInfo";
 
 export default function UserSideBar({ locale }: { locale: string }) {
   const [active, setActive] = useState("addproduct");
@@ -75,6 +76,9 @@ export default function UserSideBar({ locale }: { locale: string }) {
         </TabsContent>
         <TabsContent value="addproduct">
           <AddMyProduct />
+        </TabsContent>
+        <TabsContent value="editaccount">
+          <MyInfoPage />
         </TabsContent>
       </div>
     </Tabs>
