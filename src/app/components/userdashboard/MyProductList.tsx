@@ -67,6 +67,7 @@ export default function MyProductList({ locale }: MyProductListProps) {
 
   return (
     <section className="grid grid-cols-4 gap-3">
+      {JSON.stringify(data)}
       {mappedData?.map((item) => (
         <MySingle
           item={item.filteredLanguage}

@@ -6,32 +6,48 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 export async function POST(req: NextRequest) {
   const token = await getToken({ req, secret });
-  const userId = token?.id;
-  console.log("userId", userId);
-
   const { data } = await req.json();
-  console.log(data);
-  const {
-    entitle,
-    enbrand,
-    encountry,
-    encategory,
-    ensdescription,
-
-    enldescription,
-    katitle,
-    kabrand,
-    kacountry,
-    kacategory,
-    kasdescription,
-    kaldescription,
-    size,
-    enprice,
-    kaprice,
-    image,
-  } = data;
-
   try {
+    console.log("Received data:", data);
+
+    const {
+      entitle,
+      enbrand,
+      encountry,
+      encategory,
+      ensdescription,
+      enldescription,
+      katitle,
+      kabrand,
+      kacountry,
+      kacategory,
+      kasdescription,
+      kaldescription,
+      size,
+      enprice,
+      kaprice,
+      image,
+    } = data;
+
+    console.log("Extracted fields:", {
+      entitle,
+      enbrand,
+      encountry,
+      encategory,
+      ensdescription,
+      enldescription,
+      katitle,
+      kabrand,
+      kacountry,
+      kacategory,
+      kasdescription,
+      kaldescription,
+      size,
+      enprice,
+      kaprice,
+      image,
+    });
+
     if (
       !encategory ||
       !entitle ||
@@ -41,35 +57,82 @@ export async function POST(req: NextRequest) {
       !size ||
       !enprice ||
       !image
-    )
-      throw new Error("field is missing");
+    ) {
+      throw new Error("Required fields are missing");
+    }
 
-    const { rows: users } = await sql`SELECT * FROM users WHERE id = ${userId}`;
-    console.log("users", users);
-    if (users.length > 0) {
-      const userId = users[0].id;
-      const productResult: QueryResult<QueryResultRow> = await sql`
+    console.log("All required fields are present");
+
+    if (!token?.id) {
+      console.log("Token or user ID is missing");
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    let userIdQuery;
+    if (typeof token.id === "string" && parseInt(token.id, 10) <= 2147483647) {
+      userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
+      `;
+    } else {
+      userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE providerid = ${token.id}
+      `;
+    }
+
+    console.log("User ID query:", userIdQuery);
+
+    const { rows: users } = await userIdQuery;
+    console.log("Users from database:", users);
+
+    if (users.length === 0) {
+      console.log("User not found");
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const userId = users[0].id;
+    console.log("User ID:", userId);
+
+    const productResult: QueryResult<QueryResultRow> = await sql`
       INSERT INTO products (size, image, user_id)
       VALUES (${size}, ${image}, ${userId})
       RETURNING id;
     `;
-      const productId = productResult.rows[0].id;
-      const currencygel = "GEL";
-      const currencyUSD = "USD";
-      const en = "en";
-      const ka = "ka";
+    console.log("Product insert result:", productResult);
 
-      await sql`INSERT INTO product_translations (title, category, country, brand, language, product_id, sdescription, ldescription, price, currency ) VALUES (${entitle}, ${encategory},  ${encountry}, ${enbrand}, ${en}, ${productId}, ${ensdescription}, ${enldescription}, ${enprice}, ${currencyUSD});`;
+    const productId = productResult.rows[0].id;
+    console.log("Inserted product ID:", productId);
 
-      await sql`INSERT INTO product_translations (title, category, country, brand, language, product_id, sdescription, ldescription, price, currency ) VALUES (${katitle}, ${kacategory},  ${kacountry}, ${kabrand}, ${ka}, ${productId}, ${kasdescription}, ${kaldescription}, ${kaprice}, ${currencygel});`;
-    }
+    const currencygel = "GEL";
+    const currencyUSD = "USD";
+    const en = "en";
+    const ka = "ka";
+
+    await sql`INSERT INTO product_translations (title, category, country, brand, language, product_id, sdescription, ldescription, price, currency )
+      VALUES (${entitle}, ${encategory},  ${encountry}, ${enbrand}, ${en}, ${productId}, ${ensdescription}, ${enldescription}, ${enprice}, ${currencyUSD});`;
+    console.log("Inserted English translation");
+
+    await sql`INSERT INTO product_translations (title, category, country, brand, language, product_id, sdescription, ldescription, price, currency )
+      VALUES (${katitle}, ${kacategory},  ${kacountry}, ${kabrand}, ${ka}, ${productId}, ${kasdescription}, ${kaldescription}, ${kaprice}, ${currencygel});`;
+    console.log("Inserted Georgian translation");
+
+    const product = await sql`
+      SELECT * FROM products WHERE id = ${productId};
+    `;
+    console.log("Selected product:", product);
+
+    return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("Error processing request:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
-
-  const product = await sql`SELECT * FROM products where user_id = ${userId};`;
-  console.log(product);
-
-  return NextResponse.json({ product }, { status: 200 });
 }
