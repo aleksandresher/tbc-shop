@@ -19,7 +19,7 @@ export default function CartWrapper({ locale }: { locale: string }) {
     }
   };
   return (
-    <CartHoverCard handleClick={handleClick} />
+    <CartHoverCard handleClick={handleClick} locale={locale} />
     // <Image
     //   src="/basket.svg"
     //   width={30}

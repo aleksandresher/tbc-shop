@@ -9,9 +9,13 @@ import {
 
 interface CartHoverCardProps {
   handleClick: () => void;
+  locale: string;
 }
 
-export default function CartHoverCard({ handleClick }: CartHoverCardProps) {
+export default function CartHoverCard({
+  handleClick,
+  locale,
+}: CartHoverCardProps) {
   return (
     <section>
       <HoverCard>
@@ -25,7 +29,7 @@ export default function CartHoverCard({ handleClick }: CartHoverCardProps) {
           />
         </HoverCardTrigger>
         <HoverCardContent className="w-80 bg-gray-200">
-          <Cart />
+          <Cart locale={locale} />
         </HoverCardContent>
       </HoverCard>
     </section>
