@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import RateProduct from "../RateProduct";
 import { join } from "path";
+import AddToCart from "../../cart/AddToCart";
 
 export default function Single({
   item,
@@ -40,6 +41,7 @@ export default function Single({
         amount={item.numberofvotes}
         total={item.totalvotes}
       />
+      <AddToCart productId={productId} />
     </section>
   );
 }

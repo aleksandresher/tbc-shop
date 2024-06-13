@@ -4,7 +4,6 @@ import Gallery from "../components/landing/CategorySlidesWrapper";
 // import Single from "../components/products/card/Single";
 
 export default function Home({ params }: { params: { locale: string } }) {
-  console.log("locale from homme", params.locale);
   return (
     <section>
       <MenuWraper locale={params.locale} />
