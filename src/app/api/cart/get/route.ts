@@ -39,7 +39,6 @@ export async function GET(req: NextRequest) {
     }
 
     const userId = users[0].id;
-    console.log("User ID:", userId);
 
     try {
       const { rows: cartItems } = await sql`
@@ -88,17 +87,14 @@ export async function GET(req: NextRequest) {
         },
       }));
 
-      console.log("cart items", items);
       return NextResponse.json({ items }, { status: 200 });
     } catch (error) {
-      console.error("Error fetching cart items:", error);
       return NextResponse.json(
         { error: "Failed to fetch cart items" },
         { status: 500 }
       );
     }
   } catch (error) {
-    console.error("Error fetching user:", error);
     return NextResponse.json(
       { error: "Failed to fetch user" },
       { status: 500 }

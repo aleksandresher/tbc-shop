@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
     }
 
     const userId = users[0].id;
-    console.log("User ID:", userId);
 
     const result = await sql`
       UPDATE cart

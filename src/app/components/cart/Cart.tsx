@@ -8,6 +8,8 @@ import DeleteButton from "./DeleteBtn";
 import { useState } from "react";
 import Image from "next/image";
 import FullProductOnHover from "./FullProductOnHover";
+import Link from "next/link";
+import StripeProducts from "./StripeProducts";
 
 interface CartItem {
   cart_id: number;
@@ -57,6 +59,7 @@ export default function Cart({ locale }: { locale: string }) {
   return (
     <section className="w-[600px] flex flex-col gap-2">
       <h1 className="font-bold">Shopping cart</h1>
+      <StripeProducts />
 
       <div className="flex gap-5">
         <p>You have {data?.items?.length} item(s) in your cart</p>
@@ -90,6 +93,9 @@ export default function Cart({ locale }: { locale: string }) {
           </div>
         ))}
       </div>
+      <Link href={`dashboard/${14}/purchase`}>
+        <button>Buy</button>
+      </Link>
     </section>
   );
 }

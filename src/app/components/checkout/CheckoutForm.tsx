@@ -23,6 +23,37 @@ import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 
+interface CartItem {
+  cart_id: number;
+  product_id: number;
+  quantity: number;
+  added_at: string; // You may want to convert this to a Date type if needed
+  image: string;
+  numberofvotes: number;
+  totalvotes: number;
+  size: string;
+  languages: {
+    en: LanguageDetails;
+    ka: LanguageDetails;
+  };
+}
+
+interface LanguageDetails {
+  title: string;
+  category: string;
+  country: string;
+  brand: string;
+  sdescription: string;
+  ldescription: string;
+  price: string; // You may want to convert this to a number type if needed
+  currency: string;
+}
+
+interface CheckoutProps {
+  product: CartItem[];
+  clientSecret: string;
+}
+
 type CheckoutFormProps = {
   product: {
     id: string;
@@ -33,31 +64,40 @@ type CheckoutFormProps = {
     description: string;
     price: number;
   };
-  clientSecret: string;
 };
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
 );
 
-export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
+export function CheckoutForm({ product, clientSecret }: CheckoutProps) {
   return (
-    <div className="max-w-5xl w-full mx-auto space-y-8 pt-8">
-      <div className="flex gap-4 items-center">
-        <div className="aspect-video flex-shrink-0 w-1/3 relative">
-          <Image
-            src={product.image ? product.image : "/no-image.svg"}
-            fill
-            alt={product.title}
-            className="object-cover"
-          />
+    <div>
+      {product.map((item) => (
+        <div className="flex gap-4 items-center" key={item.product_id}>
+          <div className="aspect-video flex-shrink-0 w-1/3 relative">
+            <Image
+              src={item.image ? item.image : "/no-image.svg"}
+              fill
+              alt={item.languages.en.title}
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h1>{item.languages.en.title}</h1>
+            <p>{item.languages.en.category}</p>
+          </div>
         </div>
-
-        <h1>{product.title}</h1>
-        <p>{product.category}</p>
-      </div>
-      <Elements options={{ clientSecret }} stripe={stripePromise}>
-        <Form price={product.price} productId={product.id} />
+      ))}
+      <Elements
+        options={{ clientSecret }}
+        stripe={stripePromise}
+        key={clientSecret}
+      >
+        <Form
+          price={parseFloat(product[0]?.languages.en.price)}
+          productId={product[0]?.product_id.toString()}
+        />
       </Elements>
     </div>
   );

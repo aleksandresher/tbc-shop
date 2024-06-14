@@ -197,3 +197,15 @@ export async function getUser() {
   }
   return response.json();
 }
+
+export async function getStripeProducts() {
+  try {
+    const response = await fetch(`http://localhost:3000/api/getproducts`);
+    const { data } = await response.json();
+    console.log("data", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
