@@ -1,10 +1,12 @@
 import { sql, QueryResultRow, QueryResult } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import Stripe from "stripe";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
   const token = await getToken({ req, secret });
   const { data } = await req.json();
   try {
@@ -104,6 +106,7 @@ export async function POST(req: NextRequest) {
       VALUES (${kasize}, ${image}, ${userId})
       RETURNING id;
     `;
+
     console.log("Product insert result:", productResult);
 
     const productId = productResult.rows[0].id;
@@ -139,6 +142,15 @@ export async function POST(req: NextRequest) {
       await sql`INSERT INTO product_translations (title, category, country, brand, language, product_id, sdescription, ldescription, price, currency )
       VALUES (${katitle}, ${kacategory},  ${kacountry}, ${kabrand}, ${ka}, ${productId}, ${kasdescription}, ${kaldescription}, ${kaprice}, ${currencygel});`;
     }
+
+    await stripe.products.create({
+      name: katitle,
+      images: [image],
+      default_price_data: {
+        unit_amount: kaprice * 100,
+        currency: "usd",
+      },
+    });
     console.log("Inserted Georgian translation");
 
     const product = await sql`

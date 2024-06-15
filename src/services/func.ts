@@ -209,3 +209,11 @@ export async function getStripeProducts() {
     return [];
   }
 }
+
+export async function getStripeProdutsList() {
+  const response = await fetch(`/api/stripeproductlist`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch user");
+  }
+  return response.json();
+}

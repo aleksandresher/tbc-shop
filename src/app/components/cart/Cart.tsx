@@ -10,6 +10,7 @@ import Image from "next/image";
 import FullProductOnHover from "./FullProductOnHover";
 import Link from "next/link";
 import StripeProducts from "./StripeProducts";
+import StripeProductList from "../stripe/StripeProductList";
 
 interface CartItem {
   cart_id: number;
@@ -93,9 +94,10 @@ export default function Cart({ locale }: { locale: string }) {
           </div>
         ))}
       </div>
-      <Link href={`dashboard/${14}/purchase`}>
-        <button>Buy</button>
+      <Link href={`dashboard/payment`}>
+        <button>Checkout</button>
       </Link>
+      <StripeProductList />
     </section>
   );
 }
