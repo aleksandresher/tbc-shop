@@ -6,11 +6,17 @@ import { useEffect, useState } from "react";
 
 interface CartItem {
   stripe_product_id: string;
+  quantity: number;
 }
 
 interface StripeProduct {
   id: string;
   product: string;
+}
+
+interface ProductWithQuantity {
+  id: string;
+  quantity: number;
 }
 
 export default function StripeProducts() {
@@ -24,32 +30,41 @@ export default function StripeProducts() {
     queryFn: () => getStripeProducts(),
   });
 
-  const [filteredProducts, setFilteredProducts] = useState<StripeProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<
+    ProductWithQuantity[]
+  >([]);
 
   useEffect(() => {
-    if (cartData && cartData.items && stripeProducts) {
-      const arrayOfIds = cartData.items.map(
-        (item: any) => item.stripe_product_id
-      );
+    if (cartData?.items && stripeProducts) {
+      const arrayOfIdsWithQuantity = cartData.items.map((item) => ({
+        stripe_product_id: item.stripe_product_id,
+        quantity: item.quantity,
+      }));
 
-      const filteredProducts = stripeProducts.filter((product: any) =>
-        arrayOfIds.includes(product.product)
-      );
+      const updatedProducts: ProductWithQuantity[] = arrayOfIdsWithQuantity
+        .map(({ stripe_product_id, quantity }) => {
+          const product = stripeProducts.find(
+            (p) => p.product === stripe_product_id
+          );
+          return product ? { id: product.id, quantity } : null;
+        })
+        .filter((product): product is ProductWithQuantity => product !== null);
 
-      setFilteredProducts(filteredProducts);
+      setFilteredProducts(updatedProducts);
     }
   }, [cartData, stripeProducts]);
 
+  console.log("Filtered Products with Quantity:", filteredProducts);
+
   const handlePayment = async () => {
     try {
-      const idsToSend = filteredProducts.map((product) => product.id);
       const response = await fetch(`/api/payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          arrayOfIds: idsToSend,
+          items: filteredProducts,
         }),
       });
 
@@ -58,7 +73,6 @@ export default function StripeProducts() {
       }
 
       const url = await response.json();
-
       router.push(`${url}`);
     } catch (error) {
       console.error("Error in payment:", error);
@@ -67,15 +81,10 @@ export default function StripeProducts() {
 
   return (
     <section>
-      <h1>{JSON.stringify(filteredProducts)}</h1>
-      {/* {JSON.stringify(arrayOfIds)} */}
-      {/* <p>
-        {(data[0].unit_amount / 100).toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        })}
-      </p> */}
-      <button onClick={() => handlePayment()}>Buy</button>
+      <h1>
+        Filtered Products with Quantity: {JSON.stringify(filteredProducts)}
+      </h1>
+      <button onClick={handlePayment}>Buy</button>
     </section>
   );
 }

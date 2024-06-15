@@ -5,7 +5,7 @@ export default function Gallery() {
     <section className="grid grid-cols-2 pt-14 p-8 gap-y-10">
       <div className="flex rounded-[10px] shadow-lg w-fit mr-14">
         <div className="flex flex-col items-center justify-around p-2">
-          <p className="text-center">Skincare you'll stick with</p>
+          <p className="text-center">Skincare youll stick with</p>
           <p className="text-lg font-bold">Face</p>
           <button className="border border-yellow-700 p-2 rounded-[5px] hover:bg-[#f5b886] hover:text-white">
             Shop now
@@ -42,7 +42,7 @@ export default function Gallery() {
       <div className="flex rounded-[10px] shadow-lg w-fit mr-14">
         <div className="flex flex-col items-center justify-around p-2">
           <p className="text-center">
-            Life isn't perfect but your <br></br>hair can be
+            Life isnt perfect but your <br></br>hair can be
           </p>
           <p className="text-lg font-bold">Hair</p>
           <button className="border border-yellow-700 p-2 rounded-[5px] hover:bg-[#f5b886] hover:text-white">
