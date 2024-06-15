@@ -60,7 +60,6 @@ export default function Cart({ locale }: { locale: string }) {
   return (
     <section className="w-[600px] flex flex-col gap-2">
       <h1 className="font-bold">Shopping cart</h1>
-      <StripeProducts />
 
       <div className="flex gap-5">
         <p>You have {data?.items?.length} item(s) in your cart</p>
@@ -71,12 +70,12 @@ export default function Cart({ locale }: { locale: string }) {
             key={cartItem.cart_id}
             className="grid grid-cols-5 items-center border border-gray-400 rounded-lg p-3"
           >
-            <h2>
+            {/* <h2>
               {
                 cartItem.languages[locale as keyof typeof cartItem.languages]
                   .title
               }
-            </h2>
+            </h2> */}
             <span className="flex items-center gap-2 justify-center">
               <DecreaseButton
                 productId={cartItem.product_id}
@@ -97,7 +96,8 @@ export default function Cart({ locale }: { locale: string }) {
       <Link href={`dashboard/payment`}>
         <button>Checkout</button>
       </Link>
-      <StripeProductList />
+      {/* <StripeProductList /> */}
+      <StripeProducts />
     </section>
   );
 }

@@ -6,50 +6,53 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   try {
     const { rows: products } = await sql`
-SELECT
-    pt_en.product_id AS product_id,
-    jsonb_build_object(
-        'en', jsonb_build_object(
-            'title', pt_en.title,
-            'category', pt_en.category,
-            'country', pt_en.country,
-            'brand', pt_en.brand,
-            'sdescription', pt_en.sdescription,
-            'ldescription', pt_en.ldescription,
-            'price', pt_en.price,
-            'currency', pt_en.currency,
-            'image', p.image,
-            'numberofvotes', p.numberofvotes,
-            'totalvotes', p.totalvotes
-        ),
-        'ka', jsonb_build_object(
-            'title', pt_ka.title,
-            'category', pt_ka.category,
-            'country', pt_ka.country,
-            'brand', pt_ka.brand,
-            'sdescription', pt_ka.sdescription,
-            'ldescription', pt_ka.ldescription,
-            'price', pt_ka.price,
-            'currency', pt_ka.currency,
-            'image', p.image,
-            'numberofvotes', p.numberofvotes,
-            'totalvotes', p.totalvotes
-        )
-    ) AS languages
-FROM
-    product_translations AS pt_en
-JOIN
-    product_translations AS pt_ka ON pt_en.product_id = pt_ka.product_id
-JOIN
-    products AS p ON pt_en.product_id = p.id  -- Use the correct column name here
-WHERE
-    pt_en.language = 'en' AND
-    pt_ka.language = 'ka';
-`;
+      SELECT
+          p.id AS product_id,
+          jsonb_build_object(
+              'en', jsonb_build_object(
+                  'title', COALESCE(pt_en.title, ''),
+                  'category', COALESCE(pt_en.category, ''),
+                  'country', COALESCE(pt_en.country, ''),
+                  'brand', COALESCE(pt_en.brand, ''),
+                  'sdescription', COALESCE(pt_en.sdescription, ''),
+                  'ldescription', COALESCE(pt_en.ldescription, ''),
+                  'price', COALESCE(pt_en.price::numeric, 0),
+                  'currency', COALESCE(pt_en.currency, ''),
+                  'image', p.image,
+                  'numberofvotes', p.numberofvotes,
+                  'totalvotes', p.totalvotes
+              ),
+              'ka', jsonb_build_object(
+                  'title', COALESCE(pt_ka.title, ''),
+                  'category', COALESCE(pt_ka.category, ''),
+                  'country', COALESCE(pt_ka.country, ''),
+                  'brand', COALESCE(pt_ka.brand, ''),
+                  'sdescription', COALESCE(pt_ka.sdescription, ''),
+                  'ldescription', COALESCE(pt_ka.ldescription, ''),
+                  'price', COALESCE(pt_ka.price::numeric, 0),
+                  'currency', COALESCE(pt_ka.currency, ''),
+                  'image', p.image,
+                  'numberofvotes', p.numberofvotes,
+                  'totalvotes', p.totalvotes
+              )
+          ) AS languages
+      FROM
+          products AS p
+      LEFT JOIN
+          product_translations AS pt_en ON p.id = pt_en.product_id AND pt_en.language = 'en'
+      LEFT JOIN
+          product_translations AS pt_ka ON p.id = pt_ka.product_id AND pt_ka.language = 'ka'
+      WHERE
+          pt_en.language IS NOT NULL OR pt_ka.language IS NOT NULL;
+    `;
+
     console.log("products", products);
     return NextResponse.json({ products }, { status: 200 });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("Error fetching products:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

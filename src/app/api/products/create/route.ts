@@ -143,7 +143,7 @@ export async function POST(req: NextRequest) {
       VALUES (${katitle}, ${kacategory},  ${kacountry}, ${kabrand}, ${ka}, ${productId}, ${kasdescription}, ${kaldescription}, ${kaprice}, ${currencygel});`;
     }
 
-    await stripe.products.create({
+    const stripeProduct = await stripe.products.create({
       name: katitle,
       images: [image],
       default_price_data: {
@@ -152,6 +152,12 @@ export async function POST(req: NextRequest) {
       },
     });
     console.log("Inserted Georgian translation");
+
+    await sql`
+    UPDATE products
+    SET stripe_product_id = ${stripeProduct.id}
+    WHERE id = ${productId};
+  `;
 
     const product = await sql`
       SELECT * FROM products WHERE id = ${productId};

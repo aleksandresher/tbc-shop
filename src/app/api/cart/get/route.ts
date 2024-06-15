@@ -9,6 +9,7 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   try {
     const token = await getToken({ req, secret });
+    console.log("token from cart get", token);
 
     if (!token?.id) {
       return NextResponse.json(
@@ -44,13 +45,13 @@ export async function GET(req: NextRequest) {
       const { rows: cartItems } = await sql`
         SELECT 
           c.id as cart_id, c.product_id, c.quantity, c.added_at,
-          p.image, p.numberofvotes, p.totalvotes, p.size,
-          pt_en.title as title_en, pt_en.category as category_en, pt_en.country as country_en, pt_en.brand as brand_en, pt_en.sdescription as sdescription_en, pt_en.ldescription as ldescription_en, pt_en.price as price_en, pt_en.currency as currency_en,
-          pt_ka.title as title_ka, pt_ka.category as category_ka, pt_ka.country as country_ka, pt_ka.brand as brand_ka, pt_ka.sdescription as sdescription_ka, pt_ka.ldescription as ldescription_ka, pt_ka.price as price_ka, pt_ka.currency as currency_ka
+          p.image, p.numberofvotes, p.totalvotes, p.size, p.stripe_product_id,
+          COALESCE(pt_en.title, '') as title_en, COALESCE(pt_en.category, '') as category_en, COALESCE(pt_en.country, '') as country_en, COALESCE(pt_en.brand, '') as brand_en, COALESCE(pt_en.sdescription, '') as sdescription_en, COALESCE(pt_en.ldescription, '') as ldescription_en, COALESCE(pt_en.price::numeric, 0) as price_en, COALESCE(pt_en.currency, '') as currency_en,
+          COALESCE(pt_ka.title, '') as title_ka, COALESCE(pt_ka.category, '') as category_ka, COALESCE(pt_ka.country, '') as country_ka, COALESCE(pt_ka.brand, '') as brand_ka, COALESCE(pt_ka.sdescription, '') as sdescription_ka, COALESCE(pt_ka.ldescription, '') as ldescription_ka, COALESCE(pt_ka.price::numeric, 0) as price_ka, COALESCE(pt_ka.currency, '') as currency_ka
         FROM cart c
         JOIN products p ON c.product_id = p.id
-        JOIN product_translations pt_en ON p.id = pt_en.product_id AND pt_en.language = 'en'
-        JOIN product_translations pt_ka ON p.id = pt_ka.product_id AND pt_ka.language = 'ka'
+        LEFT JOIN product_translations pt_en ON p.id = pt_en.product_id AND pt_en.language = 'en'
+        LEFT JOIN product_translations pt_ka ON p.id = pt_ka.product_id AND pt_ka.language = 'ka'
         WHERE c.user_id = ${userId}
       `;
 
@@ -63,6 +64,7 @@ export async function GET(req: NextRequest) {
         numberofvotes: item.numberofvotes,
         totalvotes: item.totalvotes,
         size: item.size,
+        stripe_product_id: item.stripe_product_id,
         languages: {
           en: {
             title: item.title_en,
