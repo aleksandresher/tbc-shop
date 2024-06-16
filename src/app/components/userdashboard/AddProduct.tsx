@@ -2,7 +2,7 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-
+import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 import {
   Dialog,
   DialogContent,
@@ -35,11 +35,13 @@ interface UserType {
 
 export default function AddMyProduct() {
   const queryClient = useQueryClient();
+  const [productImageUrl, setProductImageUrl] = useState<string | null>(null);
   const [isEn, setIsEn] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<UserType>();
 
@@ -82,6 +84,11 @@ export default function AddMyProduct() {
     } catch (error) {
       console.error("Error creating product:", error);
     }
+  };
+
+  const handleImageUpload = (url: string) => {
+    setProductImageUrl(url);
+    setValue("image", url);
   };
   return (
     <div className="w-full">
@@ -253,6 +260,7 @@ export default function AddMyProduct() {
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                       id="image"
+                      value={productImageUrl || ""}
                       {...register("image", {
                         required: "image is required",
                       })}
@@ -264,6 +272,7 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
+                <ProductImageUpload onUploadComplete={handleImageUpload} />
               </section>
 
               {isEn && (

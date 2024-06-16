@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import MyRate from "./MyRate";
 import EditMyProduct from "./MyEdit";
+import DeleteProduct from "../products/delete/DeleteProduct";
 
 interface LanguageObject {
   title: string;
@@ -67,14 +68,13 @@ export default function MySingle({
 
       <MyRate amount={numberofvotes} total={totalvotes} />
       <span className="flex gap-2 pt-4">
-        <EditMyProduct wholeItem={fullLanguages} productId={productId} />
-        <Image
-          src="/delete.svg"
-          width={30}
-          height={30}
-          alt="delete button"
-          className=""
+        <EditMyProduct
+          wholeItem={fullLanguages}
+          productId={productId}
+          size={size}
+          image={image}
         />
+        <DeleteProduct productId={productId} />
       </span>
     </section>
   );

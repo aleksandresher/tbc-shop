@@ -1,13 +1,14 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
-export default function DeleteProduct({ productId }: { productId: string }) {
+export default function DeleteProduct({ productId }: { productId: number }) {
   const queryClient = useQueryClient();
-  const deleteProduct = async (productId: string) => {
+  const deleteProduct = async (productId: number) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/product/delete?category&productId=${productId}`,
+        `http://localhost:3000/api/products/delete?productId=${productId}`,
         {
           method: "DELETE",
         }
@@ -17,7 +18,7 @@ export default function DeleteProduct({ productId }: { productId: string }) {
         throw new Error("Failed to delete product");
       }
 
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["myproducts"] });
 
       return response.json();
     } catch (error) {
@@ -27,7 +28,13 @@ export default function DeleteProduct({ productId }: { productId: string }) {
   };
   return (
     <button className="bg-red-300" onClick={() => deleteProduct(productId)}>
-      Delete
+      <Image
+        src="/delete.svg"
+        width={30}
+        height={30}
+        alt="delete button"
+        className=""
+      />
     </button>
   );
 }

@@ -6,8 +6,6 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 export async function PUT(req: NextRequest) {
   const token = await getToken({ req, secret });
-  const userId = token?.id;
-  console.log("userId", userId);
 
   const { data, productId } = await req.json();
   console.log(data);
@@ -24,28 +22,57 @@ export async function PUT(req: NextRequest) {
     kacategory,
     kasdescription,
     kaldescription,
-    size,
     enprice,
     kaprice,
     image,
+    size,
   } = data;
+  console.log("data", data);
 
   try {
     if (
-      !encategory ||
-      !entitle ||
-      !enbrand ||
-      !encountry ||
-      !ensdescription ||
+      !kacategory ||
+      !katitle ||
+      !kabrand ||
+      !kacountry ||
+      !kasdescription ||
       !size ||
-      !enprice ||
+      !kaprice ||
       !image
     )
       throw new Error("field is missing");
 
-    const { rows: users } = await sql`SELECT * FROM users WHERE id = ${userId}`;
-    console.log("users", users);
-    if (users.length > 0) {
+    if (!token?.id) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    let userIdQuery;
+    if (typeof token.id === "string" && parseInt(token.id, 10) <= 2147483647) {
+      userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
+      `;
+    } else {
+      userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE providerid = ${token.id}
+      `;
+    }
+
+    const { rows: users } = await userIdQuery;
+
+    if (users.length === 0) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const userId = users[0].id;
+
+    if (userId) {
       const { rows: products } = await sql`
         SELECT * FROM products WHERE id = ${productId} AND user_id = ${userId};
       `;
