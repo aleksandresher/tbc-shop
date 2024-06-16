@@ -25,19 +25,27 @@ interface FullLanguages {
 }
 interface MySingleProps {
   item: LanguageObject;
+  image: string;
+  size: number;
+  totalvotes: number;
   fullLanguages: FullLanguages;
   productId: number;
+  numberofvotes: number;
 }
 export default function MySingle({
   item,
   fullLanguages,
   productId,
+  image,
+  size,
+  totalvotes,
+  numberofvotes,
 }: MySingleProps) {
   return (
     <section className="flex flex-col gap-3  border border-gray-200 p-3  mb-8">
       <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
         <Image
-          src={item.image}
+          src={image}
           fill={true}
           alt="oidinaru"
           className=" object-cover"
@@ -57,7 +65,7 @@ export default function MySingle({
         <p className="font-bold">{item.price}.00</p>
       </span>
 
-      <MyRate amount={item.numberofvotes} total={item.totalvotes} />
+      <MyRate amount={numberofvotes} total={totalvotes} />
       <span className="flex gap-2 pt-4">
         <EditMyProduct wholeItem={fullLanguages} productId={productId} />
         <Image

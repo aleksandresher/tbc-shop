@@ -1,9 +1,43 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { getOrders } from "@/services/func";
+import Image from "next/image";
+
+interface LanguageDetails {
+  title: string;
+  category: string;
+  country: string;
+  brand: string;
+  sdescription: string;
+  ldescription: string;
+  price: string;
+  currency: string;
+}
+
+interface Languages {
+  en: LanguageDetails;
+  ka: LanguageDetails;
+}
+
+interface OrderItem {
+  order_id: number;
+  product_id: number;
+  amount: number;
+  created_at: string;
+  image: string;
+  numberofvotes: number;
+  totalvotes: number;
+  size: string;
+  stripe_product_id: string | null;
+  languages: Languages;
+}
+
+interface OrdersResponse {
+  items: OrderItem[];
+}
 
 export default function OrderList() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery<OrdersResponse>({
     queryKey: ["orders"],
     queryFn: () => getOrders(),
   });
@@ -17,8 +51,18 @@ export default function OrderList() {
   }
   return (
     <section>
-      <h1>Order list</h1>
-      <p>{JSON.stringify(data)}</p>
+      {data?.items?.map((orderItem: OrderItem) => (
+        <div key={orderItem.order_id}>
+          <p>{orderItem.languages.ka.title}</p>
+          <Image
+            src={orderItem.image}
+            alt={orderItem.languages.ka.title}
+            width={100}
+            height={100}
+          />
+          <p>რაოდენობა: {orderItem.amount}</p>
+        </div>
+      ))}
     </section>
   );
 }

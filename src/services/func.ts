@@ -183,7 +183,7 @@ export async function getMyProducts() {
     }
     const data = await response.json();
     console.log("data", data);
-    return data.products || [];
+    return data || [];
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
