@@ -41,12 +41,12 @@ export default function FullProductOnHover({
   cartItem,
   locale,
 }: CartHoverCardProps) {
-  const languageDetails =
-    cartItem.languages[locale as keyof typeof cartItem.languages];
+  // const languageDetails =
+  //   cartItem.languages[locale as keyof typeof cartItem.languages];
 
   return (
     <section>
-      <HoverCard>
+      {/* <HoverCard>
         <HoverCardTrigger asChild>
           <Image src="/eye.svg" width={30} height={30} alt="eye icon" />
         </HoverCardTrigger>
@@ -58,7 +58,7 @@ export default function FullProductOnHover({
             Price: {languageDetails.price} {languageDetails.currency}
           </p>
         </HoverCardContent>
-      </HoverCard>
+      </HoverCard> */}
     </section>
   );
 }

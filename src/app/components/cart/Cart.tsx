@@ -86,7 +86,7 @@ export default function Cart({ locale }: { locale: string }) {
             </span>
 
             <span className="flex justify-center">
-              ${Number(cartItem.languages.en.price) * cartItem.quantity}
+              {/* ${Number(cartItem.languages.en.price) * cartItem.quantity} */}
             </span>
             <DeleteButton product_id={cartItem.product_id} />
             <FullProductOnHover locale={locale} cartItem={cartItem} />

@@ -81,7 +81,6 @@ export default function SingleProductPageCard({
           height={200}
         />
       </div>
-      <h3>Comments</h3>
     </section>
   );
 }

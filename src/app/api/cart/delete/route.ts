@@ -7,12 +7,40 @@ const secret = process.env.NEXTAUTH_SECRET;
 export async function DELETE(req: NextRequest) {
   const { productId } = await req.json();
   const token = await getToken({ req, secret });
-  const userId = token?.id;
+
+  if (!token?.id) {
+    return NextResponse.json(
+      { error: "Missing required fields" },
+      { status: 400 }
+    );
+  }
+
+  if (!productId) {
+    throw new Error("product_id is required");
+  }
+  let userIdQuery;
+  if (typeof token.id === "string" && parseInt(token.id, 10) <= 2147483647) {
+    userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
+      `;
+  } else {
+    userIdQuery = sql`
+        SELECT id
+        FROM users
+        WHERE providerid = ${token.id}
+      `;
+  }
 
   try {
-    if (!productId) {
-      throw new Error("product_id is required");
+    const { rows: users } = await userIdQuery;
+
+    if (users.length === 0) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
+
+    const userId = users[0].id;
 
     const result = await sql`
       DELETE FROM cart

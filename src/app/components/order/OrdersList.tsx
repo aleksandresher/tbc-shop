@@ -49,9 +49,17 @@ export default function OrderList() {
   if (error instanceof Error) {
     return <div>Error: {error.message}</div>;
   }
+
+  //   const filteredData =
+  //     data[0]?.latest_charge.billing_details.email ===
+  //     "aleksandre.shervashidze.2@ialiauni.edu.ge";
+
+  console.log(data);
   return (
     <section>
-      {data?.items?.map((orderItem: OrderItem) => (
+      {/* {JSON.stringify(data[0].latest_charge.billing_details)} */}
+      {/* {JSON.stringify(data)} */}
+      {/* {data?.items?.map((orderItem: OrderItem) => (
         <div key={orderItem.order_id}>
           <p>{orderItem.languages.ka.title}</p>
           <Image
@@ -62,7 +70,7 @@ export default function OrderList() {
           />
           <p>რაოდენობა: {orderItem.amount}</p>
         </div>
-      ))}
+      ))} */}
     </section>
   );
 }
