@@ -13,13 +13,13 @@ export async function generateStaticParams() {
 export default function SingleProductPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string; locale: string };
 }) {
-  const { id } = params;
+  const { id, locale } = params;
   return (
     <section>
       {" "}
-      <SingleProductPageCard id={id} />
+      <SingleProductPageCard id={id} locale={locale} />
     </section>
   );
 }
