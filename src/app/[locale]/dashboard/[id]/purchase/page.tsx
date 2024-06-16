@@ -14,9 +14,9 @@ export default async function PurchasePage({
   console.log("id", id);
 
   const item = await loadSingle({ id });
-  console.log(item);
+
   //   const price = Number(item.price);
-  console.log("item", item);
+
   const price = 450;
 
   if (isNaN(price)) {

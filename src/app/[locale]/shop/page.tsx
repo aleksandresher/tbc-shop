@@ -51,15 +51,12 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
       }))
     : [];
 
-  console.log("mappped data", mappedData);
-
   const filteredData = searchByBrand
     ? mappedData.filter(
         (product) => product.languages.brand.toLowerCase() === searchByBrand
       )
     : mappedData;
 
-  console.log("filrerd data", filteredData);
   return (
     <section className=" p-12 ">
       <div className=" grid grid-cols-4 gap-4 ">

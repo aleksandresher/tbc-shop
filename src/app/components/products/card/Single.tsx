@@ -4,6 +4,7 @@ import Image from "next/image";
 import RateProduct from "../RateProduct";
 import { join } from "path";
 import AddToCart from "../../cart/AddToCart";
+import Link from "next/link";
 
 export default function Single({
   item,
@@ -14,28 +15,33 @@ export default function Single({
 }) {
   return (
     <section className="flex flex-col items-center border border-gray-200 p-3  mb-8">
-      <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
-        <Image
-          src={item.image}
-          fill={true}
-          alt="oidinaru"
-          className=" object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={true}
-        />
-      </div>
+      <Link href={`shop/${productId}`}>
+        {" "}
+        <span>
+          <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
+            <Image
+              src={item.image}
+              fill={true}
+              alt="oidinaru"
+              className=" object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={true}
+            />
+          </div>
+          <div className="flex flex-col mt-2">
+            <span className="w-full flex">
+              <h1>{item.brand}-</h1>
+              <p> {item.title}</p>
+            </span>
 
-      <div className="flex flex-col mt-2">
-        <span className="w-full flex">
-          <h1>{item.brand}-</h1>
-          <p> {item.title}</p>
+            <p className="font-bold">
+              {item.currency == "USD" ? "$" : "₾"}
+              {item.price}.00
+            </p>
+          </div>
         </span>
+      </Link>
 
-        <p className="font-bold">
-          {item.currency == "USD" ? "$" : "₾"}
-          {item.price}.00
-        </p>
-      </div>
       <RateProduct
         productId={productId}
         amount={item.numberofvotes}
