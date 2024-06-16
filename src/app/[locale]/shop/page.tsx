@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllProduct } from "@/services/func";
 import Single from "@/app/components/products/card/Single";
 import { useSearchParams } from "next/navigation";
-
+import SearchWrapper from "@/app/components/search/SearchWrapper";
 interface LanguageObject {
   title: string;
   category: string;
@@ -60,6 +60,7 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   return (
     <section className=" p-12 ">
       <div className=" grid grid-cols-4 gap-4 ">
+        <SearchWrapper />
         {filteredData?.map((item) => {
           return (
             <Single
