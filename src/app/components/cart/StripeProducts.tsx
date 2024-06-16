@@ -73,17 +73,37 @@ export default function StripeProducts() {
       }
 
       const url = await response.json();
+      if (cartData?.items) {
+        await saveOrder(cartData.items);
+      }
       router.push(`${url}`);
     } catch (error) {
       console.error("Error in payment:", error);
     }
   };
+  const saveOrder = async (items: CartItem[]) => {
+    try {
+      const response = await fetch(`/api/orders/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items,
+        }),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to save order");
+      }
+
+      console.log("Order saved successfully");
+    } catch (error) {
+      console.error("Error saving order:", error);
+    }
+  };
   return (
     <section>
-      <h1>
-        Filtered Products with Quantity: {JSON.stringify(filteredProducts)}
-      </h1>
       <button onClick={handlePayment}>Buy</button>
     </section>
   );

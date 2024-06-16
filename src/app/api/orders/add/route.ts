@@ -14,35 +14,48 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { productIds, totalAmount } = await req.json();
+  const { items } = await req.json();
 
-  try {
-    const { rows: users } = await sql`
+  let userIdQuery;
+  if (typeof token.id === "string" && parseInt(token.id, 10) <= 2147483647) {
+    userIdQuery = sql`
       SELECT id
       FROM users
       WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
     `;
+  } else {
+    userIdQuery = sql`
+      SELECT id
+      FROM users
+      WHERE providerid = ${token.id}
+    `;
+  }
+
+  try {
+    const { rows: users } = await userIdQuery;
 
     if (users.length === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     const userId = users[0].id;
-    const createdOrders = [];
+    console.log("User ID:", userId);
 
-    for (const productId of productIds) {
-      const { rows: order } = await sql`
-        INSERT INTO orders (user_id, product_id, amount, created_at)
-        VALUES (${userId}, ${productId}, ${
-        totalAmount / productIds.length
-      }, NOW())
-        RETURNING id
+    for (const item of items) {
+      await sql`
+          INSERT INTO orders (user_id, product_id, amount, created_at)
+          VALUES (${userId}, ${item.product_id}, ${item.quantity}, NOW())
+        `;
+      await sql`
+        DELETE FROM cart
+        WHERE user_id = ${userId}
       `;
-
-      createdOrders.push(order[0].id);
     }
 
-    return NextResponse.json({ orderIds: createdOrders }, { status: 201 });
+    return NextResponse.json(
+      { message: "Order saved and cart items deleted successfully" },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Error creating order:", error);
     return NextResponse.json(
