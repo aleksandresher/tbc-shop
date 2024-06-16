@@ -217,3 +217,11 @@ export async function getStripeProdutsList() {
   }
   return response.json();
 }
+
+export async function getOrders() {
+  const response = await fetch(`/api/orders/get`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch order items");
+  }
+  return response.json();
+}
