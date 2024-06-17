@@ -13,8 +13,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 
+interface User {
+  email: string;
+  role: string;
+  // Add other user properties if needed
+}
+
 export default function ProfileButton({ locale }: { locale: string }) {
   const { data, status: session } = useSession();
+  const [user, setUser] = useState<User | null>(null);
+  console.log("user", user);
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
     try {
@@ -32,8 +40,10 @@ export default function ProfileButton({ locale }: { locale: string }) {
   }
 
   useEffect(() => {
-    getUser({ email });
-  }, [data]);
+    if (email) {
+      getUser({ email }).then(setUser);
+    }
+  }, [email]);
 
   return (
     <DropdownMenu>
@@ -54,7 +64,9 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`/dashboard`}>Dashboard</Link>
+          <Link href={user?.role === "admin" ? `/admin` : `/dashboard`}>
+            {user?.role === "admin" ? "Admin Dashboard" : "Dashboard"}
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
