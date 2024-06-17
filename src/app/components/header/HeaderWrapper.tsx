@@ -7,6 +7,7 @@ import ContactWrapper from "./ContactWrapper";
 import ShopWrapper from "./ShopWrapper";
 import Link from "next/link";
 import SearchWrapper from "../search/SearchWrapper";
+import { ModeToggle } from "../ThemeToggle";
 
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
@@ -28,6 +29,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
       </span>
 
       <span className="flex gap-4 justify-start sm:justify-end pr-10 items-center">
+        <ModeToggle />
         <LocaleChange />
         <AuthorizationWrapper locale={locale} />
         <CartWrapper locale={locale} />

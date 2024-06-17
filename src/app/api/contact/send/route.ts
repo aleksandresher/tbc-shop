@@ -32,8 +32,9 @@ export async function POST(req: NextRequest) {
     VALUES (${title}, ${message}, ${email}, NOW() )
     RETURNING id;
   `;
+    const id = messageresult.rows[0].id;
 
-    return NextResponse.json({ messageresult }, { status: 200 });
+    return NextResponse.json({ id }, { status: 200 });
   } catch (error) {
     console.error("Error processing request:", error);
     return NextResponse.json(

@@ -60,7 +60,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
           <Image src="/auth.png" width={30} height={30} alt="user icon" />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="z-8 bg-gray-50">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

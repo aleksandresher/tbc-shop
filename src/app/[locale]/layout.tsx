@@ -8,6 +8,7 @@ import MainProvider from "../providers/SessionProvider";
 import HeaderWrapper from "../components/header/HeaderWrapper";
 const inter = Inter({ subsets: ["latin"] });
 import { CartProvider } from "../providers/ContextProvider";
+import { ThemeProvider } from "../providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,8 +32,14 @@ export default function RootLayout({
           <I18nProviderClient locale={locale}>
             <MainProvider>
               <CartProvider>
-              
-                {children}
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  {children}
+                </ThemeProvider>
               </CartProvider>
             </MainProvider>
           </I18nProviderClient>
