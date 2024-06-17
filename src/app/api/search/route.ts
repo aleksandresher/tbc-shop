@@ -7,7 +7,6 @@ export const revalidate = 0;
 export async function POST(req: NextRequest) {
   try {
     const { query } = await req.json();
-    console.log("searchQuery", query);
 
     const { rows: products } = await sql`
     SELECT
@@ -49,21 +48,22 @@ export async function POST(req: NextRequest) {
     WHERE
         pt_en.language IS NOT NULL OR pt_ka.language IS NOT NULL;
   `;
-    console.log("products", products);
+
     const searchResults = products.map((product: any) => ({
-      title: product.languages.ka.title,
+      kaTitle: product.languages.ka.title,
+      enTitle: product.languages.en.title,
       image: product.languages.ka.image,
       id: product.product_id,
     }));
 
-    console.log("katitles", searchResults);
     const fuse = new Fuse(searchResults, {
-      keys: ["title"],
+      keys: ["kaTitle", "enTitle"],
       includeScore: true,
       threshold: 0.4,
     });
 
     const filteredResults = fuse.search(query).map((result) => result.item);
+    console.log("filteredResults", filteredResults);
 
     return NextResponse.json({
       success: true,

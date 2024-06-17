@@ -43,6 +43,9 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
     queryFn: () => getAllProduct(),
   });
 
+  if (isLoading) {
+    <div>loading</div>;
+  }
   const mappedData = Array.isArray(data)
     ? data.map((product) => ({
         product_id: product.product_id,
@@ -60,7 +63,6 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   return (
     <section className=" p-12 ">
       <div className=" grid grid-cols-4 gap-4 ">
-        <SearchWrapper />
         {filteredData?.map((item) => {
           return (
             <Single

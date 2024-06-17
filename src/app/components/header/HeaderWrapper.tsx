@@ -6,6 +6,7 @@ import AuthorizationWrapper from "../authorization/AuthorizationWrapper";
 import ContactWrapper from "./ContactWrapper";
 import ShopWrapper from "./ShopWrapper";
 import Link from "next/link";
+import SearchWrapper from "../search/SearchWrapper";
 
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
@@ -17,7 +18,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
         <Link href="/">
           <h1 className="hidden sm:block font-bold text-lg">Care</h1>
         </Link>
-        <Search />
+        <SearchWrapper locale={locale} />
       </span>
 
       <span className="hidden sm:flex gap-4 justify-end items-center ">

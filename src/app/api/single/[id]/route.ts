@@ -18,7 +18,7 @@ export async function GET(
   try {
     const { rows: product } = await sql`
       SELECT
-          pt_en.product_id AS product_id,
+          p.id AS product_id,
           jsonb_build_object(
               'en', jsonb_build_object(
                   'title', pt_en.title,
@@ -50,17 +50,16 @@ export async function GET(
               )
           ) AS languages
       FROM
-          product_translations AS pt_en
-      JOIN
-          product_translations AS pt_ka ON pt_en.product_id = pt_ka.product_id
-      JOIN
-          products AS p ON pt_en.product_id = p.id
+          products AS p
+      LEFT JOIN
+          product_translations AS pt_en ON p.id = pt_en.product_id AND pt_en.language = 'en'
+      LEFT JOIN
+          product_translations AS pt_ka ON p.id = pt_ka.product_id AND pt_ka.language = 'ka'
       WHERE
-          pt_en.language = 'en' AND
-          pt_ka.language = 'ka' AND
           p.id = ${id}
-           ORDER BY
-          p.creation_time DESC;`;
+      ORDER BY
+          p.creation_time DESC;
+    `;
 
     console.log("product", product);
     return NextResponse.json({ product }, { status: 200 });

@@ -9,7 +9,6 @@ export default function Home({ params }: { params: { locale: string } }) {
     <section>
       <MenuWraper locale={params.locale} />
       <Gallery />
-      <SearchWrapper />
     </section>
   );
 }

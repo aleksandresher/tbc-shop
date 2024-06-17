@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useI18n } from "@/app/locales/client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-
+import useDebounce from "@/lib/hooks";
 import {
   HoverCard,
   HoverCardContent,
@@ -11,15 +11,19 @@ import {
 } from "@/components/ui/hover-card";
 
 interface SearchResult {
-  title: string;
+  kaTitle: string;
+  enTitle: string;
   image: string;
   id: string;
 }
-export default function Search() {
+export default function Search({ locale }: { locale: string }) {
   const t = useI18n();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<SearchResult[]>([]);
+  const debouncedInputValue = useDebounce(inputValue, 500);
   const ulRef = useRef<HTMLUListElement>(null);
+
+  console.log("suggestions", suggestions);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -34,20 +38,27 @@ export default function Search() {
     };
   }, []);
 
-  const handleInputChange = async (e: any) => {
-    try {
-      const { value } = e.target;
-      const response = await fetch("/api/search", {
-        method: "POST",
-        body: JSON.stringify({ query: value }),
-      });
-      const { results } = await response.json();
-      setSuggestions(results);
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
+  useEffect(() => {
+    if (debouncedInputValue) {
+      const fetchSuggestions = async () => {
+        try {
+          const response = await fetch("/api/search", {
+            method: "POST",
+            body: JSON.stringify({ query: debouncedInputValue }),
+          });
+          const { results } = await response.json();
+          setSuggestions(results);
+        } catch (error) {
+          console.error(error);
+          alert("Something went wrong");
+        }
+      };
+
+      fetchSuggestions();
+    } else {
+      setSuggestions([]);
     }
-  };
+  }, [debouncedInputValue]);
 
   return (
     <section className="flex flex-col gap-2 relative">
@@ -61,7 +72,6 @@ export default function Search() {
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
-              handleInputChange(e);
             }}
           />
         </form>
@@ -71,16 +81,24 @@ export default function Search() {
         ref={ulRef}
       >
         {suggestions?.map((suggestion, index) => (
-          <Link href={`/shop/${suggestion.id}`} key={index}>
-            <li
-              key={index}
-              className="flex items-center gap-2  p-4 px-8"
-              // onClick={() => setSuggestions([])}
-            >
-              <p> {suggestion?.title}</p>
+          <Link
+            href={`/shop/${suggestion.id}`}
+            key={index}
+            onClick={() => {
+              setInputValue(
+                locale === "ka" ? suggestion.kaTitle : suggestion.enTitle
+              );
+              setSuggestions([]);
+            }}
+          >
+            <li key={index} className="flex items-center gap-2  p-4 px-8">
+              <p>
+                {" "}
+                {locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
+              </p>
               <Image
                 src={suggestion.image}
-                alt={suggestion?.title}
+                alt={locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
                 width={50}
                 height={50}
               />
