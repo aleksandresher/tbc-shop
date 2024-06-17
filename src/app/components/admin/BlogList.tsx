@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllBlog } from "@/services/func";
 import EditBlog from "./EditBlog";
 import Image from "next/image";
+import DeleteBlog from "./DeleteBlog";
 
 interface BlogProps {
   title: string;
@@ -34,6 +35,7 @@ export default function BlogList() {
           <p>Author: {blog.author}</p>
           <Image src={blog.image} alt={blog.title} width={50} height={50} />
           <EditBlog content={blog} />
+          <DeleteBlog product_id={blog.id} />
         </div>
       ))}
       {/* <EditBlog content={data}/> */}
