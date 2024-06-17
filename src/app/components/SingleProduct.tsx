@@ -79,6 +79,7 @@ export default function SingleProductPageCard({
           alt={selectedLanguage.title}
           width={200}
           height={200}
+          priority={true}
         />
       </div>
     </section>
