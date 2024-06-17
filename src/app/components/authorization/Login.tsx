@@ -25,7 +25,7 @@ export default function Login() {
   const router = useRouter();
   const { data, status: session } = useSession();
   const [providers, setProviders] = useState<Provider[]>([]);
-  console.log(data, session);
+  console.log("providers", providers);
 
   useEffect(() => {
     if (data?.user) {
@@ -37,13 +37,10 @@ export default function Login() {
     (async () => {
       const res = await getProviders();
       if (res) {
-        const newProviders = Object.values(res);
-        setProviders((prevProviders) => {
-          if (JSON.stringify(prevProviders) !== JSON.stringify(newProviders)) {
-            return newProviders;
-          }
-          return prevProviders;
-        });
+        const filteredProviders = Object.values(res).filter(
+          (provider) => provider.id === "google"
+        );
+        setProviders(filteredProviders);
       }
     })();
   }, []);
@@ -105,44 +102,28 @@ export default function Login() {
       </form>
       <div className="w-4/5 flex justify-between mt-6">
         <div className="flex items-center border-[1px] border-[#dbdbdb] px-6 py-2 rounded-[12px] gap-3">
-          {providers &&
-            Object.values(providers).map((provider) => (
-              <button
-                type="button"
-                key={provider.name}
-                onClick={() => signIn(provider.id)}
-                className="bg-[#38b000] hover:bg-[#008000] p-2 rounded-[8px] text-white"
-              >
-                <Image
-                  src="/social/google.svg"
-                  width={30}
-                  height={30}
-                  alt="google"
-                />
-                <p>Google</p>
-              </button>
-            ))}
-        </div>
-        <div className="flex items-center border-[1px] border-[#dbdbdb] px-6 py-2 rounded-[12px] gap-3">
-          <Image
-            src="/social/facebook.svg"
-            width={30}
-            height={30}
-            alt="facebook"
-          />
-          <p>Facebook</p>
-        </div>
-        <div className="flex items-center border-[1px] border-[#dbdbdb] px-6 py-2 rounded-[12px] gap-3">
-          <Image src="/social/apple.svg" width={30} height={30} alt="apple" />
-          <p>Apple ID</p>
+          {providers.length > 0 && (
+            <button
+              type="button"
+              onClick={() => signIn(providers[0].id)}
+              className="bg-[#38b000] hover:bg-[#008000] p-2 rounded-[8px] text-white"
+            >
+              <Image
+                src="/social/google.svg"
+                width={30}
+                height={30}
+                alt="google"
+              />
+              <p>Google</p>
+            </button>
+          )}
         </div>
       </div>
       <div className="flex p-6 mt-8 gap-2">
         <p className="text-[#9f9d9b] font-tbc-medium">არ გაქვს ანგარიში? - </p>
-        {/* <Link href="/register">
-          {" "}
+        <Link href="/register">
           <p className="text-[#6d87ff] font-tbc-medium">შექმენი</p>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );
