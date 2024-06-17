@@ -1,6 +1,7 @@
 import SingleBlogCard from "@/app/components/blogs/SingleBlogCard";
 import { loadSingleBlog } from "@/services/func";
 import { ResolvingMetadata, Metadata } from "next";
+import { getAllBlog } from "@/services/func";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Props {
@@ -8,11 +9,11 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const response = await fetch(`${URL}/api/blog/getall`);
+  const response = await getAllBlog();
   const blogs = await response.json();
   console.log("blogs on page", blogs);
 
-  return blogs?.blogs?.map((blog: any) => ({
+  return blogs?.map((blog: any) => ({
     id: blog.id.toString(),
   }));
 }
