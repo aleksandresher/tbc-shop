@@ -219,3 +219,18 @@ export async function getOrders() {
   }
   return response.json();
 }
+
+export async function getAllBlog() {
+  try {
+    const response = await fetch("http://localhost:3000/api/blog/getall");
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    const data = await response.json();
+    console.log("data from blogs", data);
+    return data.blogs;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+}
