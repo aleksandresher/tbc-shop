@@ -21,6 +21,7 @@ export default function BlogCreator() {
     register,
     handleSubmit,
     setValue,
+    resetField,
     formState: { errors },
   } = useForm<BlogType>();
 

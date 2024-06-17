@@ -234,3 +234,15 @@ export async function getAllBlog() {
     throw error;
   }
 }
+
+export async function loadSingleBlog({ id }: { id: string }) {
+  try {
+    const response = await fetch(`http://localhost:3000/api/blog/single/${id}`);
+    const { blog } = await response.json();
+
+    return blog;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
