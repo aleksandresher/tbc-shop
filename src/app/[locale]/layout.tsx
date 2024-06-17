@@ -31,7 +31,7 @@ export default function RootLayout({
           <I18nProviderClient locale={locale}>
             <MainProvider>
               <CartProvider>
-                <HeaderWrapper locale={locale} />
+              
                 {children}
               </CartProvider>
             </MainProvider>
