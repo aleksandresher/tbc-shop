@@ -31,7 +31,7 @@ export default function Login() {
     if (data?.user) {
       router.push("/en");
     }
-  }, [data]);
+  }, [data, router]);
 
   useEffect(() => {
     (async () => {
