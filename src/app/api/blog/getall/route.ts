@@ -6,7 +6,7 @@ export const revalidate = 0;
 export async function GET(req: NextRequest) {
   try {
     const { rows: blogs } = await sql`
-      SELECT id, title, content, author_id, created_at
+      SELECT id, title, author, content, image, author_id, created_at
       FROM blog_posts;
     `;
 
