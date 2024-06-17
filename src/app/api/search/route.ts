@@ -49,23 +49,25 @@ export async function POST(req: NextRequest) {
     WHERE
         pt_en.language IS NOT NULL OR pt_ka.language IS NOT NULL;
   `;
-
-    const kaTitles = products?.map((product: any) => ({
+    console.log("products", products);
+    const searchResults = products.map((product: any) => ({
       title: product.languages.ka.title,
+      image: product.languages.ka.image,
+      id: product.product_id,
     }));
 
-    console.log("katitles", kaTitles);
-    const fuse = new Fuse(kaTitles, {
+    console.log("katitles", searchResults);
+    const fuse = new Fuse(searchResults, {
       keys: ["title"],
       includeScore: true,
       threshold: 0.4,
     });
 
-    const searchResults = fuse.search(query);
+    const filteredResults = fuse.search(query).map((result) => result.item);
 
     return NextResponse.json({
       success: true,
-      results: searchResults.map((result) => result.item),
+      results: filteredResults,
       message: "Here are your search results",
     });
   } catch (error) {
