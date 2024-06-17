@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   const blogs = await response.json();
   console.log("blogs on page", blogs);
 
-  return blogs?.map((blog: any) => ({
+  return blogs?.blogs.map((blog: any) => ({
     id: blog.id.toString(),
   }));
 }
@@ -25,6 +25,7 @@ export async function generateMetadata(
   const id = params.id;
 
   const blog = await loadSingleBlog({ id });
+  console.log("blog", blog[0]?.title);
 
   return {
     title: blog[0].title,
