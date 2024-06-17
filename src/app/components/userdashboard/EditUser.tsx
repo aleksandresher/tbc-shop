@@ -5,10 +5,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import UserImageUpload from "../ImageUpload/UserImageUploader";
 import { useState } from "react";
-
-// interface UserProps {
-//   user: UserTypes | null;
-// }
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface UserTypes {
   name?: string | null;
@@ -28,7 +25,7 @@ export default function EditUser({ name, email, image }: UserTypes) {
 
   const onSubmit = async (data: UserTypes) => {
     try {
-      const response = await fetch("/api/user/update", {
+      const response = await fetch(`${URL}/api/user/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -12,6 +12,7 @@ import Image from "next/image";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 
 import { useForm } from "react-hook-form";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface FullLanguages {
   en: EnLanguageObject;
@@ -96,7 +97,7 @@ const EditMyProduct = ({
 
   const onSubmit = async (data: UserType) => {
     try {
-      const response = await fetch(`/api/products/edit`, {
+      const response = await fetch(`${URL}/api/products/edit`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

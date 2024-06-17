@@ -4,6 +4,7 @@ import { useI18n } from "@/app/locales/client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import useDebounce from "@/lib/hooks";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 import {
   HoverCard,
   HoverCardContent,
@@ -42,7 +43,7 @@ export default function Search({ locale }: { locale: string }) {
     if (debouncedInputValue) {
       const fetchSuggestions = async () => {
         try {
-          const response = await fetch("/api/search", {
+          const response = await fetch(`${URL}/api/search`, {
             method: "POST",
             body: JSON.stringify({ query: debouncedInputValue }),
           });

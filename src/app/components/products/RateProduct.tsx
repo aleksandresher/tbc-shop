@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Product {
   rating: number;
@@ -33,7 +34,7 @@ export default function RateProduct({
   const handleRating = async (rate: number) => {
     setRating(rate);
     try {
-      const response = await fetch(`/api/product/rate`, {
+      const response = await fetch(`${URL}/api/product/rate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

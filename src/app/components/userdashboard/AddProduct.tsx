@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 interface UserType {
   entitle: string;
   enbrand: string;
@@ -62,7 +64,7 @@ export default function AddMyProduct() {
           throw new Error("All English description fields are required");
         }
       }
-      const response = await fetch("/api/products/create", {
+      const response = await fetch(`${URL}/api/products/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

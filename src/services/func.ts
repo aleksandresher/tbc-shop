@@ -32,10 +32,9 @@ export async function createUser(userData: UserProps) {
 
 export async function getProducts({ id }: { id: string }) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/get-products?id=${id}`,
-      { cache: "no-cache" }
-    );
+    const response = await fetch(`${URL}/api/get-products?id=${id}`, {
+      cache: "no-cache",
+    });
     const { products } = await response.json();
     return products;
   } catch (error) {
@@ -46,12 +45,12 @@ export async function getProducts({ id }: { id: string }) {
 
 export async function getAllProduct() {
   try {
-    const response = await fetch("http://localhost:3000/api/allproduct");
+    const response = await fetch(`${URL}/api/allproduct`);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-    return data.products || []; // Return an empty array if data.products is undefined
+    return data.products || [];
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
@@ -64,7 +63,7 @@ export async function loadProductsByCategory({
   category: string;
 }) {
   try {
-    const response = await fetch(`http://localhost:3000/api/${category}/all`);
+    const response = await fetch(`${URL}/api/${category}/all`);
     const { items } = await response.json();
 
     return items;
@@ -75,7 +74,7 @@ export async function loadProductsByCategory({
 }
 
 export async function getCart() {
-  const response = await fetch(`/api/cart/get`);
+  const response = await fetch(`${URL}/api/cart/get`);
   if (!response.ok) {
     throw new Error("Failed to fetch cart items");
   }
@@ -84,10 +83,9 @@ export async function getCart() {
 
 export async function getFaceProducts() {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/get-products/face`,
-      { cache: "no-cache" }
-    );
+    const response = await fetch(`${URL}/api/get-products/face`, {
+      cache: "no-cache",
+    });
     const { products } = await response.json();
     console.log("products", products);
     return products;
@@ -99,10 +97,9 @@ export async function getFaceProducts() {
 
 export async function getBodyProducts() {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/get-products/body`,
-      { cache: "no-cache" }
-    );
+    const response = await fetch(`${URL}/api/get-products/body`, {
+      cache: "no-cache",
+    });
     const { products } = await response.json();
     console.log("products", products);
     return products;
@@ -136,9 +133,7 @@ export async function updateUser({ avatar }: { avatar: Url }) {
 
 export async function loadSingle({ id }: { id: string }) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/products/single/${id}`
-    );
+    const response = await fetch(`${URL}/api/products/single/${id}`);
     const { items } = await response.json();
 
     return items;
@@ -150,7 +145,7 @@ export async function loadSingle({ id }: { id: string }) {
 
 export async function checkUserAuthentication() {
   try {
-    const response = await fetch("/api/checkuser", {
+    const response = await fetch(`${URL}/api/checkuser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -171,7 +166,7 @@ export async function checkUserAuthentication() {
 
 export async function getMyProducts() {
   try {
-    const response = await fetch("http://localhost:3000/api/products/all");
+    const response = await fetch(`${URL}/api/products/all`);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -185,7 +180,7 @@ export async function getMyProducts() {
 }
 
 export async function getUser() {
-  const response = await fetch(`/api/user/get`);
+  const response = await fetch(`${URL}/api/user/get`);
   if (!response.ok) {
     throw new Error("Failed to fetch user");
   }
@@ -194,7 +189,7 @@ export async function getUser() {
 
 export async function getStripeProducts() {
   try {
-    const response = await fetch(`http://localhost:3000/api/getproducts`);
+    const response = await fetch(`${URL}/api/getproducts`);
     const { data } = await response.json();
     console.log("data", data);
     return data;
@@ -205,7 +200,7 @@ export async function getStripeProducts() {
 }
 
 export async function getStripeProdutsList() {
-  const response = await fetch(`/api/stripeproductlist`);
+  const response = await fetch(`${URL}/api/stripeproductlist`);
   if (!response.ok) {
     throw new Error("Failed to fetch user");
   }
@@ -213,7 +208,7 @@ export async function getStripeProdutsList() {
 }
 
 export async function getOrders() {
-  const response = await fetch(`/api/orders/get`);
+  const response = await fetch(`${URL}/api/orders/get`);
   if (!response.ok) {
     throw new Error("Failed to fetch order items");
   }
@@ -222,7 +217,7 @@ export async function getOrders() {
 
 export async function getAllBlog() {
   try {
-    const response = await fetch("http://localhost:3000/api/blog/getall");
+    const response = await fetch(`${URL}/api/blog/getall`);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -237,7 +232,7 @@ export async function getAllBlog() {
 
 export async function loadSingleBlog({ id }: { id: string }) {
   try {
-    const response = await fetch(`http://localhost:3000/api/blog/single/${id}`);
+    const response = await fetch(`${URL}/api/blog/single/${id}`);
     const { blog } = await response.json();
 
     return blog;

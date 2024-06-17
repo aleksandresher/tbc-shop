@@ -4,6 +4,7 @@ import Image from "next/image";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface BlogData {
   title: string;
@@ -28,7 +29,7 @@ const EditBlog = ({ content }: { content: BlogData }) => {
 
   const onSubmit = async (data: BlogData) => {
     try {
-      const response = await fetch(`/api/blog/edit`, {
+      const response = await fetch(`${URL}/api/blog/edit`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

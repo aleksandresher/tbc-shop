@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface User {
   email: string;
@@ -26,10 +27,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/get-user?email=${email}`,
-        {}
-      );
+      const response = await fetch(`${URL}/api/get-user?email=${email}`, {});
       const { user } = await response.json();
 
       return user;

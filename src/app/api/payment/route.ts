@@ -3,6 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { sql } from "@vercel/postgres";
 const secret = process.env.NEXTAUTH_SECRET;
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function POST(req: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -65,8 +66,8 @@ export async function POST(req: NextRequest) {
         },
       },
       mode: "payment",
-      success_url: "http://localhost:3000/en/dashboard/payment/success",
-      cancel_url: "http://localhost:3000/en/dashboard/payment/cancel",
+      success_url: `${URL}/en/dashboard/payment/success`,
+      cancel_url: `${URL}/en/dashboard/payment/cancel`,
     });
 
     return NextResponse.json(session.url);

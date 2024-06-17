@@ -1,13 +1,16 @@
 import HeaderWrapper from "@/app/components/header/HeaderWrapper";
 import { ReactNode } from "react";
 
-interface ShopLayoutProps {
+interface ContactLayoutProps {
   children: ReactNode;
   params: {
     locale: string;
   };
 }
-export default function ShopLayout({ params, children }: ShopLayoutProps) {
+export default function ContactLayout({
+  params,
+  children,
+}: ContactLayoutProps) {
   return (
     <section>
       <main>

@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useQueryClient } from "@tanstack/react-query";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ImageUploadPageProps {
   onUploadComplete: (url: string) => void;
@@ -26,10 +27,13 @@ export default function UserImageUpload({
 
     const file = inputFileRef.current.files[0];
 
-    const response = await fetch(`/api/avatar/upload?filename=${file.name}`, {
-      method: "POST",
-      body: file,
-    });
+    const response = await fetch(
+      `${URL}/api/avatar/upload?filename=${file.name}`,
+      {
+        method: "POST",
+        body: file,
+      }
+    );
 
     const newBlob = (await response.json()) as PutBlobResult;
 

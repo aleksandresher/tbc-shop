@@ -1,12 +1,13 @@
 import SingleProductPageCard from "@/app/components/SingleProduct";
 import { loadSingle } from "@/lib/laod-single";
 import { Metadata, ResolvingMetadata } from "next";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 interface Props {
   params: { id: string; locale: string };
 }
 
 export async function generateStaticParams() {
-  const response = await fetch("http://localhost:3000/api/productLanding");
+  const response = await fetch(`${URL}/api/productLanding`);
   const products = await response.json();
   console.log("products on page", products);
 

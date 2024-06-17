@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 interface UserProps {
   name: string;
   email: string;
@@ -16,7 +16,7 @@ export default function SignUp() {
 
   const onSubmit = async (data: UserProps) => {
     try {
-      const response = await fetch("/api/user/create", {
+      const response = await fetch(`${URL}/api/user/create`, {
         cache: "no-cache",
         method: "POST",
         headers: {

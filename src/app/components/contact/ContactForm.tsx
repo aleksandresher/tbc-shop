@@ -1,6 +1,7 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ContactMessage {
   title: string;
@@ -20,7 +21,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data: ContactMessage) => {
     try {
-      const res = await fetch("/api/contact/send", {
+      const res = await fetch(`${URL}/api/contact/send`, {
         method: "POST",
         body: JSON.stringify({
           title: data.title,

@@ -1,5 +1,6 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function DecreaseButton({
   productId,
@@ -11,7 +12,7 @@ export default function DecreaseButton({
   const queryClient = useQueryClient();
 
   const decreaseQuantity = async (productId: number) => {
-    const response = await fetch("/api/cart/decrease", {
+    const response = await fetch(`${URL}/api/cart/decrease`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

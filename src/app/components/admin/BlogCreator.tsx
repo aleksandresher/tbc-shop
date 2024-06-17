@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
-
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 interface BlogType {
   title: string;
   image: string;
@@ -27,7 +27,7 @@ export default function BlogCreator() {
 
   const onSubmit = async (data: BlogType) => {
     try {
-      const response = await fetch("/api/blog/create", {
+      const response = await fetch(`${URL}/api/blog/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCart, getStripeProducts } from "@/services/func";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface CartItem {
   stripe_product_id: string;
@@ -58,7 +59,7 @@ export default function StripeProducts() {
 
   const handlePayment = async () => {
     try {
-      const response = await fetch(`/api/payment`, {
+      const response = await fetch(`${URL}/api/payment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,11 +1,12 @@
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function IncreaseButton({ productId }: { productId: number }) {
   const queryClient = useQueryClient();
 
   const increaseQuantity = async (productId: number) => {
-    const response = await fetch("/api/cart/increase", {
+    const response = await fetch(`${URL}/api/cart/increase`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

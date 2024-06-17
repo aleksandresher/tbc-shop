@@ -1,19 +1,13 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function AddToCart({
-  productId,
-  
-}: {
-  productId: number;
-  
-}) {
+export default function AddToCart({ productId }: { productId: number }) {
   const queryClient = useQueryClient();
 
   const addToCart = async () => {
-
-    const response = await fetch("/api/cart/add", {
+    const response = await fetch(`${URL}/api/cart/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +34,7 @@ export default function AddToCart({
         (oldCart: { items: any[] } | undefined) => ({
           items: [
             ...(oldCart?.items || []),
-            { id: Math.random(), productId,  quantity: 1 },
+            { id: Math.random(), productId, quantity: 1 },
           ],
         })
       );
