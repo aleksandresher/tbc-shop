@@ -9,13 +9,22 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const response = await getAllBlog();
-  const blogs = await response.json();
-  console.log("blogs on page", blogs);
+  try {
+    const response = await getAllBlog();
 
-  return blogs?.blogs.map((blog: any) => ({
-    id: blog.id.toString(),
-  }));
+    if (!Array.isArray(response)) {
+      throw new Error("Invalid response format: expected array of blogs");
+    }
+
+    console.log("Blogs fetched:", response);
+
+    return response.map((blog: any) => ({
+      id: blog.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata(
