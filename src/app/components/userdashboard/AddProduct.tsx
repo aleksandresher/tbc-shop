@@ -92,6 +92,7 @@ export default function AddMyProduct() {
     setProductImageUrl(url);
     setValue("image", url);
   };
+
   return (
     <div className="w-full">
       <Dialog>
@@ -264,6 +265,9 @@ export default function AddMyProduct() {
                       id="image"
                       value={productImageUrl || ""}
                       {...register("image", {
+                        onChange(event) {
+                          setProductImageUrl(event.target.value);
+                        },
                         required: "image is required",
                       })}
                     />
