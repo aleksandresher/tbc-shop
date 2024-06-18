@@ -132,11 +132,13 @@ export async function updateUser({ avatar }: { avatar: Url }) {
 }
 
 export async function loadSingle({ id }: { id: string }) {
+  console.log("id from fetch", id);
   try {
-    const response = await fetch(`${URL}/api/products/single/${id}`);
-    const { items } = await response.json();
+    const response = await fetch(`${URL}/api/single/${id}`);
+    const data = await response.json();
+    console.log("item from fetch", data);
 
-    return items;
+    return data.product;
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -233,11 +235,14 @@ export async function getAllBlog() {
 export async function loadSingleBlog({ id }: { id: string }) {
   try {
     const response = await fetch(`${URL}/api/blog/single/${id}`);
-    const { blog } = await response.json();
+    if (!response.ok) {
+      throw new Error(`Failed to fetch blog with id ${id}`);
+    }
+    const data = await response.json();
 
-    return blog;
+    return data.blog;
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
+    console.error(`Error fetching blog with id ${id}:`, error);
+    throw error;
   }
 }

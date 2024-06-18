@@ -2,7 +2,13 @@
 import { loadSingleBlog } from "@/services/func";
 import { useQuery } from "@tanstack/react-query";
 
-export default function SingleBlogCard({ id }: { id: string }) {
+export default function SingleBlogCard({
+  id,
+  locale,
+}: {
+  id: string;
+  locale: string;
+}) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["blog"],
     queryFn: () => loadSingleBlog({ id }),

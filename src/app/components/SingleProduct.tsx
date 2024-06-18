@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { loadSingle } from "@/lib/laod-single";
+import { loadSingle } from "@/services/func";
 import Image from "next/image";
 
 interface ProductProps {

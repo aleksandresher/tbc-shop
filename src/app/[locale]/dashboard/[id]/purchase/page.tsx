@@ -1,5 +1,5 @@
 import { CheckoutForm } from "@/app/components/checkout/CheckoutForm";
-import { loadSingle } from "@/lib/laod-single";
+import { loadSingle } from "@/services/func";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);

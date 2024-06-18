@@ -5,7 +5,7 @@ import { getAllBlog } from "@/services/func";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Props {
-  params: { id: string };
+  params: { id: string; locale: string };
 }
 
 export async function generateStaticParams() {
@@ -16,11 +16,12 @@ export async function generateStaticParams() {
       throw new Error("Invalid response format: expected array of blogs");
     }
 
-    console.log("Blogs fetched:", response);
+    const params = response.flatMap((blog: any) => [
+      { id: blog.id.toString(), locale: "en" },
+      { id: blog.id.toString(), locale: "ka" },
+    ]);
 
-    return response.map((blog: any) => ({
-      id: blog.id.toString(),
-    }));
+    return params;
   } catch (error) {
     console.error("Error fetching blogs:", error);
     return [];
@@ -31,17 +32,35 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = params.id;
+  const { id } = params;
 
-  const blog = await loadSingleBlog({ id });
-  console.log("blog", blog[0]?.title);
+  try {
+    const blog = await loadSingleBlog({ id });
 
-  return {
-    title: blog[0].title,
-  };
+    if (!blog || !blog[0]) {
+      throw new Error(`Blog with id ${id} not found`);
+    }
+
+    return {
+      title: blog[0]?.title,
+    };
+  } catch (error) {
+    console.error("Error loading single blog:", error);
+    return {
+      title: "Blog not found",
+    };
+  }
 }
 
-export default function SingleBlogPage({ params }: { params: { id: string } }) {
-  const { id } = params;
-  return <SingleBlogCard id={id} />;
+export default function SingleBlogPage({
+  params,
+}: {
+  params: { id: string; locale: string };
+}) {
+  const { id, locale } = params;
+  return (
+    <section>
+      <SingleBlogCard id={id} locale={locale} />
+    </section>
+  );
 }

@@ -26,7 +26,7 @@ export default function RootLayout({
   params: { locale },
 }: PageProps) {
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressContentEditableWarning>
       <body className={inter.className}>
         <ReactQueryProvider>
           <I18nProviderClient locale={locale}>
