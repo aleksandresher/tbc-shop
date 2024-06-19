@@ -10,6 +10,7 @@ export default {
 
   nuxe: "nuxe",
   svr: "svr",
+
   phyto: "phyto",
   fanola: "fanola",
   avene: "avene",

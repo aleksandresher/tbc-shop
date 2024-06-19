@@ -8,7 +8,7 @@ export default {
   querybody: "ტანი",
   queryhair: "თმა",
   nuxe: "ნუქსი",
-  svr: "სვრ",
+  svr: "ესვიერი",
   phyto: "ფიტო",
   fanola: "ფანოლა",
   avene: "ავენე",

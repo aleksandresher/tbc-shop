@@ -16,15 +16,15 @@ export default function Single({
   locale: string;
 }) {
   return (
-    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] sm:border border-gray-200 p-3">
+    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55]  border-gray-200 p-3">
       <Link href={`shop/${productId}`}>
         <div className="w-full flex flex-col items-center">
-          <div className="w-[300px] h-[300px] flex justify-center items-center relative">
+          <div className="w-[300px] h-[300px] md:w-[250px] flex justify-center items-center relative">
             <Image
               src={item.image}
               fill={true}
               alt="oidinaru"
-              className="object-cover"
+              className="object-cover md:w-[250px]"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={true}
             />
