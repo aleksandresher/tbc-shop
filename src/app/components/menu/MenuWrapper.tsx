@@ -1,5 +1,6 @@
 import { BrandsMenu } from "./BrandsMenu";
 import MenuCarousel from "./MenuCarouse";
+import MobileMenu from "./MobileMenu";
 
 export default function MenuWraper({ locale }: { locale: string }) {
   return (
@@ -8,7 +9,8 @@ export default function MenuWraper({ locale }: { locale: string }) {
         <BrandsMenu locale={locale} />
       </div>
       <div className="sm:hidden">
-        <MenuCarousel />
+        <MobileMenu locale={locale} />
+        {/* <MenuCarousel /> */}
       </div>
     </section>
   );
