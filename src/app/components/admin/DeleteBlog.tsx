@@ -1,9 +1,11 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
 import DeleteIcon from "../svg/DeleteIcon";
+import { useToast } from "@/components/ui/use-toast";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function DeleteBlog({ product_id }: { product_id: number }) {
+  const { toast } = useToast();
   const queryClient = useQueryClient();
   const handleClick = async (productId: number) => {
     try {
@@ -21,6 +23,7 @@ export default function DeleteBlog({ product_id }: { product_id: number }) {
 
       const data = await response.json();
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      toast({ description: "deleted" });
       return data;
     } catch (error) {
       console.error("Error deleting item:", error);

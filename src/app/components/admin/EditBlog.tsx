@@ -4,6 +4,7 @@ import Image from "next/image";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/components/ui/use-toast";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface BlogData {
@@ -20,6 +21,7 @@ const EditBlog = ({ content }: { content: BlogData }) => {
     setValue,
     formState: { errors },
   } = useForm<BlogData>({ defaultValues: content });
+  const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
   const [productImageUrl, setProductImageUrl] = useState<string | null>(
@@ -42,9 +44,11 @@ const EditBlog = ({ content }: { content: BlogData }) => {
       }
 
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      toast({ description: "Blog edited successfully!" });
       setOpen(false);
     } catch (error) {
       console.error("Error editing blog:", error);
+      toast({ description: "Error deleting blog", variant: "destructive" });
     }
   };
 

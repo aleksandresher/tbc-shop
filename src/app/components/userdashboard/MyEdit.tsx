@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
+import { useToast } from "@/components/ui/use-toast";
 
 import { useForm } from "react-hook-form";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -79,9 +80,7 @@ const EditMyProduct = ({
   size: number;
   image: string;
 }) => {
-  const { data: session } = useSession();
-
-  console.log(session);
+  const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -112,6 +111,8 @@ const EditMyProduct = ({
       const productData = await response.json();
       queryClient.invalidateQueries({ queryKey: ["myproducts"] });
       setOpen(false);
+      toast({ description: "Product edited successfully", variant: "default" });
+
       console.log("product edited successfully:", productData);
     } catch (error) {
       console.error("Error editing product:", error);

@@ -103,10 +103,8 @@ export default function MyProductList({ locale }: MyProductListProps) {
       locale === "en" ? product.languages.en : product.languages.ka,
   }));
 
-  console.log("mapped data", mappedData);
-  console.log("data", data);
   return (
-    <section className="grid grid-cols-4 gap-3">
+    <section className="grid grid-col-3 md:grid-cols-4 gap-3">
       {mappedData?.map((item) => (
         <MySingle
           item={item.filteredLanguage}
