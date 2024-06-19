@@ -34,7 +34,8 @@ interface ParamsType {
 
 export default function GenericCategory({ params }: { params: ParamsType }) {
   const searchParams = useSearchParams();
-  const searchByBrand = searchParams.get("brand");
+  const searchByBrand = searchParams.get("brand")?.toLocaleLowerCase();
+  const searchByCategory = searchParams.get("category")?.toLocaleLowerCase();
 
   const { locale } = params;
 
@@ -54,11 +55,15 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
       }))
     : [];
 
-  const filteredData = searchByBrand
-    ? mappedData.filter(
-        (product) => product.languages.brand.toLowerCase() === searchByBrand
-      )
-    : mappedData;
+  const filteredData = mappedData.filter((product) => {
+    const brandMatch = searchByBrand
+      ? product.languages.brand.toLowerCase() === searchByBrand
+      : true;
+    const categoryMatch = searchByCategory
+      ? product.languages.category.toLowerCase() === searchByCategory
+      : true;
+    return brandMatch && categoryMatch;
+  });
 
   return (
     <section className=" p-12 ">

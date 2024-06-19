@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
     }
 
     const userId = users[0].id;
-
+    console.log("userId from all products route", userId);
     try {
       const { rows: products } = await sql`
         SELECT 
@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
         LEFT JOIN product_translations pt_ka ON p.id = pt_ka.product_id AND pt_ka.language = 'ka'
         WHERE p.user_id = ${userId}
       `;
-      console.log("prod", products);
+
       const items = products.map((item) => ({
         product_id: item.product_id,
         image: item.image,
@@ -83,7 +83,7 @@ export async function GET(req: NextRequest) {
           },
         },
       }));
-      console.log("items", items);
+
       return NextResponse.json({ items }, { status: 200 });
     } catch (error) {
       console.error("Failed to fetch products:", error);

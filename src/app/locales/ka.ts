@@ -1,5 +1,12 @@
 export default {
   all: "ყველა",
+  category: "კატეგორია",
+  skin: "კანის მოვლა",
+  hair: "თმის მოვლა",
+  body: "ტანის მოვლა",
+  queryskin: "კანი",
+  querybody: "ტანი",
+  queryhair: "თმა",
   nuxe: "ნუქსი",
   svr: "სვრ",
   phyto: "ფიტო",
@@ -12,7 +19,7 @@ export default {
   new: "ახალი",
   brands: "ბრენდები",
   skincare: "კანის მოვლა",
-  hair: "თმის მოვლა",
+
   bath: "აბაზანა & ტანი",
   blog: "ბლოგი",
   store: "მაღაზია",

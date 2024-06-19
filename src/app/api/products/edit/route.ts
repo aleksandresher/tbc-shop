@@ -52,16 +52,16 @@ export async function PUT(req: NextRequest) {
     let userIdQuery;
     if (typeof token.id === "string" && parseInt(token.id, 10) <= 2147483647) {
       userIdQuery = sql`
-        SELECT id
-        FROM users
-        WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
-      `;
+          SELECT id
+          FROM users
+          WHERE id = ${parseInt(token.id, 10)} OR (providerid = ${token.id})
+        `;
     } else {
       userIdQuery = sql`
-        SELECT id
-        FROM users
-        WHERE providerid = ${token.id}
-      `;
+          SELECT id
+          FROM users
+          WHERE providerid = ${token.id}
+        `;
     }
 
     const { rows: users } = await userIdQuery;
@@ -71,6 +71,8 @@ export async function PUT(req: NextRequest) {
     }
 
     const userId = users[0].id;
+    console.log("userId", userId);
+    console.log("productId", productId);
 
     if (userId) {
       const { rows: products } = await sql`

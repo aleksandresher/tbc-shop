@@ -21,50 +21,6 @@ export function BrandsMenu({ locale }: { locale: string }) {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              {t("new")}
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="w-full grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
-                <li className="hover:underline hover:underline-offset-2">
-                  <NavigationMenuLink asChild>
-                    <Link href="/">All new</Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      New SkinCare
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      New Hair Care
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      New Bath & Body
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
               {t("brands")}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -164,115 +120,37 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/skincare`}> {t("skincare")}</Link>
+              <Link href={`/${locale}/shop/skincare`}> {t("category")}</Link>
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
+                      href={`/${locale}/shop?category=${t("queryskin")}`}
+                      className="hover:underline hover:underline-offset-2 tracking-wide"
                     >
-                      Sunscreen
+                      {t("skin")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
+                      href={`/${locale}/shop?category=${t("queryhair")}`}
+                      className="hover:underline hover:underline-offset-2 tracking-wide"
                     >
-                      Cleaners
+                      {t("hair")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
+                      href={`/${locale}/shop?category=${t("querybody")}`}
+                      className="hover:underline hover:underline-offset-2 tracking-wide"
                     >
-                      Masks
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/hair`}> {t("hair")}</Link>
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Shampoo
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Conditioners
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Hair Oil
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/body`}> {t("bath")}</Link>
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Body wash
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Shower gell
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-                <li className="row-span-3">
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href="/"
-                      className="hover:underline hover:underline-offset-2"
-                    >
-                      Body oils
+                      {t("body")}
                     </Link>
                   </NavigationMenuLink>
                 </li>
