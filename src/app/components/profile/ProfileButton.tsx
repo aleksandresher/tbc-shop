@@ -23,7 +23,7 @@ interface User {
 export default function ProfileButton({ locale }: { locale: string }) {
   const { data, status: session } = useSession();
   const [user, setUser] = useState<User | null>(null);
-  console.log("user", user);
+
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
     try {

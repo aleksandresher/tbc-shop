@@ -71,6 +71,7 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
         {filteredData?.map((item) => {
           return (
             <Single
+              locale={locale}
               item={item.languages}
               productId={item.product_id}
               key={item.product_id}

@@ -24,8 +24,6 @@ export default function Search({ locale }: { locale: string }) {
   const debouncedInputValue = useDebounce(inputValue, 500);
   const ulRef = useRef<HTMLUListElement>(null);
 
-  console.log("suggestions", suggestions);
-
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ulRef.current && !ulRef.current.contains(event.target as Node)) {

@@ -7,6 +7,7 @@ export default {
   queryskin: "skin",
   querybody: "body",
   queryhair: "hair",
+
   nuxe: "nuxe",
   svr: "svr",
   phyto: "phyto",

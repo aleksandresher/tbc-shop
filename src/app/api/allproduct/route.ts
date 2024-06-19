@@ -20,7 +20,8 @@ export async function GET(req: NextRequest) {
                   'currency', COALESCE(pt_en.currency, ''),
                   'image', p.image,
                   'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes
+                  'totalvotes', p.totalvotes,
+                  'size', p.size
               ),
               'ka', jsonb_build_object(
                   'title', COALESCE(pt_ka.title, ''),
@@ -33,7 +34,8 @@ export async function GET(req: NextRequest) {
                   'currency', COALESCE(pt_ka.currency, ''),
                   'image', p.image,
                   'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes
+                  'totalvotes', p.totalvotes,
+                  'size', p.size
               )
           ) AS languages
       FROM
