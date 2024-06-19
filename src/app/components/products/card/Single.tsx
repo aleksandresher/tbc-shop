@@ -14,32 +14,30 @@ export default function Single({
   productId: number;
 }) {
   return (
-    <section className="flex flex-col items-center border border-gray-200 p-3  mb-8">
+    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] sm:border border-gray-200 p-3">
       <Link href={`shop/${productId}`}>
-        {" "}
-        <span>
-          <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
+        <div className="w-full flex flex-col items-center">
+          <div className="w-[200px] h-[200px] flex justify-center items-center relative">
             <Image
               src={item.image}
               fill={true}
               alt="oidinaru"
-              className=" object-cover"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={true}
             />
           </div>
-          <div className="flex flex-col mt-2">
-            <span className="w-full flex">
-              <h1>{item.brand}-</h1>
-              <p> {item.title}</p>
-            </span>
-
-            <p className="font-bold">
-              {item.currency == "USD" ? "$" : "₾"}
-              {item.price}.00
-            </p>
+          <div className="w-full flex flex-col items-center gap-1">
+            <h1 className="text-base font-tbc-medium">{item.brand}</h1>
+            <p className=" text-sm text-center font-tbc-medium">{item.title}</p>
           </div>
-        </span>
+          <div className="flex justify-center items-center gap-1 mt-3">
+            <p className="font-tbc-bold text-red-600">
+              {item.currency == "USD" ? "$" : "₾"}
+            </p>
+            <p className=" font-tbc-bold">{item.price}.00</p>
+          </div>
+        </div>
       </Link>
 
       <RateProduct

@@ -15,7 +15,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
       className="w-full grid  py-4 "
       style={{ gridTemplateColumns: "3fr 1fr 1fr" }}
     >
-      <span className=" flex items-center md:justify-end gap-10 col-span-1">
+      {/* <span className=" flex items-center md:justify-end gap-10 col-span-1">
         <Link href="/">
           <h1 className="hidden sm:block font-bold text-lg">Care</h1>
         </Link>
@@ -33,7 +33,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
         <LocaleChange />
         <AuthorizationWrapper locale={locale} />
         <CartWrapper locale={locale} />
-      </span>
+      </span> */}
     </section>
   );
 }

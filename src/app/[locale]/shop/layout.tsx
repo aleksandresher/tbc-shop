@@ -7,6 +7,7 @@ interface ShopLayoutProps {
     locale: string;
   };
 }
+
 export default function ShopLayout({ params, children }: ShopLayoutProps) {
   return (
     <section>

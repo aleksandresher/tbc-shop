@@ -12,3 +12,45 @@ svg.star-svg {
   display: inline;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+@font-face {
+  font-family: "TBC-Regular";
+  src: url("/fonts/TBCContractica-Regular.ttf");
+}
+
+@font-face {
+  font-family: "TBC-Medium";
+  src: url("/fonts/TBCContractica-Medium.ttf");
+}
+@font-face {
+  font-family: "TBC-Bold";
+  src: url("/fonts/TBCContracticaCAPS-Bold.ttf");
+}
+
+@font-face {
+  font-family: "TBCX-Medium";
+  src: url("/fonts/TBCContracticaCAPS-Medium.ttf");
+}
+body {
+  font-family: "TBC-Regular", sans-serif;
+}
+
+.tbc-regular {
+  font-family: "TBC-Regular", sans-serif;
+}
+
+.tbc-medium {
+  font-family: "TBC-Medium", sans-serif;
+}
+.tbc-bold {
+  font-family: "TBC-Bold", sans-serif;
+}
+
+.tbcx-medium {
+  font-family: "TBCX-Medium", sans-serif;
+}

@@ -57,17 +57,18 @@ export default function RateProduct({
     }
   };
   return (
-    <section className="flex items-center">
+    <section className="flex items-center justify-center gap-1">
       <div className="App">
         <Rating
           onClick={handleRating}
           initialValue={avarageRating}
           className="hidden"
+          size={20}
         />
       </div>
-      <span className="flex gap-1">
-        <p>{total}</p>
-        <p>({amount})</p>
+      <span className="flex gap-1 items-center">
+        <p className="text-sm">{total}</p>
+        <p className="text-sm">({amount})</p>
       </span>
     </section>
   );
