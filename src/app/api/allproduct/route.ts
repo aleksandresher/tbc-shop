@@ -48,7 +48,6 @@ export async function GET(req: NextRequest) {
           pt_en.language IS NOT NULL OR pt_ka.language IS NOT NULL;
     `;
 
-    console.log("products", products);
     return NextResponse.json({ products }, { status: 200 });
   } catch (error) {
     console.error("Error fetching products:", error);

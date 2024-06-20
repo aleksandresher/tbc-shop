@@ -7,6 +7,9 @@ export default {
   queryskin: "skin",
   querybody: "body",
   queryhair: "hair",
+  priceUp: "Price, low to high",
+  priceDown: "Price, high to low",
+  sort: "Sorting",
 
   nuxe: "nuxe",
   svr: "svr",

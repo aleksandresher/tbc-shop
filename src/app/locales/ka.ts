@@ -19,6 +19,9 @@ export default {
   new: "ახალი",
   brands: "ბრენდები",
   skincare: "კანის მოვლა",
+  priceUp: "ფასი, ზრდადობით",
+  priceDown: "ფასი, კლებადობით",
+  sort: "სორტირება",
 
   bath: "აბაზანა & ტანი",
   blog: "ბლოგი",
