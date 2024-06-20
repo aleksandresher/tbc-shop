@@ -42,6 +42,8 @@ export default {
   email: "Email",
   password: "Password",
   authorization: "Log In",
+  registration: "Sign Up",
+  name: "Name",
   reset: "Reset Password",
   login: "Log In",
   logout: "Log Out",

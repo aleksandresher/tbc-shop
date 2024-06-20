@@ -37,13 +37,14 @@ export default {
   anotation: "ანოტაცია",
   ldescription: "დამატებითი ინფორმაცია",
 
-
   email: "ელფოსტა",
   password: "პაროლი",
   reset: "პაროლის აღდგენა",
   authorization: "ავტორიზაცია",
+  registration: "რეგისტრაცია",
+  name: "სახელი",
   login: "შესვლა",
   logout: "გასვლა",
   notregister: "არ გაქვს ანგარიში?",
-  create: "შექმენი"
+  create: "შექმენი",
 } as const;

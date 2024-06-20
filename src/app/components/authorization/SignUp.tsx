@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { useI18n } from "@/app/locales/client";
 interface UserProps {
   name: string;
   email: string;
@@ -13,6 +14,7 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm<UserProps>();
+  const t = useI18n();
 
   const onSubmit = async (data: UserProps) => {
     try {
@@ -36,15 +38,21 @@ export default function SignUp() {
   return (
     <section>
       <div className="flex flex-col items-center p-12 gap-4">
-        <div className="w-4/5 flex justify-start">
-          <h1 className="text-[32px] font-tbc-bold">ავტორიზაცია</h1>
+        <div className="w-full sm:w-4/5 flex justify-center sm:justify-start">
+          <h1 className="text-[32px] font-tbc-bold">{t("registration")}</h1>
         </div>
 
-        <form className="w-4/5 mt-7" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="w-full sm:w-4/5 mt-7"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className=" flex flex-col gap-4">
             <div className="w-full flex items-center gap-2">
+              <label htmlFor="name" hidden>
+                {t("name")}
+              </label>
               <input
-                placeholder="name"
+                placeholder={t("name")}
                 className="p-2  rounded-[8px] w-full h-[55px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="name"
                 {...register("name", {
@@ -54,8 +62,11 @@ export default function SignUp() {
               {errors.name?.message && <span>{errors.name?.message}</span>}
             </div>
             <div className="w-full flex items-center gap-2">
+              <label htmlFor="email" hidden>
+                {t("email")}
+              </label>
               <input
-                placeholder="ელფოსტა"
+                placeholder={t("email")}
                 className="p-2  rounded-[8px] w-full h-[55px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="email"
                 {...register("email", {
@@ -66,8 +77,11 @@ export default function SignUp() {
             </div>
 
             <div className="flex items-center gap-2">
+              <label htmlFor="password" hidden>
+                {t("password")}
+              </label>
               <input
-                placeholder="პაროლი"
+                placeholder={t("password")}
                 type="password"
                 className="w-full p-2 h-[55px]  rounded-[8px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="password"
@@ -80,8 +94,8 @@ export default function SignUp() {
               )}
             </div>
           </div>
-          <div className="w-full flex justify-center items-center bg-[#3c74ff] text-white p-4 rounded-[25px] hover:bg-[#5a88fd] cursor-pointer">
-            <button type="submit">რეგისტრაცია</button>
+          <div className="w-full flex justify-center items-center bg-[#3c74ff] text-white p-4 rounded-[25px] hover:bg-[#5a88fd] cursor-pointer mt-4">
+            <button type="submit">{t("registration")}</button>
           </div>
         </form>
       </div>
