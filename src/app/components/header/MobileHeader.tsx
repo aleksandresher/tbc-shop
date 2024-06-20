@@ -32,7 +32,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
   };
 
   return (
-    <section className="sm:hidden relative">
+    <section className="md:hidden relative">
       <section className="py-5 px-8 grid grid-cols-5 items-center">
         <span onClick={() => toggleMenu()}>
           <svg

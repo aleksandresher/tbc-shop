@@ -5,6 +5,7 @@ import RateProduct from "../RateProduct";
 import { join } from "path";
 import AddToCart from "../../cart/AddToCart";
 import Link from "next/link";
+import ImageHoverCard from "./ImageHover";
 
 export default function Single({
   item,
@@ -16,17 +17,17 @@ export default function Single({
   locale: string;
 }) {
   return (
-    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55]  border-gray-200 p-3">
+    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#fff]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
       <Link href={`shop/${productId}`}>
-        <div className="w-full flex flex-col items-center">
-          <div className="w-[300px] h-[300px] md:w-[250px] flex justify-center items-center relative">
+        <div className="w-full flex flex-col items-center  ">
+          <div className="w-[300px] h-[300px] md:w-[350px] flex justify-center items-center relative">
             <Image
               src={item.image}
               width={300}
               height={300}
               alt="oidinaru"
-              className="object-cover md:w-[250px]"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover md:w-[300px]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
               priority={true}
             />
           </div>

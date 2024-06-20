@@ -57,7 +57,7 @@ export default function AddToCart({ productId }: { productId: number }) {
 
   return (
     <button
-      className="border bg-[#90e0ef] border-gray-300 rounded-[8px] mt-2 p-2 uppercase font-tbc-medium  "
+      className="border bg-[#fff] border-black rounded-[4px] mt-2 px-6 py-2  text-sm dark:bg-black font-tbc-regular "
       onClick={() => clickHandler()}
     >
       Add to Cart

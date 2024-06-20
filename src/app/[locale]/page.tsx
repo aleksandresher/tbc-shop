@@ -7,7 +7,7 @@ import MobileHeader from "../components/header/MobileHeader";
 
 export default function Home({ params }: { params: { locale: string } }) {
   return (
-    <section>
+    <section className="dark:bg-black">
       <HeaderWrapper locale={params.locale} />
       <MenuWraper locale={params.locale} />
       <Gallery />

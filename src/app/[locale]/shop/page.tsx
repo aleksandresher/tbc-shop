@@ -47,7 +47,6 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   const [searchByCategory, setSearchByCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortedData, setSortedData] = useState<Product[]>([]);
-  console.log("search brand", searchByBrand);
   const { locale } = params;
 
   const { data, isLoading, error } = useQuery<DataType>({
@@ -96,8 +95,8 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   }
 
   return (
-    <section className="flex  flex-col sm:flex-row gap-8 p-12 relative">
-      <span className="flex sm:flex-row justify-between sm:pt-8 gap-4">
+    <section className="flex  flex-col items-center  gap-8 p-12 relative">
+      <span className="flex   sm:pt-8 gap-4">
         <BrandFilterSelect
           setBrandFilter={setSearchByBrand}
           clearFilter={clearFilter}
@@ -105,8 +104,8 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
         <ProductSort onSortChange={handleSortChange} />
       </span>
 
-      <div className=" gap-y-3 grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 md:gap-x-6 md:max-w-[1000px] md:min-w-[1000px]">
-        {sortedData.length > 0 ? (
+      <div className=" gap-y-3 gap-x-3 grid grid-cols-1 sm:grid-cols-2  md:grid-cols-4 md:gap-x-6 md:max-w-[1600px] md:min-w-[1000px]">
+        {sortedData.length > 0 &&
           sortedData.map((item) => (
             <Single
               locale={locale}
@@ -114,10 +113,7 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
               productId={item.product_id}
               key={item.product_id}
             />
-          ))
-        ) : (
-          <div>No products found for the selected criteria.</div>
-        )}
+          ))}
       </div>
     </section>
   );

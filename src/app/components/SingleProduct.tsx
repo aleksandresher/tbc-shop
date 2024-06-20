@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { loadSingle } from "@/services/func";
 import Image from "next/image";
 import { useI18n } from "../locales/client";
+import ImageHoverCard from "./products/card/ImageHover";
 
 interface ProductProps {
   product_id: number;
@@ -69,6 +70,10 @@ export default function SingleProductPageCard({
   return (
     <section>
       <div className="product-card px-4 pt-8">
+        <ImageHoverCard
+          image={selectedLanguage.image}
+          title={selectedLanguage.title}
+        />
         <span className="flex items-center p-2 gap-1 sm:gap-4">
           <Image
             src={selectedLanguage.image}
@@ -76,7 +81,7 @@ export default function SingleProductPageCard({
             width={200}
             height={250}
             priority={true}
-            className="border border-gray-100 shadow-md"
+            className="w-[180px] border border-gray-100 shadow-md sm:w-[300px]"
           />
           <section className="flex flex-col items-center gap-2">
             <h1 className="text-center font-tbc-regular">

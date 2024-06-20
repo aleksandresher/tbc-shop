@@ -12,12 +12,14 @@ import { ModeToggle } from "../ThemeToggle";
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
     <section
-      className="hidden sm:w-full sm:grid  py-4 "
+      className="hidden sm:w-full md:grid  py-4 dark:bg-black"
       style={{ gridTemplateColumns: "3fr 1fr 1fr" }}
     >
       <span className=" flex items-center md:justify-end gap-10 col-span-1">
         <Link href="/">
-          <h1 className="hidden sm:block font-bold text-lg">Care</h1>
+          <h1 className="hidden sm:block font-bold text-lg font-tbc-regular">
+            Beauty Bounty
+          </h1>
         </Link>
         <SearchWrapper locale={locale} />
       </span>

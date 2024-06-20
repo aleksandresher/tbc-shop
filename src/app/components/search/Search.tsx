@@ -67,7 +67,7 @@ export default function Search({ locale }: { locale: string }) {
           <input
             type="text"
             placeholder={t("search")}
-            className="block p-4 text-md text-gray-900 focus:outline-none"
+            className="block px-4 text-md text-gray-400 focus:outline-none dark:bg-[#fff] w-full"
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
