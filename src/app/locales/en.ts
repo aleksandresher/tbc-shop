@@ -38,4 +38,13 @@ export default {
   country: "Country",
   anotation: "Anotation",
   ldescription: "Description",
+
+  email: "Email",
+  password: "Password",
+  authorization: "Log In",
+  reset: "Reset Password",
+  login: "Log In",
+  logout: "Log Out",
+  notregister: "Not Registered?",
+  create: "Sign-up",
 } as const;

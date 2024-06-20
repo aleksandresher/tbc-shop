@@ -35,5 +35,15 @@ export default {
   price: "ფასი",
   country: "ქვეყანა",
   anotation: "ანოტაცია",
-  ldescription: "დამატებითი ინფორმაცია"
+  ldescription: "დამატებითი ინფორმაცია",
+
+
+  email: "ელფოსტა",
+  password: "პაროლი",
+  reset: "პაროლის აღდგენა",
+  authorization: "ავტორიზაცია",
+  login: "შესვლა",
+  logout: "გასვლა",
+  notregister: "არ გაქვს ანგარიში?",
+  create: "შექმენი"
 } as const;

@@ -46,9 +46,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
         </span>
 
         <h1 className=" col-span-3 text-center">Beauty Bounty</h1>
-        <span className="flex gap-3 ">
-          {" "}
-          {/* <Image src="/search2.svg" alt="search icon" width={30} height={50} /> */}
+        <span className="flex gap-3 items-center ">
           <CartWrapper locale={locale} />
           <AuthorizationWrapper locale={locale} />
         </span>
