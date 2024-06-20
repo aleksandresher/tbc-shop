@@ -78,7 +78,8 @@ export function CheckoutForm({ product, clientSecret }: CheckoutProps) {
           <div className="aspect-video flex-shrink-0 w-1/3 relative">
             <Image
               src={item.image ? item.image : "/no-image.svg"}
-              fill
+              width={250}
+              height={250}
               alt={item.languages.en.title}
               className="object-cover"
             />
