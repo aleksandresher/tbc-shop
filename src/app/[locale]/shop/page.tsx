@@ -96,8 +96,8 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   }
 
   return (
-    <section className="flex  flex-col sm:flex-row justify-center gap-8 p-12 relative">
-      <span className="flex justify-between items-center gap-4">
+    <section className="flex  flex-col sm:flex-row gap-8 p-12 relative">
+      <span className="flex sm:flex-row justify-between sm:pt-8 gap-4">
         <BrandFilterSelect
           setBrandFilter={setSearchByBrand}
           clearFilter={clearFilter}
