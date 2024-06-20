@@ -1,35 +1,31 @@
-"use client";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ChangeEvent, useState } from "react";
 import { useI18n } from "@/app/locales/client";
 
-export default function ProductSort() {
+interface ProductSortProps {
+  onSortChange: (sortOption: string) => void;
+}
+
+export default function BrandFilterSelect({ onSortChange }: ProductSortProps) {
   const t = useI18n();
+
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = event.target.value;
+    const sortOrder = selectedOption === t("priceDown") ? "down" : "up";
+    console.log("sort set", sortOrder);
+    onSortChange(sortOrder);
+  };
+
   return (
-    <Select>
-      <SelectTrigger className="rounded-[10px] outline-none border border-gray-200">
-        <SelectValue placeholder={`${t("sort")}`} />
-      </SelectTrigger>
-      <SelectContent className="bg-white">
-        <SelectItem
-          value={t("priceDown")}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("priceDown")}
-        </SelectItem>
-        <SelectItem
-          value={t("priceUp")}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("priceUp")}
-        </SelectItem>
-      </SelectContent>
-    </Select>
+    <form className="">
+      <select
+        onChange={handleSortChange}
+        id="countries"
+        className="bg-gray-50 border border-gray-300 text-black text-sm  focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-[10px]"
+      >
+        <option disabled>{t("sort")}</option>
+        <option value={t("priceDown")}>{t("priceDown")}</option>
+        <option value={t("priceUp")}>{t("priceUp")}</option>
+      </select>
+    </form>
   );
 }

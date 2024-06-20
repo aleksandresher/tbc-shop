@@ -1,12 +1,4 @@
-"use client";
-import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ChangeEvent, useState } from "react";
 import { useI18n } from "@/app/locales/client";
 
 interface FilterProps {
@@ -18,75 +10,28 @@ export default function BrandFilterSelect({
   setBrandFilter,
   clearFilter,
 }: FilterProps) {
-  const handleBrandChange = (brand: string) => {
-    if (brand === "All" || brand === "ყველა") {
+  const t = useI18n();
+
+  const handleBrandChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === "All" || e.target.value === "ყველა") {
       clearFilter();
     } else {
-      setBrandFilter(brand.toLowerCase());
+      setBrandFilter(e.target.value.toLowerCase());
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    console.log("propagation stopod");
-  };
-  const t = useI18n();
   return (
-    <Select onValueChange={handleBrandChange}>
-      <SelectTrigger className="rounded-[10px] outline-none border border-gray-200 relative">
-        <SelectValue placeholder={`${t("brands")}`} />
-      </SelectTrigger>
-      <SelectContent className=" bg-red-900 z-50">
-        <SelectItem
-          value={t("all")}
-          onClick={(e) => handleClick(e)}
-          className="focus:bg-slate-200 "
-        >
-          {t("all")}
-        </SelectItem>
-        <SelectItem
-          value={t("isispharma")}
-          onClick={(e) => handleClick(e)}
-          className="focus:bg-slate-200"
-        >
-          {t("isispharma")}
-        </SelectItem>
-        <SelectItem
-          value={t("avene")}
-          onClick={handleClick}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("avene")}
-        </SelectItem>
-        <SelectItem
-          value={t("echosline")}
-          onClick={handleClick}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("echosline")}
-        </SelectItem>
-        <SelectItem
-          value={t("nuxe")}
-          onClick={handleClick}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("nuxe")}
-        </SelectItem>
-        <SelectItem
-          value={t("svr")}
-          onClick={handleClick}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("svr")}
-        </SelectItem>
-        <SelectItem
-          value={t("phyto")}
-          onClick={handleClick}
-          className="focus:bg-slate-200 cursor-pointer"
-        >
-          {t("phyto")}
-        </SelectItem>
-      </SelectContent>
-    </Select>
+    <form className="">
+      <select
+        onChange={handleBrandChange}
+        id="countries"
+        className="bg-gray-50 border border-gray-300 text-black text-sm  focus:ring-blue-500 focus:border-blue-500 block p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-[10px]"
+      >
+        <option value={t("all")}>{t("all")}</option>
+        <option value={t("isispharma")}>{t("isispharma")}</option>
+        <option value={t("avene")}>{t("avene")}</option>
+        <option value={t("nuxe")}>{t("nuxe")}</option>
+      </select>
+    </form>
   );
 }
