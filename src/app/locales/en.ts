@@ -33,4 +33,9 @@ export default {
   store: "Store",
   contact: "Contact",
   search: "Search",
+  brand: "Brand",
+  price: "Price",
+  country: "Country",
+  anotation: "Anotation",
+  ldescription: "Description",
 } as const;

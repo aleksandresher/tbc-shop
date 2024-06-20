@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { useI18n } from "@/app/locales/client";
+import LocaleChange from "../language/LocalChange";
+import CartWrapper from "../cart/CartWrapper";
+import AuthorizationWrapper from "../authorization/AuthorizationWrapper";
 
 export default function MobileHeader({ locale }: { locale: string }) {
   const router = useRouter();
@@ -45,15 +48,16 @@ export default function MobileHeader({ locale }: { locale: string }) {
         <h1 className=" col-span-3 text-center">Beauty Bounty</h1>
         <span className="flex gap-3 ">
           {" "}
-          <Image src="/search2.svg" alt="search icon" width={30} height={50} />
-          <Image src="/basket.svg" alt="basket icon" width={30} height={30} />
+          {/* <Image src="/search2.svg" alt="search icon" width={30} height={50} /> */}
+          <CartWrapper locale={locale} />
+          <AuthorizationWrapper locale={locale} />
         </span>
       </section>
       {menuOpen && (
         <section className="h-screen w-full flex flex-col absolute gap-4 top-0 px-8 py-5 bg-[#fff] z-50">
           <div className="flex w-full justify-between pl-1">
             <h1>Beauty</h1>
-            <ModeToggle />
+
             <span onClick={() => toggleMenu()}>
               <Image
                 src="/close.svg"
@@ -83,6 +87,10 @@ export default function MobileHeader({ locale }: { locale: string }) {
               </li>
             </ul>
           </nav>
+          <div className="flex flex-col justify-center gap-2 pl-2">
+            <ModeToggle />
+            <LocaleChange />
+          </div>
         </section>
       )}
     </section>

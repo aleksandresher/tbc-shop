@@ -66,7 +66,7 @@ export default function SingleProductPage({
   params: { id: string; locale: string };
 }) {
   const { id, locale } = params;
-  console.log("id", id, "locale", locale);
+
   return (
     <section>
       <SingleProductPageCard id={id} locale={locale} />

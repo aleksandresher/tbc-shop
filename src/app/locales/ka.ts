@@ -31,4 +31,9 @@ export default {
   store: "მაღაზია",
   contact: "კონტაქტი",
   search: "ძებნა",
+  brand: "ბრენდი",
+  price: "ფასი",
+  country: "ქვეყანა",
+  anotation: "ანოტაცია",
+  ldescription: "დამატებითი ინფორმაცია"
 } as const;

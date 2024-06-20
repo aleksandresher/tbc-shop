@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { loadSingle } from "@/services/func";
 import Image from "next/image";
+import { useI18n } from "../locales/client";
 
 interface ProductProps {
   product_id: number;
@@ -44,6 +45,7 @@ export default function SingleProductPageCard({
   id: string;
   locale: string;
 }) {
+  const t = useI18n();
   const { data, isLoading, error } = useQuery<ProductProps[]>({
     queryKey: ["singleProduct"],
     queryFn: () => loadSingle({ id }),
@@ -66,21 +68,44 @@ export default function SingleProductPageCard({
 
   return (
     <section>
-      <div className="product-card">
-        <h2>{selectedLanguage.title}</h2>
-        <p>
-          Price: {selectedLanguage.price} {selectedLanguage.currency}
-        </p>
-        <p>Brand: {selectedLanguage.brand}</p>
-        <p>Description: {selectedLanguage.sdescription}</p>
-        <p>Description: {selectedLanguage.ldescription}</p>
-        <Image
-          src={selectedLanguage.image}
-          alt={selectedLanguage.title}
-          width={200}
-          height={200}
-          priority={true}
-        />
+      <div className="product-card px-4 pt-8">
+        <span className="flex items-center p-2 gap-1 sm:gap-4">
+          <Image
+            src={selectedLanguage.image}
+            alt={selectedLanguage.title}
+            width={200}
+            height={250}
+            priority={true}
+            className="border border-gray-100 shadow-md"
+          />
+          <section className="flex flex-col items-center gap-2">
+            <h1 className="text-center font-tbc-regular">
+              {selectedLanguage.title}
+            </h1>
+            <h2 className="font-tbc-regular">
+              {t("brand")} {selectedLanguage.brand}
+            </h2>
+            <p className="font-tbc-regular">
+              {t("category")}: {selectedLanguage.category}
+            </p>
+            <p className="font-tbc-regular">
+              {t("country")}: {selectedLanguage.country}
+            </p>
+            <p>
+              {t("price")}: {selectedLanguage.price} {selectedLanguage.currency}
+            </p>
+          </section>
+        </span>
+
+        <div className="flex flex-col gap-3 mt-5">
+          {" "}
+          <p className="font-tbc-regular">
+            {t("anotation")}: {selectedLanguage.sdescription}
+          </p>
+          <p className=" font-tbc-regular">
+            {t("ldescription")}: {selectedLanguage.ldescription}
+          </p>
+        </div>
       </div>
     </section>
   );
