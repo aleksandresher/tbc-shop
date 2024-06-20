@@ -22,7 +22,8 @@ export default function Single({
           <div className="w-[300px] h-[300px] md:w-[250px] flex justify-center items-center relative">
             <Image
               src={item.image}
-              fill={true}
+              width={300}
+              height={300}
               alt="oidinaru"
               className="object-cover md:w-[250px]"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -15,15 +15,7 @@ export default function Gallery() {
           <div></div>
         </div>
         <div className="flex rounded-[10px] shadow-lg w-fit ml-14">
-          <div>
-            <Image
-              src="/bodycare.jpg"
-              width={500}
-              height={300}
-              alt="bodycare"
-              className="rounded-l-[10px]"
-            />
-          </div>
+          <div></div>
           <div className="flex flex-col items-center justify-around p-2">
             <p className="text-center">Body care is a choice</p>
             <p className="text-lg font-bold">Body</p>
@@ -43,23 +35,8 @@ export default function Gallery() {
             </button>
           </div>
 
-          <div>
-            <Image
-              src="/haircare.jpg"
-              width={500}
-              height={300}
-              alt="bodycare"
-              className="rounded-r-[10px]"
-            />
-          </div>
+          <div></div>
         </div>
-        <Image
-          src="/landing.jpg"
-          width={1000}
-          height={1000}
-          alt="skincare"
-          className="rounded-r-[10px]"
-        />
       </section>
     </>
   );
