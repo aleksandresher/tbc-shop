@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { ModeToggle } from "../ThemeToggle";
+import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import Search from "../search/Search";
@@ -18,12 +19,15 @@ import Link from "next/link";
 import { useI18n } from "@/app/locales/client";
 
 export default function MobileHeader({ locale }: { locale: string }) {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  console.log("menu", menuOpen);
   const t = useI18n();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   return (
     <section className="sm:hidden relative">
       <section className="py-5 px-8 grid grid-cols-5 items-center">
@@ -51,176 +55,34 @@ export default function MobileHeader({ locale }: { locale: string }) {
             <h1>Beauty</h1>
             <ModeToggle />
             <span onClick={() => toggleMenu()}>
-              <svg
-                className="block h-5 w-5 fill-current "
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Mobile menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-              </svg>
+              <Image
+                src="/close.svg"
+                alt="menu close icon"
+                width={20}
+                height={20}
+              />
             </span>
           </div>
           <Search locale={locale} />
-          <span className="">
-            <NavigationMenu className="w-[340px] sm:w-[600px] absolute">
-              <NavigationMenuList className="flex flex-col items-start gap-3">
-                <NavigationMenuItem className="top-0 ">
-                  <NavigationMenuTrigger className="px-1 m-0 font-tbc-medium">
-                    {t("brands")}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="top-0">
-                    <ul className=" grid grid-col-2 gap-3 p-4   lg:grid-cols-2 grid-rows-3 right-full ease-in-out ">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop`}
-                            className="hover:underline hover:underline-offset-2 text-red-600"
-                          >
-                            {t("all")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("rituals")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("rituals")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("isispharma")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("isispharma")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("nuxe")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("nuxe")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("fanola")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("fanola")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("avene")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("avene")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("echosline")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("echosline")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("svr")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("svr")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?brand=${t("caudalie")}`}
-                            className="hover:underline hover:underline-offset-2"
-                          >
-                            {t("caudalie")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="p-0 m-0 font-tbc-medium">
-                    {t("category")}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?category=${t("queryskin")}`}
-                            className="hover:underline hover:underline-offset-2 tracking-wide"
-                          >
-                            {t("skin")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?category=${t("queryhair")}`}
-                            className="hover:underline hover:underline-offset-2 tracking-wide"
-                          >
-                            {t("hair")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                      <li className="row-span-3">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={`/${locale}/shop?category=${t("querybody")}`}
-                            className="hover:underline hover:underline-offset-2 tracking-wide"
-                          >
-                            {t("body")}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link href={`/shop`} className=" font-tbc-medium">
-                    Store
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link href={`/contact`} className=" font-tbc-medium">
-                    Contact
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link href={`/blog`} className=" font-tbc-medium">
-                    Blog
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </span>
+          <nav>
+            <ul className="flex flex-col gap-4 pl-2">
+              <li>
+                <Link href={"/shop"} onClick={() => toggleMenu()}>
+                  {t("store")}
+                </Link>
+              </li>
+              <li>
+                <Link href={"/blog"} onClick={() => toggleMenu()}>
+                  {t("blog")}
+                </Link>
+              </li>
+              <li>
+                <Link href={"/contact"} onClick={() => toggleMenu()}>
+                  {t("contact")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </section>
       )}
     </section>

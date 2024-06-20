@@ -9,7 +9,6 @@ export default function Home({ params }: { params: { locale: string } }) {
   return (
     <section>
       <HeaderWrapper locale={params.locale} />
-      <MobileHeader locale={params.locale} />
       <MenuWraper locale={params.locale} />
       <Gallery />
     </section>

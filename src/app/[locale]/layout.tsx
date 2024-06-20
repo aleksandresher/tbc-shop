@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { CartProvider } from "../providers/ContextProvider";
 import { ThemeProvider } from "../providers/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
+import MobileHeader from "../components/header/MobileHeader";
 
 export const metadata: Metadata = {
   title: "Cosmetics Store",
@@ -40,7 +41,10 @@ export default function RootLayout({
                   enableSystem
                   disableTransitionOnChange
                 >
-                  <main> {children}</main>
+                  <main>
+                    <MobileHeader locale={locale} />
+                    {children}
+                  </main>
                   <Toaster />
                 </ThemeProvider>
               </CartProvider>

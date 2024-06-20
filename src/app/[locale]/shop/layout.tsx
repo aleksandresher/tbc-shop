@@ -14,7 +14,6 @@ export default function ShopLayout({ params, children }: ShopLayoutProps) {
     <section>
       <main>
         <HeaderWrapper locale={params.locale} />
-        <MobileHeader locale={params.locale} />
         {children}
       </main>
     </section>

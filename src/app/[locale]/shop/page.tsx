@@ -47,7 +47,7 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
   const [searchByCategory, setSearchByCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortedData, setSortedData] = useState<Product[]>([]);
-  console.log("sorted data", sortedData);
+  console.log("search brand", searchByBrand);
   const { locale } = params;
 
   const { data, isLoading, error } = useQuery<DataType>({
