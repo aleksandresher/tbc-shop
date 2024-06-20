@@ -31,6 +31,10 @@ export default function BrandFilterSelect({
         <option value={t("isispharma")}>{t("isispharma")}</option>
         <option value={t("avene")}>{t("avene")}</option>
         <option value={t("nuxe")}>{t("nuxe")}</option>
+        <option value={t("fanola")}>{t("fanola")}</option>
+        <option value={t("caudalie")}>{t("caudalie")}</option>
+        <option value={t("rituals")}>{t("rituals")}</option>
+        <option value={t("topicream")}>{t("topicream")}</option>
       </select>
     </form>
   );

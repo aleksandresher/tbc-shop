@@ -65,11 +65,11 @@ export default function MobileHeader({ locale }: { locale: string }) {
           <span className="">
             <NavigationMenu className="w-[340px] sm:w-[600px] absolute">
               <NavigationMenuList className="flex flex-col items-start gap-3">
-                <NavigationMenuItem className=" ">
+                <NavigationMenuItem className="top-0 ">
                   <NavigationMenuTrigger className="px-1 m-0 font-tbc-medium">
                     {t("brands")}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="">
+                  <NavigationMenuContent className="top-0">
                     <ul className=" grid grid-col-2 gap-3 p-4   lg:grid-cols-2 grid-rows-3 right-full ease-in-out ">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
@@ -84,10 +84,10 @@ export default function MobileHeader({ locale }: { locale: string }) {
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <Link
-                            href={`/${locale}/shop?brand=${t("ordinary")}`}
+                            href={`/${locale}/shop?brand=${t("rituals")}`}
                             className="hover:underline hover:underline-offset-2"
                           >
-                            {t("ordinary")}
+                            {t("rituals")}
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -154,10 +154,10 @@ export default function MobileHeader({ locale }: { locale: string }) {
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
                           <Link
-                            href={`/${locale}/shop?brand=${t("mizon")}`}
+                            href={`/${locale}/shop?brand=${t("caudalie")}`}
                             className="hover:underline hover:underline-offset-2"
                           >
-                            {t("mizon")}
+                            {t("caudalie")}
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -204,7 +204,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link href={`${locale}/shop`} className=" font-tbc-medium">
+                  <Link href={`/shop`} className=" font-tbc-medium">
                     Store
                   </Link>
                 </NavigationMenuItem>
@@ -214,7 +214,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link href={`${locale}/blog`} className=" font-tbc-medium">
+                  <Link href={`/blog`} className=" font-tbc-medium">
                     Blog
                   </Link>
                 </NavigationMenuItem>

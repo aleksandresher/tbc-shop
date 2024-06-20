@@ -54,3 +54,6 @@ body {
 .tbcx-medium {
   font-family: "TBCX-Medium", sans-serif;
 }
+option {
+  margin-bottom: 5px;
+}
