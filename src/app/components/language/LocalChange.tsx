@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import LanguageIcon from "../svg/LanguageIcon";
 
 export default function LocaleChange() {
   const changeLocale = useChangeLocale();
@@ -17,19 +18,13 @@ export default function LocaleChange() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Image
-          src="/languageSwitcher.png"
-          width={30}
-          height={30}
-          alt="language switcher"
-        />
+        <LanguageIcon />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="z-500 bg-slate-300">
+      <DropdownMenuContent className=" bg-slate-300 z-50">
         <DropdownMenuItem className="">
           <button onClick={() => changeLocale("en")}>English</button>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          {" "}
           <button onClick={() => changeLocale("ka")}>Georgian</button>
         </DropdownMenuItem>
       </DropdownMenuContent>

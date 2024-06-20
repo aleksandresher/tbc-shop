@@ -120,7 +120,7 @@ export function BrandsMenu({ locale }: { locale: string }) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger className="text-white hover:text-white focus:text-white">
-              <Link href={`/${locale}/shop/skincare`}> {t("category")}</Link>
+              {t("category")}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-4 md:w-[400px]  lg:grid-cols-1">

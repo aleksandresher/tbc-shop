@@ -52,7 +52,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
         </span>
       </section>
       {menuOpen && (
-        <section className="h-screen w-full flex flex-col absolute gap-4 top-0 px-8 py-5 bg-[#fff] z-50">
+        <section className="h-screen w-full flex flex-col absolute gap-4 top-0 px-8 py-5 bg-[#fff] dark:bg-black z-50">
           <div className="flex w-full justify-between pl-1">
             <h1>Beauty</h1>
 
