@@ -105,7 +105,9 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
                 src={suggestion.image}
                 alt={locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
                 width={70}
-                height={50}
+                height={20}
+                priority={true}
+                className="w-[70px] border border-gray-100 shadow-md sm:w-[100px]"
               />
             </li>
           </Link>
