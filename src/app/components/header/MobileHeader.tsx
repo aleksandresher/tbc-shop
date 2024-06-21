@@ -56,7 +56,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
               />
             </span>
           </div>
-          <Search locale={locale} />
+          <Search locale={locale} toggleMenu={toggleMenu} />
           <nav>
             <ul className="flex flex-col gap-4 pl-2">
               <li>

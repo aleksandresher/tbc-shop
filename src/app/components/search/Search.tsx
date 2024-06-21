@@ -17,7 +17,12 @@ interface SearchResult {
   image: string;
   id: string;
 }
-export default function Search({ locale }: { locale: string }) {
+
+interface SearchProps {
+  locale: string;
+  toggleMenu?: () => void;
+}
+export default function Search({ locale, toggleMenu }: SearchProps) {
   const t = useI18n();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<SearchResult[]>([]);
@@ -76,7 +81,7 @@ export default function Search({ locale }: { locale: string }) {
         </form>
       </div>
       <ul
-        className="flex flex-col  rounded-[10px] bg-gray-200 top-14 shadow-lg absolute z-10"
+        className="h-[400px] flex flex-col md:h-[300px] overflow-x-auto  rounded-[10px] bg-[#fff] top-14 shadow-lg absolute z-10"
         ref={ulRef}
       >
         {suggestions?.map((suggestion, index) => (
@@ -87,18 +92,19 @@ export default function Search({ locale }: { locale: string }) {
               setInputValue(
                 locale === "ka" ? suggestion.kaTitle : suggestion.enTitle
               );
+              if (toggleMenu) toggleMenu();
               setSuggestions([]);
             }}
           >
-            <li key={index} className="flex items-center gap-2  p-4 px-8">
-              <p>
-                {" "}
-                {locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
-              </p>
+            <li
+              key={index}
+              className="flex justify-between items-center gap-2  p-4 px-8"
+            >
+              <p>{locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}</p>
               <Image
                 src={suggestion.image}
                 alt={locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
-                width={50}
+                width={70}
                 height={50}
               />
             </li>
