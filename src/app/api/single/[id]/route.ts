@@ -19,6 +19,8 @@ export async function GET(
     const { rows: product } = await sql`
       SELECT
           p.id AS product_id,
+          p.numberofvotes AS numberofvotes,
+          p.totalvotes AS totalvotes,
           jsonb_build_object(
               'en', jsonb_build_object(
                   'title', pt_en.title,
@@ -30,8 +32,6 @@ export async function GET(
                   'price', pt_en.price,
                   'currency', pt_en.currency,
                   'image', p.image,
-                  'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes,
                   'size', p.size
               ),
               'ka', jsonb_build_object(
@@ -44,8 +44,6 @@ export async function GET(
                   'price', pt_ka.price,
                   'currency', pt_ka.currency,
                   'image', p.image,
-                  'numberofvotes', p.numberofvotes,
-                  'totalvotes', p.totalvotes,
                   'size', p.size
               )
           ) AS languages

@@ -1,11 +1,10 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
-import RateProduct from "../RateProduct";
-import { join } from "path";
+
 import AddToCart from "../../cart/AddToCart";
 import Link from "next/link";
 import ImageHoverCard from "./ImageHover";
+import { Rating } from "react-simple-star-rating";
 
 export default function Single({
   item,
@@ -16,6 +15,7 @@ export default function Single({
   productId: number;
   locale: string;
 }) {
+  const avarageRating = item.totalvotes / item.numberofvotes;
   return (
     <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#fff]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
       <Link href={`shop/${productId}`}>
@@ -51,12 +51,16 @@ export default function Single({
           </div>
         </div>
       </Link>
+      <section className="flex p-2 items-center">
+        <div className="App">
+          <Rating initialValue={avarageRating} className="hidden" size={20} />
+        </div>
+        <div className="flex gap-1 items-center p-0">
+          <p className="text-sm">{avarageRating ? avarageRating : null}</p>
+          <p className="text-sm">({item.totalvotes})</p>
+        </div>
+      </section>
 
-      <RateProduct
-        productId={productId}
-        amount={item.numberofvotes}
-        total={item.totalvotes}
-      />
       <AddToCart productId={productId} />
     </section>
   );

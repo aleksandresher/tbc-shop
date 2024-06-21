@@ -4,9 +4,15 @@ import { loadSingle } from "@/services/func";
 import Image from "next/image";
 import { useI18n } from "../locales/client";
 import ImageHoverCard from "./products/card/ImageHover";
+import { Rating } from "react-simple-star-rating";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ProductProps {
   product_id: number;
+  numberofvotes: number;
+  totalvotes: number;
   languages: {
     en: {
       size: number;
@@ -46,6 +52,8 @@ export default function SingleProductPageCard({
   id: string;
   locale: string;
 }) {
+  const [rating, setRating] = useState(0);
+  const queryClient = useQueryClient();
   const t = useI18n();
   const { data, isLoading, error } = useQuery<ProductProps[]>({
     queryKey: ["singleProduct"],
@@ -67,13 +75,41 @@ export default function SingleProductPageCard({
   const { en, ka } = data[0].languages;
   const selectedLanguage = locale === "ka" ? ka : en;
 
+  const avarageRating = data[0].totalvotes / data[0].numberofvotes;
+
+  const handleRating = async (rate: number) => {
+    setRating(rate);
+    try {
+      const response = await fetch(`${URL}/api/product/rate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: data[0].product_id,
+          rating: rate,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to rate product");
+      }
+
+      const productData = await response.json();
+      queryClient.invalidateQueries({ queryKey: ["SingleProduct"] });
+      console.log("Product rated successfully:", productData);
+    } catch (error) {
+      console.error("Error rating product:", error);
+    }
+  };
+
   return (
-    <section>
-      <div className="product-card px-4 pt-8">
-        <ImageHoverCard
+    <section className="w-full flex justify-center px-12">
+      <div className="w-4/5 product-card px-4 pt-8 border border-red-700">
+        {/* <ImageHoverCard
           image={selectedLanguage.image}
           title={selectedLanguage.title}
-        />
+        /> */}
         <span className="flex items-center p-2 gap-1 sm:gap-4">
           <Image
             src={selectedLanguage.image}
@@ -81,7 +117,7 @@ export default function SingleProductPageCard({
             width={200}
             height={250}
             priority={true}
-            className="w-[180px] border border-gray-100 shadow-md sm:w-[300px]"
+            className="w-[180px] border border-gray-100 shadow-md sm:w-[400px] sm:h-[500px]"
           />
           <section className="flex flex-col items-center gap-2">
             <h1 className="text-center font-tbc-regular">
@@ -99,6 +135,23 @@ export default function SingleProductPageCard({
             <p>
               {t("price")}: {selectedLanguage.price} {selectedLanguage.currency}
             </p>
+
+            <div className="flex items-center justify-center gap-1">
+              <div className="App">
+                <Rating
+                  onClick={handleRating}
+                  initialValue={avarageRating}
+                  className="hidden"
+                  size={20}
+                />
+              </div>
+              <span className="flex gap-1 items-center">
+                <p className="text-sm">
+                  {avarageRating ? avarageRating : null}
+                </p>
+                <p className="text-sm">({data[0]?.totalvotes})</p>
+              </span>
+            </div>
           </section>
         </span>
 
