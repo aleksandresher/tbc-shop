@@ -78,7 +78,7 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
           <input
             type="text"
             placeholder={t("search")}
-            className="block px-4 text-md text-gray-400 focus:outline-none dark:bg-[#fff] w-full"
+            className="block px-4 text-md  text-black focus:outline-none dark:bg-[#fff] w-full placeholder:text-black "
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
