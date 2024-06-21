@@ -7,14 +7,12 @@ import ImageHoverCard from "./ImageHover";
 import { Rating } from "react-simple-star-rating";
 
 export default function RelatedProductCard({
-  key,
   productId,
   image,
   averageRating,
   totalVotes,
   title,
 }: {
-  key: number;
   productId: number;
   image: string;
   averageRating: number;
@@ -22,7 +20,7 @@ export default function RelatedProductCard({
   title: string;
 }) {
   return (
-    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#fff]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
+    <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#f1f3f6]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
       <Link href={`shop/${productId}`}>
         <div className="w-full flex flex-col items-center  ">
           <div className="w-[300px] h-[300px] md:w-[350px] flex justify-center items-center relative">
@@ -36,9 +34,8 @@ export default function RelatedProductCard({
               priority={true}
             />
           </div>
-          <div className="w-full flex flex-col items-center gap-1">
-            {/* <h1 className="text-base font-tbc-medium">{item.brand}</h1> */}
-            <p className=" text-sm text-center font-tbc-medium">{title}</p>
+          <div className="w-4/5 flex flex-col items-center gap-1">
+            <p className=" text-sm text-center  font-tbc-medium">{title}</p>
           </div>
           <div className="flex items-center mt-3 gap-2">
             <div className="flex justify-center items-center gap-1 ">

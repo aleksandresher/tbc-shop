@@ -2,42 +2,31 @@
 import { useQuery } from "@tanstack/react-query";
 import { getByCategory } from "@/services/func";
 import RelatedProductCard from "../card/RelatedCard";
-interface ProductProps {
-  product_id: number;
-  numberofvotes: number;
+interface LanguageObject {
+  title: string;
+  category: string;
+  country: string;
+  brand: string;
+  sdescription: string;
+  ldescription: string;
+  price: number;
+  currency: string;
   totalvotes: number;
+  numberofvotes: number;
+  image: string;
+}
+
+interface Product {
+  product_id: number;
   languages: {
-    en: {
-      size: number;
-      brand: string;
-      image: string;
-      price: number;
-      title: string;
-      country: string;
-      category: string;
-      currency: string;
-      totalvotes: number;
-      ldescription: string;
-      sdescription: string;
-      numberofvotes: number;
-    };
-    ka: {
-      size: number;
-      brand: string;
-      image: string;
-      price: number;
-      title: string;
-      country: string;
-      category: string;
-      currency: string;
-      totalvotes: number;
-      ldescription: string;
-      sdescription: string;
-      numberofvotes: number;
-    };
+    en: LanguageObject;
+    ka: LanguageObject;
   };
 }
 
+interface DataType {
+  products: Product[];
+}
 export default function ProductsByCategory({
   category,
   locale,
@@ -45,7 +34,7 @@ export default function ProductsByCategory({
   category: string;
   locale: string;
 }) {
-  const { data, isLoading, error } = useQuery<ProductProps[]>({
+  const { data, isLoading, error } = useQuery<DataType>({
     queryKey: ["productByCategory", category],
     queryFn: () => getByCategory({ category }),
   });
@@ -58,28 +47,30 @@ export default function ProductsByCategory({
     return <div>Error: {error.message}</div>;
   }
 
-  if (!data) {
-    return <div>No product data available</div>;
+  if (!data || data.products.length === 0) {
+    return null; // Return null if no data or no products
   }
-
-  const { en, ka } = data[0].languages;
-  const selectedLanguage = locale === "ka" ? ka : en;
-  console.log("selected language", selectedLanguage);
-  const avarageRating = data[0].totalvotes / data[0].numberofvotes;
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-      {/* {selectedLanguage.map((item: any) => {
+    <section className="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      {data.products.map((item: Product) => {
+        const selectedLanguage =
+          locale === "ka" ? item.languages.ka : item.languages.en;
+        const averageRating =
+          item.languages.en.totalvotes > 0
+            ? item.languages.en.totalvotes / item.languages.en.numberofvotes
+            : 0;
+
         return (
           <RelatedProductCard
             key={item.product_id}
             productId={item.product_id}
-            image={selectedLanguage.title}
-            averageRating={avarageRating}
-            totalVotes={item.totalvotes}
+            image={selectedLanguage.image}
+            averageRating={averageRating}
+            totalVotes={selectedLanguage.totalvotes}
             title={selectedLanguage.title}
           />
         );
-      })} */}
+      })}
     </section>
   );
 }

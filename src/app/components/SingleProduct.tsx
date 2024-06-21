@@ -106,22 +106,22 @@ export default function SingleProductPageCard({
   };
 
   return (
-    <section className="w-full flex justify-center px-12">
-      <div className="w-4/5 product-card px-4 pt-8 rounded-[10px] bg-[#fff]">
+    <section className="w-full flex justify-center  px-4 dark:bg-[#1c1c1e]">
+      <div className="w-4/5   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
         {/* <ImageHoverCard
           image={selectedLanguage.image}
           title={selectedLanguage.title}
         /> */}
-        <span className="flex justify-center p-2 gap-1 sm:gap-4">
+        <span className="flex justify-center p-2 gap-1 sm:gap-8">
           <Image
             src={selectedLanguage.image}
             alt={selectedLanguage.title}
             width={200}
             height={250}
             priority={true}
-            className="w-[180px] border border-gray-100 shadow-md sm:w-[400px] sm:h-[500px]"
+            className="w-[180px]  shadow-md sm:w-[400px] sm:h-[500px] border border-[#ecb8ec55] "
           />
-          <section className="w-1/2 pt-5 flex flex-col items-start px-6 justify-start gap-2">
+          <section className=" pt-5 flex flex-col items-start px-6 justify-start gap-2">
             <span className="flex items-center gap-2">
               <h1 className="text-center font-tbc-regular text-2xl">
                 {selectedLanguage.title} -
@@ -141,7 +141,7 @@ export default function SingleProductPageCard({
                   initialValue={avarageRating}
                   className="hidden"
                   size={20}
-                  fillColor="#000"
+                  fillColor="#fff dark:#000"
                 />
               </div>
               <span className="flex gap-1 items-center">
@@ -165,18 +165,17 @@ export default function SingleProductPageCard({
           </section>
         </span>
 
-        <span className="w-full p-12 flex flex-col">
+        <span className="w-full py-10 flex flex-col">
           <p className="font-tbc-bold"> {t("ldescription")}</p>
           <p className=" font-tbc-regular">{selectedLanguage.ldescription}</p>
         </span>
 
-        <div className="w-full p-12 flex flex-col">
+        <div className="w-full py-10  flex flex-col">
           <h3 className="font-tbc-bold">Related Products</h3>
           <ProductsByCategory
             category={selectedLanguage.category}
             locale={locale}
           />
-          <div className="grid grid-col-1 sm:grid-col-2 md:grid-cols-4"></div>
         </div>
       </div>
     </section>

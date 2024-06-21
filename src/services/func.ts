@@ -87,7 +87,7 @@ export async function getFaceProducts() {
       cache: "no-cache",
     });
     const { products } = await response.json();
-    console.log("products", products);
+
     return products;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -101,7 +101,7 @@ export async function getBodyProducts() {
       cache: "no-cache",
     });
     const { products } = await response.json();
-    console.log("products", products);
+
     return products;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -136,7 +136,6 @@ export async function loadSingle({ id }: { id: string }) {
   try {
     const response = await fetch(`${URL}/api/single/${id}`);
     const data = await response.json();
-    console.log("item from fetch", data);
 
     return data.product;
   } catch (error) {
@@ -193,7 +192,7 @@ export async function getStripeProducts() {
   try {
     const response = await fetch(`${URL}/api/getproducts`);
     const { data } = await response.json();
-    console.log("data", data);
+
     return data;
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -253,7 +252,6 @@ export async function getByCategory({ category }: { category: string }) {
       `${URL}/api/products/group?category=${category}`
     );
     const data = await response.json();
-    console.log("data", data);
 
     return data;
   } catch (error) {
