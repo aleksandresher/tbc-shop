@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ModeToggle } from "../ThemeToggle";
 import { useRouter } from "next/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "../search/Search";
 
 import Link from "next/link";
@@ -21,6 +21,13 @@ export default function MobileHeader({ locale }: { locale: string }) {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add("overflow-y-hidden");
+    } else {
+      document.body.classList.remove("overflow-y-hidden");
+    }
+  }, [menuOpen]);
 
   return (
     <section className="md:hidden relative">
