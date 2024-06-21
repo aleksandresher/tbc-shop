@@ -66,6 +66,7 @@ export default function MySingle({
         <p className="font-bold"> {item.currency == "USD" ? "$" : "₾"}</p>
         <p className="font-bold">{item.price}.00</p>
       </span>
+
       <p>Rating: {numberofvotes}</p>
       <p>Total: {totalvotes}</p>
 

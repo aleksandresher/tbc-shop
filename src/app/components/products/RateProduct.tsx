@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
+import SingleProductRating from "./SingleProductRate";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Product {
@@ -67,8 +68,9 @@ export default function RateProduct({
         />
       </div>
       <span className="flex gap-1 items-center">
-        <p className="text-sm">{total}</p>
-        <p className="text-sm">({amount})</p>
+        <SingleProductRating productId={productId} />
+        {/* <p className="text-sm">{total}</p>
+        <p className="text-sm">({amount})</p> */}
       </span>
     </section>
   );
