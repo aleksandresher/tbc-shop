@@ -52,4 +52,9 @@ export default {
   createProduct: "create",
   addProduct: "Add Product",
   myProducts: "My products",
+
+  title: "Title",
+  message: "Message",
+  ifcontactback:
+    "If you would like more information or have any questions, please leave us a message we will do our best to get back to you as soon as possible.",
 } as const;

@@ -13,10 +13,7 @@ export default function ContactLayout({
 }: ContactLayoutProps) {
   return (
     <section>
-      <main>
-        <HeaderWrapper locale={params.locale} />
-        {children}
-      </main>
+      <main>{children}</main>
     </section>
   );
 }

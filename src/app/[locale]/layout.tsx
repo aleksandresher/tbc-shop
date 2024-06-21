@@ -43,6 +43,7 @@ export default function RootLayout({
                 >
                   <main className="flex-1 bg-[#f1f3f8] dark:bg-[#000]">
                     <MobileHeader locale={locale} />
+                    <HeaderWrapper locale={locale} />
                     {children}
                   </main>
                   <Toaster />

@@ -49,5 +49,9 @@ export default {
   create: "შექმენი",
   createProduct: "დამატება",
   addProduct: "დაამატე პროდუქტი",
-  myProducts: "ჩემი პროდუქტები"
+  myProducts: "ჩემი პროდუქტები",
+
+  title: "სათაური",
+  message: "წერილი",
+  ifcontactback: "თქვენი მეილი, თუ გსურთ რომ დაგიკავშირდეთ.",
 } as const;

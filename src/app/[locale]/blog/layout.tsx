@@ -10,10 +10,7 @@ interface BlogLayoutProps {
 export default function BlogLayout({ params, children }: BlogLayoutProps) {
   return (
     <section>
-      <main>
-        <HeaderWrapper locale={params.locale} />
-        {children}
-      </main>
+      <main>{children}</main>
     </section>
   );
 }
