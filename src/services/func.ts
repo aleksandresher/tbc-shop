@@ -246,3 +246,18 @@ export async function loadSingleBlog({ id }: { id: string }) {
     throw error;
   }
 }
+
+export async function getByCategory({ category }: { category: string }) {
+  try {
+    const response = await fetch(
+      `${URL}/api/products/group?category=${category}`
+    );
+    const data = await response.json();
+    console.log("data", data);
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}

@@ -7,6 +7,8 @@ import ImageHoverCard from "./products/card/ImageHover";
 import { Rating } from "react-simple-star-rating";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import AddToCart from "./cart/AddToCart";
+import ProductsByCategory from "./products/category/ProductsByCategory";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ProductProps {
@@ -105,12 +107,12 @@ export default function SingleProductPageCard({
 
   return (
     <section className="w-full flex justify-center px-12">
-      <div className="w-4/5 product-card px-4 pt-8 border border-red-700">
+      <div className="w-4/5 product-card px-4 pt-8 rounded-[10px] bg-[#fff]">
         {/* <ImageHoverCard
           image={selectedLanguage.image}
           title={selectedLanguage.title}
         /> */}
-        <span className="flex items-center p-2 gap-1 sm:gap-4">
+        <span className="flex justify-center p-2 gap-1 sm:gap-4">
           <Image
             src={selectedLanguage.image}
             alt={selectedLanguage.title}
@@ -119,30 +121,27 @@ export default function SingleProductPageCard({
             priority={true}
             className="w-[180px] border border-gray-100 shadow-md sm:w-[400px] sm:h-[500px]"
           />
-          <section className="flex flex-col items-center gap-2">
-            <h1 className="text-center font-tbc-regular">
-              {selectedLanguage.title}
-            </h1>
-            <h2 className="font-tbc-regular">
-              {t("brand")} {selectedLanguage.brand}
-            </h2>
-            <p className="font-tbc-regular">
-              {t("category")}: {selectedLanguage.category}
-            </p>
-            <p className="font-tbc-regular">
-              {t("country")}: {selectedLanguage.country}
-            </p>
+          <section className="w-1/2 pt-5 flex flex-col items-start px-6 justify-start gap-2">
+            <span className="flex items-center gap-2">
+              <h1 className="text-center font-tbc-regular text-2xl">
+                {selectedLanguage.title} -
+              </h1>
+              <h2 className="font-tbc-regular text-xl">
+                {selectedLanguage.brand}
+              </h2>
+            </span>
             <p>
-              {t("price")}: {selectedLanguage.price} {selectedLanguage.currency}
+              {selectedLanguage.currency === "USD" ? "$" : "₾"}
+              {selectedLanguage.price}.00
             </p>
-
-            <div className="flex items-center justify-center gap-1">
+            <div className="flex items-center justify-center gap-1 mt-5 mb-4">
               <div className="App">
                 <Rating
                   onClick={handleRating}
                   initialValue={avarageRating}
                   className="hidden"
                   size={20}
+                  fillColor="#000"
                 />
               </div>
               <span className="flex gap-1 items-center">
@@ -152,17 +151,32 @@ export default function SingleProductPageCard({
                 <p className="text-sm">({data[0]?.totalvotes})</p>
               </span>
             </div>
+            <p className="font-tbc-regular">{selectedLanguage.sdescription}</p>
+            <AddToCart productId={data[0]?.product_id} />
+            <span className="flex flex-col mt-4">
+              <p className="font-tbc-bold">{t("category")}</p>
+              <p className=" capitalize">{selectedLanguage.category}</p>
+            </span>
+
+            <span className="flex flex-col mt-4">
+              <p className="font-tbc-bold">{t("country")}</p>
+              <p className="capitalize">{selectedLanguage.country}</p>
+            </span>
           </section>
         </span>
 
-        <div className="flex flex-col gap-3 mt-5">
-          {" "}
-          <p className="font-tbc-regular">
-            {t("anotation")}: {selectedLanguage.sdescription}
-          </p>
-          <p className=" font-tbc-regular">
-            {t("ldescription")}: {selectedLanguage.ldescription}
-          </p>
+        <span className="w-full p-12 flex flex-col">
+          <p className="font-tbc-bold"> {t("ldescription")}</p>
+          <p className=" font-tbc-regular">{selectedLanguage.ldescription}</p>
+        </span>
+
+        <div className="w-full p-12 flex flex-col">
+          <h3 className="font-tbc-bold">Related Products</h3>
+          <ProductsByCategory
+            category={selectedLanguage.category}
+            locale={locale}
+          />
+          <div className="grid grid-col-1 sm:grid-col-2 md:grid-cols-4"></div>
         </div>
       </div>
     </section>
