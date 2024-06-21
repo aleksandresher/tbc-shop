@@ -51,4 +51,5 @@ export default {
   create: "Sign-up",
   createProduct: "create",
   addProduct: "Add Product",
+  myProducts: "My products",
 } as const;

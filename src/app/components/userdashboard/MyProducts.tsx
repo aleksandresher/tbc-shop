@@ -10,8 +10,10 @@ import {
 import MyProductList from "./MyProductList";
 import MySearch from "./MySearch";
 import { useState } from "react";
+import { useI18n } from "@/app/locales/client";
 
 export default function MyProducts({ locale }: { locale: string }) {
+  const t = useI18n();
   const [language, setLanguage] = useState(locale);
   function handleLanguageChange(value: string) {
     setLanguage(value);
@@ -22,7 +24,7 @@ export default function MyProducts({ locale }: { locale: string }) {
       {" "}
       <Card>
         <CardHeader>
-          <CardTitle>My products</CardTitle>
+          <CardTitle>{t("myProducts")}</CardTitle>
           <div className="flex gap-2">
             <button
               onClick={() => handleLanguageChange("ka")}

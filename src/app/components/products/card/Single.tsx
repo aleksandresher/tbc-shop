@@ -25,7 +25,7 @@ export default function Single({
               src={item.image}
               width={300}
               height={300}
-              alt="oidinaru"
+              alt={item.title}
               className="object-cover md:w-[300px]"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
               priority={true}

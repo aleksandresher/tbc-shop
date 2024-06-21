@@ -49,4 +49,5 @@ export default {
   create: "შექმენი",
   createProduct: "დამატება",
   addProduct: "დაამატე პროდუქტი",
+  myProducts: "ჩემი პროდუქტები"
 } as const;

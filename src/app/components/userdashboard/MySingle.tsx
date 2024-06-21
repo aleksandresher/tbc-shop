@@ -47,10 +47,11 @@ export default function MySingle({
       <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
         <Image
           src={image}
-          width={200}
-          height={230}
-          alt="oidinaru"
-          className=" object-cover"
+          width={300}
+          height={300}
+          alt={item.title}
+          className="object-cover md:w-[300px]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
           priority={true}
         />
       </div>

@@ -126,8 +126,7 @@ const EditMyProduct = ({
 
   const kaExists = wholeItem.ka.title !== "";
   const enExists = wholeItem.en.title !== "";
-  console.log("kaExisted", kaExists);
-  console.log("enexistd", enExists);
+
   return (
     <section className="flex items-center">
       <Dialog open={open} onOpenChange={setOpen}>
@@ -145,13 +144,13 @@ const EditMyProduct = ({
           </button>
         </DialogTrigger>
         <div className="">
-          <DialogContent className=" w-screen bg-gray-300">
+          <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex w-full">
+              <div className="flex flex-col md:flex-row w-full">
                 {kaExists && (
-                  <section className="flex flex-col p-3 gap-4 w-1/2 ">
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                  <section className="flex flex-col p-3 gap-4 sm:w-1/2 ">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
+                      <div className=" flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="katitle">სათაური</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -171,11 +170,11 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center  gap-2">
                         <label htmlFor="brand">ბრენდი</label>
                         <input
-                          className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                          className="p-2  rounded-[4px] w-4/5 border border-[#0c0c0c] outline-none focus:border-[#48a850]"
                           id="kabrand"
                           defaultValue={wholeItem.ka.brand}
                           {...register("kabrand", {
@@ -193,7 +192,7 @@ const EditMyProduct = ({
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                      <div className="w-full flex items-center justify-start gap-14">
                         <label htmlFor="kacategory">კატეგორია</label>
                         <select
                           defaultValue={wholeItem.ka.category}
@@ -215,14 +214,14 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className="w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kaprice">ფასი</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                           id="kaprice"
-                          defaultValue={wholeItem.ka.price}
                           type="number"
+                          defaultValue={wholeItem.ka.price}
                           {...register("kaprice", {
                             required: "ფასი სავალდებულოა",
                           })}
@@ -236,8 +235,8 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kacountry">ქვეყანა</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -256,8 +255,8 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kasdescription">აღწერა</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -276,8 +275,8 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kaldescription">მოკლე აღწერა</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -296,14 +295,14 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="size">ზომა</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                           id="size"
-                          defaultValue={size}
                           type="number"
+                          defaultValue={size}
                           {...register("size", {
                             required: "ზომა სავალდებულოა",
                           })}
@@ -315,14 +314,18 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="w-full flex items-center justify-between gap-2">
+                    <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                      <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="image">ფოტო</label>
                         <input
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                           id="image"
                           defaultValue={image}
+                          value={productImageUrl || ""}
                           {...register("image", {
+                            onChange(event) {
+                              setProductImageUrl(event.target.value);
+                            },
                             required: "image is required",
                           })}
                         />
@@ -340,7 +343,7 @@ const EditMyProduct = ({
                 )}
                 {enExists && (
                   <section className="flex flex-col p-3 gap-4 w-1/2">
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="entitle">Title</label>
                         <input
@@ -361,7 +364,7 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="enbrand">Brand</label>
                         <input
@@ -382,7 +385,7 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="encategory">category</label>
                         <select
@@ -405,7 +408,7 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="enprice">price</label>
                         <input
@@ -426,7 +429,7 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="encountry">country</label>
                         <input
@@ -446,7 +449,7 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="ensdescription">
                           small description
@@ -468,7 +471,7 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="enldescription">
                           large description
@@ -490,7 +493,7 @@ const EditMyProduct = ({
                         )}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="size">size</label>
                         <input
@@ -510,7 +513,7 @@ const EditMyProduct = ({
                       </span>
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between gap-2">
                         <label htmlFor="image">Image</label>
                         <input

@@ -23,7 +23,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
       onValueChange={(value) => setActive(value)}
       value={active}
       defaultValue="myproducts"
-      className="w-full  flex justify-center gap-3"
+      className="w-full  flex flex-col md:flex-row justify-center gap-3"
     >
       <TabsList className="flex flex-col items-start px-6 py-8 gap-2 border border-gray-100 h-full shadow-xl bg-[#fff]">
         <TabsTrigger value="addproduct">
