@@ -25,16 +25,31 @@ export default function MobileHeader({ locale }: { locale: string }) {
   return (
     <section className="md:hidden relative">
       <section className="py-5 px-8 grid grid-cols-5 items-center">
-        <span onClick={() => toggleMenu()}>
-          <svg
-            className="block h-5 w-5 fill-current"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        <div className=" h-[60px] flex justify-center">
+          <button
+            className="flex flex-col justify-center items-center z-40"
+            onClick={() => toggleMenu()}
           >
-            <title>Mobile menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-          </svg>
-        </span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out 
+                    h-0.5 w-6 rounded-sm ${
+                      menuOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"
+                    }`}
+            ></span>
+            <span
+              className={`bg-black  block transition-all duration-300 ease-out 
+                    h-0.5 w-6 rounded-sm my-0.5 ${
+                      menuOpen ? "opacity-0" : "opacity-100"
+                    }`}
+            ></span>
+            <span
+              className={`bg-black block transition-all duration-300 ease-out 
+                    h-0.5 w-6 rounded-sm ${
+                      menuOpen ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+                    }`}
+            ></span>
+          </button>
+        </div>
 
         <h1 className=" col-span-3 text-center">Beauty Bounty</h1>
         <span className="flex gap-3 items-center ">
@@ -43,19 +58,11 @@ export default function MobileHeader({ locale }: { locale: string }) {
         </span>
       </section>
       {menuOpen && (
-        <section className="h-screen w-full flex flex-col absolute gap-4 top-0 px-8 py-5 bg-[#fff] dark:bg-black z-50">
-          <div className="flex w-full justify-between pl-1">
-            <h1>Beauty</h1>
-
-            <span onClick={() => toggleMenu()}>
-              <Image
-                src="/close.svg"
-                alt="menu close icon"
-                width={20}
-                height={20}
-              />
-            </span>
-          </div>
+        <section
+          className={`h-screen w-full flex flex-col fixed top-20 right-0  gap-4 px-8 py-5 pt-8 bg-[#fff] dark:bg-black z-50 transition-transform duration-300 ease-out origin-left ${
+            menuOpen ? "translate-x-0" : "translate-y-6"
+          }`}
+        >
           <Search locale={locale} toggleMenu={toggleMenu} />
           <nav>
             <ul className="flex flex-col gap-4 pl-2">
