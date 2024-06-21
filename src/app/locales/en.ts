@@ -49,4 +49,6 @@ export default {
   logout: "Log Out",
   notregister: "Not Registered?",
   create: "Sign-up",
+  createProduct: "create",
+  addProduct: "Add Product",
 } as const;

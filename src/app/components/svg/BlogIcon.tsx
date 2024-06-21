@@ -9,7 +9,6 @@ const BlogIcon: React.FC = () => {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 470 470"
-      enable-background="new 0 0 470 470"
       className="fill-[#000] dark:fill-[#fff] stroke-black dark:stroke-white"
     >
       <g>

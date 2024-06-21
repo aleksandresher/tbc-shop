@@ -6,15 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Search from "../search/Search";
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { useI18n } from "@/app/locales/client";
 import LocaleChange from "../language/LocalChange";

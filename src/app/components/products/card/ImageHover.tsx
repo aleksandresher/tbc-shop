@@ -16,7 +16,7 @@ export default function ImageHoverCard({
   return (
     <section className="sm:hidden">
       <HoverCard>
-        <HoverCardTrigger>+</HoverCardTrigger>
+        <HoverCardTrigger asChild>+</HoverCardTrigger>
         <HoverCardContent>
           <Image
             src={image}

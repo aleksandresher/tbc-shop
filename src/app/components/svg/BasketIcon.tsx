@@ -1,6 +1,4 @@
-import React from "react";
-
-const BasketIcon: React.FC = () => {
+export default function BasketIcon() {
   return (
     <svg
       height="30px"
@@ -40,6 +38,4 @@ const BasketIcon: React.FC = () => {
       />
     </svg>
   );
-};
-
-export default BasketIcon;
+}

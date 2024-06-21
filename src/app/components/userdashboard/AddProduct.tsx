@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
+import { useI18n } from "@/app/locales/client";
 
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -39,6 +40,7 @@ export default function AddMyProduct() {
   const queryClient = useQueryClient();
   const [productImageUrl, setProductImageUrl] = useState<string | null>(null);
   const [isEn, setIsEn] = useState(false);
+  const t = useI18n();
 
   const {
     register,
@@ -98,16 +100,16 @@ export default function AddMyProduct() {
       <Dialog>
         <DialogTrigger
           asChild
-          className="border-2 rounded-[8px] border-outset border-opacity-50 border-[#f1a45d] p-2 cursor-pointer"
+          className="border-2 rounded-[8px] w-[120px] border-outset border-opacity-50 border-[#f1a45d] p-2 cursor-pointer"
         >
-          <p>Add Product</p>
+          <p>{t("addProduct")}</p>
         </DialogTrigger>
-        <DialogContent className="w-[1300px] bg-gray-300">
+        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex w-full">
-              <section className="flex flex-col p-3 gap-4 w-1/2 ">
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+            <div className="flex flex-col md:flex-row w-full">
+              <section className="flex flex-col p-3 gap-4 sm:w-1/2 ">
+                <div className="w-[320px] md:w-full flex flex-col gap-1">
+                  <div className=" flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="katitle">სათაური</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -124,11 +126,11 @@ export default function AddMyProduct() {
                   </span>
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className="w-[320px] md:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center  gap-2">
                     <label htmlFor="brand">ბრენდი</label>
                     <input
-                      className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                      className="p-2  rounded-[4px] w-4/5 border border-[#0c0c0c] outline-none focus:border-[#48a850]"
                       id="kabrand"
                       {...register("kabrand", {
                         required: "ბრენდი სავალდებულოა",
@@ -143,7 +145,7 @@ export default function AddMyProduct() {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                  <div className="w-full flex items-center justify-start gap-14">
                     <label htmlFor="kacategory">კატეგორია</label>
                     <select
                       {...register("kacategory", {
@@ -164,8 +166,8 @@ export default function AddMyProduct() {
                   </span>
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className="w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="kaprice">ფასი</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -182,8 +184,8 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="kacountry">ქვეყანა</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -201,8 +203,8 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="kasdescription">აღწერა</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -220,8 +222,8 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="kaldescription">მოკლე აღწერა</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -239,8 +241,8 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="size">ზომა</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -257,8 +259,8 @@ export default function AddMyProduct() {
                     )}
                   </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
+                <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                  <div className="w-full flex items-center justify-between md:justify-center gap-2">
                     <label htmlFor="image">ფოტო</label>
                     <input
                       className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -282,9 +284,9 @@ export default function AddMyProduct() {
               </section>
 
               {isEn && (
-                <section className="flex flex-col p-3 gap-4 w-1/2">
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                <section className="flex flex-col p-3 gap-4 sm:w-1/2">
+                  <div className="w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="entitle">Title</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -301,8 +303,8 @@ export default function AddMyProduct() {
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="enbrand">Brand</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -320,7 +322,7 @@ export default function AddMyProduct() {
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                    <div className="w-full flex items-center justify-start gap-14">
                       <label htmlFor="encategory">category</label>
                       <select {...register("encategory")}>
                         <option value="skin">skin</option>
@@ -337,8 +339,8 @@ export default function AddMyProduct() {
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="enprice">price</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -355,8 +357,8 @@ export default function AddMyProduct() {
                       )}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="encountry">country</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -372,8 +374,8 @@ export default function AddMyProduct() {
                       )}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="ensdescription">small description</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -389,8 +391,8 @@ export default function AddMyProduct() {
                       )}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="enldescription">large description</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -406,8 +408,8 @@ export default function AddMyProduct() {
                       )}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full flex items-center justify-between gap-2">
+                  <div className=" w-[320px] sm:w-full flex flex-col gap-1">
+                    <div className="w-full flex items-center justify-between md:justify-start gap-2">
                       <label htmlFor="size">size</label>
                       <input
                         className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -430,11 +432,13 @@ export default function AddMyProduct() {
                 type="submit"
                 className="bg-green-400 rounded-full p-2 uppercase"
               >
-                Create
+                {t("createProduct")}
               </button>
-              <button onClick={() => setIsEn((prev) => !prev)} type="button">
-                დაამატე პროდუქტი ინგლისურ ენაზე
-              </button>
+              {!isEn ? (
+                <button onClick={() => setIsEn((prev) => !prev)} type="button">
+                  დაამატე პროდუქტი ინგლისურ ენაზე
+                </button>
+              ) : null}
             </span>
           </form>
         </DialogContent>

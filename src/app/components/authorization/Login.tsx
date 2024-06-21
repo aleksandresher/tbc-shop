@@ -61,10 +61,13 @@ export default function Login() {
   };
   return (
     <div className="flex flex-col items-center p-12 gap-4">
-      <div className="w-fulll sm:w-4/5 flex justify-center sm:justify-start">
+      <div className="w-fulll sm:w-4/5 flex justify-center ">
         <h1 className="text-[32px] font-tbc-bold">{t("authorization")}</h1>
       </div>
-      <form className="w-full sm:w-4/5 mt-7" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="w-full max-w-[800px] sm:w-4/5 mt-7"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className=" flex flex-col gap-4">
           <div className="w-full flex items-center gap-2">
             <label htmlFor="email" hidden>
@@ -102,7 +105,7 @@ export default function Login() {
         <div className="flex justify-end py-4 mt-1 mb-4">
           <p className=" font-tbc-bold">{t("reset")}</p>
         </div>
-        <div className="w-full flex justify-center items-center bg-[#3c74ff] text-white p-4 rounded-[25px] hover:bg-[#5a88fd] cursor-pointer">
+        <div className="w-full flex justify-center items-center bg-[#000] text-white p-4 rounded-[10px] hover:bg-[#111113] cursor-pointer">
           <button
             type="submit"
             className="text-lg font-tbc-medium tracking-wide"
@@ -112,20 +115,22 @@ export default function Login() {
         </div>
       </form>
       <div className="w-4/5 flex  justify-center mt-6">
-        <div className="flex items-center justify-center rounded-[12px] gap-3">
+        <div className="flex items-center justify-center rounded-[10px] gap-3">
           {providers.length > 0 && (
             <button
               type="button"
               onClick={() => signIn(providers[0].id)}
-              className="bg-[#38b000] hover:bg-[#008000] p-2 rounded-[8px] text-white w-[200px] flex items-center justify-around"
+              className="bg-[#fff] hover:bg-[#f1f3f6] border border-black px-8 py-3 rounded-[8px] text-white flex gap-4 items-center justify-center"
             >
               <Image
                 src="/social/google.svg"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 alt="google"
               />
-              <p className=" text-lg font-tbc-medium">Google</p>
+              <p className="font-tbc-regular text-black">
+                Continue with Google
+              </p>
             </button>
           )}
         </div>
@@ -133,7 +138,7 @@ export default function Login() {
       <div className="flex p-6 mt-8 gap-2">
         <p className="text-[#9f9d9b] font-tbc-medium">{t("notregister")} - </p>
         <Link href="/register">
-          <p className="text-[#6d87ff] font-tbc-medium">{t("create")}</p>
+          <p className="text-[#101114] font-tbc-medium">{t("create")}</p>
         </Link>
       </div>
     </div>

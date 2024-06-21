@@ -38,16 +38,16 @@ export default function SignUp() {
   return (
     <section>
       <div className="flex flex-col items-center p-12 gap-4">
-        <div className="w-full sm:w-4/5 flex justify-center sm:justify-start">
+        <div className="w-full sm:w-4/5 flex justify-center ">
           <h1 className="text-[32px] font-tbc-bold">{t("registration")}</h1>
         </div>
 
         <form
-          className="w-full sm:w-4/5 mt-7"
+          className="w-full sm:w-4/5 mt-7 max-w-[800px]"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className=" flex flex-col gap-4">
-            <div className="w-full flex items-center gap-2">
+          <div className=" flex flex-col gap-6">
+            <div className="w-full flex flex-col items-center gap-2">
               <label htmlFor="name" hidden>
                 {t("name")}
               </label>
@@ -59,9 +59,11 @@ export default function SignUp() {
                   required: "this field is required",
                 })}
               />
-              {errors.name?.message && <span>{errors.name?.message}</span>}
+              {errors.name?.message && (
+                <span className="text-red-300">{errors.name?.message}</span>
+              )}
             </div>
-            <div className="w-full flex items-center gap-2">
+            <div className="w-full flex flex-col items-center gap-2">
               <label htmlFor="email" hidden>
                 {t("email")}
               </label>
@@ -73,10 +75,12 @@ export default function SignUp() {
                   required: "this field is required",
                 })}
               />
-              {errors.email?.message && <span>{errors.email?.message}</span>}
+              {errors.email?.message && (
+                <span className="text-red-300">{errors.email?.message}</span>
+              )}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center gap-2">
               <label htmlFor="password" hidden>
                 {t("password")}
               </label>
@@ -90,11 +94,11 @@ export default function SignUp() {
                 })}
               />
               {errors.password?.message && (
-                <span>{errors.password?.message}</span>
+                <span className="text-red-300">{errors.password?.message}</span>
               )}
             </div>
           </div>
-          <div className="w-full flex justify-center items-center bg-[#3c74ff] text-white p-4 rounded-[25px] hover:bg-[#5a88fd] cursor-pointer mt-4">
+          <div className="w-full flex justify-center items-center bg-[#000] text-white p-4 rounded-[10px] hover:bg-[#141414] cursor-pointer mt-4">
             <button type="submit">{t("registration")}</button>
           </div>
         </form>

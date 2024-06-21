@@ -47,4 +47,6 @@ export default {
   logout: "გასვლა",
   notregister: "არ გაქვს ანგარიში?",
   create: "შექმენი",
+  createProduct: "დამატება",
+  addProduct: "დაამატე პროდუქტი",
 } as const;

@@ -20,7 +20,7 @@ export default function CartHoverCard({
   return (
     <section>
       <HoverCard>
-        <HoverCardTrigger asChild>
+        <HoverCardTrigger>
           <BasketIcon />
         </HoverCardTrigger>
         <HoverCardContent className="w-80 bg-gray-200">
