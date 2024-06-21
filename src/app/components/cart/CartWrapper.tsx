@@ -4,6 +4,8 @@ import { useCart } from "@/app/providers/ContextProvider";
 import { checkUserAuthentication } from "@/services/func";
 import { useRouter } from "next/navigation";
 import CartHoverCard from "./CartHoverCard";
+import Cart from "./Cart";
+import BasketIcon from "../svg/BasketIcon";
 
 export default function CartWrapper({ locale }: { locale: string }) {
   const { setOpened } = useCart();
@@ -19,7 +21,10 @@ export default function CartWrapper({ locale }: { locale: string }) {
     }
   };
   return (
-    <CartHoverCard handleClick={handleClick} locale={locale} />
+    <section>
+      <CartHoverCard handleClick={handleClick} locale={locale} />
+    </section>
+
     // <Image
     //   src="/basket.svg"
     //   width={30}

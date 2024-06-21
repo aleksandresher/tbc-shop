@@ -18,9 +18,9 @@ export default function CartHoverCard({
   locale,
 }: CartHoverCardProps) {
   return (
-    <section>
+    <section className="">
       <HoverCard>
-        <HoverCardTrigger>
+        <HoverCardTrigger onClick={() => handleClick()}>
           <BasketIcon />
         </HoverCardTrigger>
         <HoverCardContent className="w-80 bg-gray-200">
