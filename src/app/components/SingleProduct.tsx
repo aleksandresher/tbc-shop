@@ -110,22 +110,18 @@ export default function SingleProductPageCard({
 
   return (
     <section className="w-full flex justify-center  px-4 dark:bg-[#1c1c1e]">
-      <div className="w-full px-8   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
-        {/* <ImageHoverCard
-          image={selectedLanguage.image}
-          title={selectedLanguage.title}
-        /> */}
-        <span className="flex justify-center p-2 gap-1 sm:gap-8">
+      <div className="w-full md:w-11/12 px-3 md:px-8   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
+        <span className="flex flex-col md:flex-row justify-center p-2 gap-1 sm:gap-8">
           <Image
             src={selectedLanguage.image}
             alt={selectedLanguage.title}
             width={200}
             height={250}
             priority={true}
-            className="w-[180px]  shadow-md sm:w-[400px] sm:h-[500px] border border-[#ecb8ec55] "
+            className="w-full h-[250px]  shadow-md sm:w-[400px] sm:h-[500px] border border-[#ecb8ec55] "
           />
           <section className=" pt-5 flex flex-col items-start px-6 justify-start gap-2">
-            <span className="flex items-center gap-2">
+            <span className="flex flex-col md:flex-row items-center gap-2">
               <h1 className="text-center font-tbc-regular text-2xl">
                 {selectedLanguage.title} -
               </h1>
@@ -154,7 +150,12 @@ export default function SingleProductPageCard({
                 <p className="text-sm">({data[0]?.totalvotes})</p>
               </span>
             </div>
-            <p className="font-tbc-regular">{selectedLanguage.sdescription}</p>
+            <span className="w-full">
+              <p className="font-tbc-regular">
+                {selectedLanguage.sdescription}
+              </p>
+            </span>
+
             <AddToCart productId={data[0]?.product_id} />
             <span className="flex flex-col mt-4">
               <p className="font-tbc-bold">{t("category")}</p>
@@ -174,7 +175,7 @@ export default function SingleProductPageCard({
           <p className=" font-tbc-regular">{selectedLanguage.ldescription}</p>
         </span>
 
-        <div className="w-full py-10  flex flex-col">
+        <div className="w-full py-10  flex flex-col gap-3">
           <h3 className="font-tbc-bold">Related Products</h3>
           <ProductsByCategory
             category={selectedLanguage.category}
