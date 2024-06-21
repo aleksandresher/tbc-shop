@@ -3,11 +3,17 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
-import SingleProductRating from "./SingleProductRate";
+
+import { useQuery } from "@tanstack/react-query";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface Product {
   rating: number;
+}
+interface ItemProps {
+  id: number;
+  totalvotes: number;
+  numberofvotes: number;
 }
 
 export default function RateProduct({
@@ -31,6 +37,29 @@ export default function RateProduct({
 
     formState: { errors },
   } = useForm<Product>();
+
+  const { data, isLoading, error } = useQuery<ItemProps>({
+    queryKey: ["rating"],
+    queryFn: () => getRating({ productId }),
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading rating</p>;
+
+  async function getRating({ productId }: { productId: number }) {
+    try {
+      const response = await fetch(
+        `${URL}/api/products/rate?productId=${productId}`,
+        {}
+      );
+      const { item } = await response.json();
+
+      return item;
+    } catch (error) {
+      console.error("Error fetching item:", error);
+      return [];
+    }
+  }
 
   const handleRating = async (rate: number) => {
     setRating(rate);
@@ -68,9 +97,8 @@ export default function RateProduct({
         />
       </div>
       <span className="flex gap-1 items-center">
-        <SingleProductRating productId={productId} />
-        {/* <p className="text-sm">{total}</p>
-        <p className="text-sm">({amount})</p> */}
+        <p className="text-sm">{total}</p>
+        <p className="text-sm">({amount})</p>
       </span>
     </section>
   );
