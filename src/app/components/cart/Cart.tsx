@@ -93,9 +93,9 @@ export default function Cart({ locale }: { locale: string }) {
           </div>
         ))}
       </div>
-      <Link href={`dashboard/payment`}>
+      {/* <Link href={`dashboard/payment`}>
         <button>Checkout</button>
-      </Link>
+      </Link> */}
       {/* <StripeProductList /> */}
       <StripeProducts />
     </section>
