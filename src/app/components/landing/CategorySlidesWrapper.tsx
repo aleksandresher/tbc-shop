@@ -34,7 +34,6 @@ export default function Gallery() {
               Shop now
             </button>
           </div>
-          <Image src="/suntheme.svg" alt="light theme" width={40} height={40} />
 
           <div></div>
         </div>

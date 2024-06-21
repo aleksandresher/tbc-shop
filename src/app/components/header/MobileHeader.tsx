@@ -29,6 +29,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
           <button
             className="flex flex-col justify-center items-center z-40"
             onClick={() => toggleMenu()}
+            aria-label="toggle button"
           >
             <span
               className={`bg-black block transition-all duration-300 ease-out 
