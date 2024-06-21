@@ -9,6 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import AddToCart from "./cart/AddToCart";
 import ProductsByCategory from "./products/category/ProductsByCategory";
+import SocialShareWrapper from "./products/share/SocialShare";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface ProductProps {
@@ -105,9 +106,11 @@ export default function SingleProductPageCard({
     }
   };
 
+  const itemUrl = `https://tbc-shop.vercel.app/en/shop/${data[0].product_id}`;
+
   return (
     <section className="w-full flex justify-center  px-4 dark:bg-[#1c1c1e]">
-      <div className="w-4/5   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
+      <div className="w-full px-8   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
         {/* <ImageHoverCard
           image={selectedLanguage.image}
           title={selectedLanguage.title}
@@ -162,6 +165,7 @@ export default function SingleProductPageCard({
               <p className="font-tbc-bold">{t("country")}</p>
               <p className="capitalize">{selectedLanguage.country}</p>
             </span>
+            <SocialShareWrapper itemUrl={itemUrl} />
           </section>
         </span>
 

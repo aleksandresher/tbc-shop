@@ -37,6 +37,7 @@
     "next-auth": "^4.24.7",
     "next-cloudinary": "^6.6.2",
     "next-international": "^1.2.4",
+    "next-share": "^0.27.0",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
