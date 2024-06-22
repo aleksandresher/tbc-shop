@@ -82,3 +82,15 @@ option {
   background: #555;
 }
 
+.slider-dots {
+  width: 8px;
+  height: 8px;
+  background-color: gray;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.slider-dots.active {
+  background-color: green;
+}
+

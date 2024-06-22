@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import Link from "next/link";
 import Image from "next/image";
 import AddToCart from "../../cart/AddToCart";
-
+import { useState } from "react";
 interface LanguageObject {
   title: string;
   category: string;
@@ -41,12 +41,29 @@ export default function ProductsByCategory({
   category: string;
   locale: string;
 }) {
+  const [activeSlide, setActiveSlide] = useState(0);
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    beforeChange: (_: any, next: any) => setActiveSlide(next),
+    customPaging: (index: number) => (
+      <div
+        style={{
+          width: "30px",
+          height: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          className={`slider-dots ${index === activeSlide ? "active" : ""}`}
+        ></div>
+      </div>
+    ),
 
     arrows: false,
   };
