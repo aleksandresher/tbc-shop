@@ -19,7 +19,7 @@ const BlogSearchBar = ({ onSearch }: SearchBarProps) => {
       placeholder="Search blogs..."
       value={searchTerm}
       onChange={handleChange}
-      className=" w-1/6 mb-4 p-2 border border-black rounded-[6px] outline-none "
+      className="w-1/2  md:w-1/6 mb-4 p-2 border border-black rounded-[6px] outline-none "
     />
   );
 };

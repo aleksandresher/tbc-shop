@@ -29,7 +29,7 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
         <BlogSearchBar onSearch={setSearchTerm} />
       </div>
 
-      <div className="grid grid-cols-3 p-12  gap-x-3">
+      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 p-4 md:p-12  gap-x-3 gap-y-4">
         {filteredBlogs?.map((blog: Blog) => (
           <div
             key={blog.id}
@@ -46,7 +46,7 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
               priority={true}
             />
-            <Link href={`blog/${blog.id}`}>
+            <Link href={`blog/${blog.id}`} className="mt-3">
               <button className="border border-gray-200 bg-[#000] p-2 rounded-[4px]">
                 <p className="text-white">Read more</p>
               </button>

@@ -43,17 +43,17 @@ export default function SingleBlogCard({
   }
 
   return (
-    <section className="flex flex-col items-center mt-8 pb-8">
-      <span className="flex w-full justify-center text-4xl font-mono">
+    <section className="w-full flex flex-col items-center mt-8 pb-8">
+      <span className="flex w-full justify-center items-center text-center text-lg  lg:text-4xl font-mono">
         {data[0].title}
       </span>
-      <div className="w-4/5 flex items-center gap-10 justify-center p-12 ">
+      <div className="w-4/5 flex flex-col md:flex-row items-center gap-10 justify-center p-4 lg:p-12 ">
         <Image
           src={data[0].image}
           width={500}
           height={500}
           alt={data[0].title}
-          className="object-cover w-[500px] "
+          className="object-cover w-[250px]  md:w-[500px] "
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
           priority={true}
         />
@@ -61,8 +61,8 @@ export default function SingleBlogCard({
           {renderParagraphs(data[0].content)}
         </div>
       </div>
-      <div className="w-1/5 flex justify-between">
-        <h2>{data[0].author}</h2>
+      <div className="w-full lg:w-1/5 flex flex-col lg:flex-row lg:justify-between items-center gap-3">
+        <h2 className="font-bold">{data[0].author}</h2>
         <p>{formatDate(data[0].created_at)}</p>
       </div>
     </section>
