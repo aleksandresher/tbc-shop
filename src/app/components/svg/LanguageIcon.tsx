@@ -3,8 +3,8 @@ import React from "react";
 const LanguageIcon: React.FC = () => {
   return (
     <svg
-      width="40px"
-      height="40px"
+      width="25px"
+      height="25px"
       viewBox="0 0 24 24"
       role="img"
       xmlns="http://www.w3.org/2000/svg"

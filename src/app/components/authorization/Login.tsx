@@ -105,10 +105,10 @@ export default function Login() {
         <div className="flex justify-end py-4 mt-1 mb-4">
           <p className=" font-tbc-bold">{t("reset")}</p>
         </div>
-        <div className="w-full flex justify-center items-center bg-[#000] text-white p-4 rounded-[10px] hover:bg-[#111113] cursor-pointer">
+        <div className="w-full flex justify-center items-center bg-[#000] text-white p-4 rounded-[10px] hover:bg-[#111113] cursor-pointer dark:bg-[#f1f3f6]">
           <button
             type="submit"
-            className="text-lg font-tbc-medium tracking-wide"
+            className="text-lg font-tbc-medium tracking-wide dark:text-black"
           >
             {t("login")}
           </button>
@@ -138,7 +138,9 @@ export default function Login() {
       <div className="flex p-6 mt-8 gap-2">
         <p className="text-[#9f9d9b] font-tbc-medium">{t("notregister")} - </p>
         <Link href="/register">
-          <p className="text-[#101114] font-tbc-medium">{t("create")}</p>
+          <p className="text-[#101114] font-tbc-medium dark:text-white">
+            {t("create")}
+          </p>
         </Link>
       </div>
     </div>

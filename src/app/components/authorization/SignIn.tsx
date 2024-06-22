@@ -4,9 +4,15 @@ import Link from "next/link";
 
 export default function SignIn({ locale }: { locale: string }) {
   return (
-    <section className="flex items-center border-[1px] border-[#6699CC]  p-2 gap-2 rounded-[15px]">
+    <section className="flex items-center   p-2 gap-2 ">
       <Link href={`/login`}>
-        <Image src="/auth.png" width={20} height={20} alt="auth" />
+        <Image
+          src="/auth.png"
+          width={48}
+          height={30}
+          alt="auth"
+          className="w-[25px] h-[25px]"
+        />
       </Link>
     </section>
   );

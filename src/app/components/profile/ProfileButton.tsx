@@ -55,7 +55,13 @@ export default function ProfileButton({ locale }: { locale: string }) {
             className="rounded-[6px]"
           />
         ) : (
-          <Image src="/auth.png" width={30} height={30} alt="user icon" />
+          <Image
+            src="/auth.png"
+            width={30}
+            height={30}
+            alt="user icon"
+            className="w-[20px] h-[20px]"
+          />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-8 bg-gray-50">
