@@ -9,7 +9,6 @@ export async function GET(req: NextRequest) {
       SELECT *
       FROM blog_posts;
     `;
-    console.log("blogs in route", blogs);
     return NextResponse.json({ blogs }, { status: 200 });
   } catch (error) {
     console.error("Failed to retrieve blogs:", error);

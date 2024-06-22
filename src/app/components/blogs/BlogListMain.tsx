@@ -14,6 +14,7 @@ interface Blog {
 
 export default function BlogListMain({ data }: { data: Blog[] }) {
   const [searchTerm, setSearchTerm] = useState("");
+  console.log("blogs", data);
 
   const filteredBlogs = data.filter(
     (blog) =>
@@ -21,23 +22,34 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
       blog.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  console.log("filtered blogs", filteredBlogs);
   return (
     <section>
-      <BlogSearchBar onSearch={setSearchTerm} />
-      <div className="grid grid-cols-4 p-12">
+      <div className="flex justify-start px-12">
+        <BlogSearchBar onSearch={setSearchTerm} />
+      </div>
+
+      <div className="grid grid-cols-3 p-12  gap-x-3">
         {filteredBlogs?.map((blog: Blog) => (
-          <div key={blog.id} className="flex flex-col gap-2 items-center p-2">
-            <h1>{blog.title}</h1>
-            <p>{blog.content}</p>
+          <div
+            key={blog.id}
+            className="flex flex-col gap-2 items-center justify-between px-4 bg-[#fff] rounded-[10px] py-8 "
+          >
+            <h1 className="text-center">{blog.title}</h1>
+
             <Image
               src={blog.image}
+              width={500}
+              height={500}
               alt={blog.title}
-              width={100}
-              height={100}
-              priority
+              className="object-cover w-[300px] h-[300px] mt-3 "
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
+              priority={true}
             />
             <Link href={`blog/${blog.id}`}>
-              <button className="border border-gray-200 p-2">Read more</button>
+              <button className="border border-gray-200 bg-[#000] p-2 rounded-[4px]">
+                <p className="text-white">Read more</p>
+              </button>
             </Link>
           </div>
         ))}

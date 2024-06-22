@@ -70,9 +70,9 @@ const EditBlog = ({ content }: { content: BlogData }) => {
             />
           </button>
         </DialogTrigger>
-        <DialogContent className="w-screen bg-gray-300">
+        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <section className="flex flex-col p-3 gap-4 w-1/2">
+            <section className="flex flex-col p-3 gap-4">
               <div className="flex flex-col gap-1">
                 <div className="w-full flex items-center justify-between gap-2">
                   <label htmlFor="title">Title</label>
@@ -91,7 +91,7 @@ const EditBlog = ({ content }: { content: BlogData }) => {
               <div className="flex flex-col gap-1">
                 <div className="w-full flex items-center justify-between gap-2">
                   <label htmlFor="content">Content</label>
-                  <input
+                  <textarea
                     className="p-2 rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="content"
                     {...register("content", {

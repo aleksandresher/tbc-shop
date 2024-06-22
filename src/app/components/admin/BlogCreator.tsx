@@ -15,7 +15,9 @@ interface BlogType {
 
 export default function BlogCreator() {
   const queryClient = useQueryClient();
-  const [blogImageUrl, setBlogImageUrl] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const [productImageUrl, setProductImageUrl] = useState<string | null>(null);
 
   const {
     register,
@@ -32,7 +34,7 @@ export default function BlogCreator() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data, image: blogImageUrl }),
+        body: JSON.stringify({ data, image: productImageUrl }),
       });
 
       if (!response.ok) {
@@ -42,6 +44,7 @@ export default function BlogCreator() {
       const blogData = await response.json();
 
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      setOpen(false);
 
       console.log("Blog created successfully:", blogData);
     } catch (error) {
@@ -50,95 +53,96 @@ export default function BlogCreator() {
   };
 
   const handleImageUpload = (url: string) => {
-    setBlogImageUrl(url);
+    setProductImageUrl(url);
     setValue("image", url);
   };
   return (
     <div className="w-full">
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
           asChild
           className="border-2 rounded-[8px] border-outset border-opacity-50 border-[#f1a45d] p-2 cursor-pointer"
         >
           <p>Add Blog</p>
         </DialogTrigger>
-        <DialogContent className="w-[1300px] bg-gray-300">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex w-full">
-              <section className="flex flex-col p-3 gap-4 w-1/2 ">
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
-                    <label htmlFor="title">Title</label>
-                    <input
-                      className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
-                      id="title"
-                      {...register("title", {
-                        required: "Title is required",
-                      })}
-                    />
-                  </div>
-                  <span className="flex justify-end px-2">
-                    {errors.title?.message && (
-                      <p className="text-red-600">{errors.title?.message}</p>
-                    )}
-                  </span>
+        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+            <section className="flex flex-col p-3 gap-4 ">
+              <div className="flex flex-col gap-1">
+                <div className="w-full flex items-center justify-between gap-2">
+                  <label htmlFor="title">Title</label>
+                  <input
+                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    id="title"
+                    {...register("title", {
+                      required: "Title is required",
+                    })}
+                  />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
-                    <label htmlFor="content">Content</label>
-                    <input
-                      className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
-                      id="content"
-                      {...register("content", {
-                        required: "content is required",
-                      })}
-                    />
-                  </div>
-                  <span className="flex justify-end px-2">
-                    {errors.content?.message && (
-                      <p className="text-red-600">{errors.content?.message}</p>
-                    )}
-                  </span>
+                <span className="flex justify-end px-2">
+                  {errors.title?.message && (
+                    <p className="text-red-600">{errors.title?.message}</p>
+                  )}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <div className="w-full flex items-center justify-between gap-2">
+                  <label htmlFor="content">Content</label>
+                  <textarea
+                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    id="content"
+                    {...register("content", {
+                      required: "content is required",
+                    })}
+                  />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
-                    <label htmlFor="author">Author name</label>
-                    <input
-                      className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
-                      id="author"
-                      {...register("author", {
-                        required: "author is required",
-                      })}
-                    />
-                  </div>
-                  <span className="flex justify-end px-2">
-                    {errors.author?.message && (
-                      <p className="text-red-600">{errors.author?.message}</p>
-                    )}
-                  </span>
+                <span className="flex justify-end px-2">
+                  {errors.content?.message && (
+                    <p className="text-red-600">{errors.content?.message}</p>
+                  )}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <div className="w-full flex items-center justify-between gap-2">
+                  <label htmlFor="author">Author name</label>
+                  <input
+                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    id="author"
+                    {...register("author", {
+                      required: "author is required",
+                    })}
+                  />
                 </div>
+                <span className="flex justify-end px-2">
+                  {errors.author?.message && (
+                    <p className="text-red-600">{errors.author?.message}</p>
+                  )}
+                </span>
+              </div>
 
-                <div className="flex flex-col gap-1">
-                  <div className="w-full flex items-center justify-between gap-2">
-                    <label htmlFor="image">Image</label>
-                    <input
-                      className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
-                      id="image"
-                      value={blogImageUrl || ""}
-                      {...register("image", {
-                        required: "image is required",
-                      })}
-                    />
-                  </div>
-                  <span className="flex justify-end px-2">
-                    {errors.image?.message && (
-                      <p className="text-red-600">{errors.image?.message}</p>
-                    )}
-                  </span>
+              <div className="flex flex-col gap-1">
+                <div className="w-full flex items-center justify-between gap-2">
+                  <label htmlFor="image">Image</label>
+                  <input
+                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    id="image"
+                    value={productImageUrl || ""}
+                    {...register("image", {
+                      onChange(event) {
+                        setProductImageUrl(event.target.value);
+                      },
+                      required: "image is required",
+                    })}
+                  />
                 </div>
-                <ProductImageUpload onUploadComplete={handleImageUpload} />
-              </section>
-            </div>
+                <span className="flex justify-end px-2">
+                  {errors.image?.message && (
+                    <p className="text-red-600">{errors.image?.message}</p>
+                  )}
+                </span>
+              </div>
+              <ProductImageUpload onUploadComplete={handleImageUpload} />
+            </section>
 
             <span className="flex gap-4">
               <button

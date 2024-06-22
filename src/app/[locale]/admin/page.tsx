@@ -4,7 +4,6 @@ import EditBlog from "@/app/components/admin/EditBlog";
 export default function AdminPage() {
   return (
     <div>
-      Admin Page
       <BlogCreator />
       <BlogList />
     </div>

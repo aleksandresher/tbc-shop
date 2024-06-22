@@ -218,15 +218,15 @@ export async function getOrders() {
 
 export async function getAllBlog() {
   try {
-    const response = await fetch(`${URL}/api/blog/getall`);
+    const response = await fetch(`${URL}/api/allblog`);
     if (!response.ok) {
-      throw new Error("Failed to fetch products");
+      throw new Error("Failed to fetch blogs");
     }
     const data = await response.json();
-    console.log("data from blogs", data);
+
     return data.blogs;
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("Error fetching blogs:", error);
     throw error;
   }
 }

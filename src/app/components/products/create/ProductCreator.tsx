@@ -78,7 +78,7 @@ export default function ProductCreator() {
         >
           <p>Add Product</p>
         </DialogTrigger>
-        <DialogContent className="w-[1300px] bg-gray-300">
+        <DialogContent className="w-[1300px]">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex w-full">
               <section className="flex flex-col p-3 gap-4 w-1/2">

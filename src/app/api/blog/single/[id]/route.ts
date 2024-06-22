@@ -2,6 +2,8 @@ import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+export const revalidate = 0;
+
 interface Params {
   id: string;
 }
@@ -19,7 +21,7 @@ export async function GET(
     }
 
     const { rows: blog } = await sql`
-    SELECT id, title, content, image, author_id, created_at
+    SELECT id, title, content, image, author_id, created_at, author
     FROM blog_posts
     WHERE id = ${id}
   `;
