@@ -44,7 +44,7 @@ export default function SingleBlogCard({
 
   return (
     <section className="w-full flex flex-col items-center mt-8 pb-8">
-      <span className="flex w-full justify-center items-center text-center text-lg  lg:text-4xl font-mono">
+      <span className="flex w-full justify-center items-center text-center text-lg  lg:text-4xl font-mono px-6">
         {data[0].title}
       </span>
       <div className="w-full md:w-4/5 flex flex-col md:flex-row items-center gap-10 justify-center p-8 lg:p-12 ">
@@ -53,8 +53,8 @@ export default function SingleBlogCard({
           width={500}
           height={500}
           alt={data[0].title}
-          className="object-cover w-[250px]  md:w-[500px] "
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
+          className=" w-[500px] h-[500]  md:w-[500px] "
+          sizes="(max-width: 768px), (max-width: 1200px) "
           priority={true}
         />
         <div className="flex flex-col gap-8 ">

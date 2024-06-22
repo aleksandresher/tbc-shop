@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
+import ProfileIcon from "../svg/Profile";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 interface User {
@@ -55,13 +56,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
             className="rounded-[6px]"
           />
         ) : (
-          <Image
-            src="/auth.png"
-            width={30}
-            height={30}
-            alt="user icon"
-            className="w-[25px] h-[25px]"
-          />
+          <ProfileIcon />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-8 bg-gray-50">

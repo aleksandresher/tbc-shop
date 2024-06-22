@@ -8,7 +8,7 @@ export default function BlogWrapper({ locale }: { locale: string }) {
   const t = useI18n();
   return (
     <Link href={`/${locale}/blog`}>
-      <section className="flex items-center gap-1">
+      <section className="flex items-center gap-2">
         <BlogIcon />
         <h1>{t("blog")}</h1>
       </section>
