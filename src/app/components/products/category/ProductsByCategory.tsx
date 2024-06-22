@@ -42,11 +42,13 @@ export default function ProductsByCategory({
   locale: string;
 }) {
   var settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+
+    arrows: false,
   };
   const { data, isLoading, error } = useQuery<DataType>({
     queryKey: ["productByCategory", category],

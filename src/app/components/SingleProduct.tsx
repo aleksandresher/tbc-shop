@@ -170,13 +170,13 @@ export default function SingleProductPageCard({
           </section>
         </span>
 
-        <span className="w-full py-10 flex flex-col">
+        <span className="w-full py-10 flex flex-col px-6">
           <p className="font-tbc-bold"> {t("ldescription")}</p>
           <p className=" font-tbc-regular">{selectedLanguage.ldescription}</p>
         </span>
 
-        <div className="w-full py-10  flex flex-col gap-3">
-          <h3 className="font-tbc-bold">Related Products</h3>
+        <div className="w-full py-10  flex flex-col gap-3 px-6">
+          <h3 className="font-tbc-bold">{t("relatedProducts")}</h3>
           <ProductsByCategory
             category={selectedLanguage.category}
             locale={locale}

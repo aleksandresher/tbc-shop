@@ -12,10 +12,7 @@ interface ShopLayoutProps {
 export default function ShopLayout({ params, children }: ShopLayoutProps) {
   return (
     <section>
-      <main>
-        <HeaderWrapper locale={params.locale} />
-        {children}
-      </main>
+      <main>{children}</main>
     </section>
   );
 }

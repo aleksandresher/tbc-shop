@@ -37,6 +37,9 @@ export default {
   anotation: "ანოტაცია",
   ldescription: "დამატებითი ინფორმაცია",
 
+  relatedProducts: "მსგავსი პროდუქტები",
+  add: "დამატება",
+
   email: "ელფოსტა",
   password: "პაროლი",
   reset: "პაროლის აღდგენა",

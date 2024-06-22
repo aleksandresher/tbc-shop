@@ -38,6 +38,9 @@ export default {
   country: "Country",
   anotation: "Anotation",
   ldescription: "Description",
+  add: "Add",
+
+  relatedProducts: "Related Products",
 
   email: "Email",
   password: "Password",
