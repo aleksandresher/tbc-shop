@@ -47,7 +47,7 @@ export default function SingleBlogCard({
       <span className="flex w-full justify-center items-center text-center text-lg  lg:text-4xl font-mono">
         {data[0].title}
       </span>
-      <div className="w-4/5 flex flex-col md:flex-row items-center gap-10 justify-center p-4 lg:p-12 ">
+      <div className="w-full md:w-4/5 flex flex-col md:flex-row items-center gap-10 justify-center p-8 lg:p-12 ">
         <Image
           src={data[0].image}
           width={500}

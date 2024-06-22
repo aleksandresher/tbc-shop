@@ -60,7 +60,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
             width={30}
             height={30}
             alt="user icon"
-            className="w-[20px] h-[20px]"
+            className="w-[25px] h-[25px]"
           />
         )}
       </DropdownMenuTrigger>

@@ -73,7 +73,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
         >
           <Search locale={locale} toggleMenu={toggleMenu} />
           <nav>
-            <ul className="flex flex-col gap-4 pl-2">
+            <ul className="flex flex-col gap-4 px-3">
               <li>
                 <Link href={"/shop"} onClick={() => toggleMenu()}>
                   {t("store")}
@@ -91,7 +91,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
               </li>
             </ul>
           </nav>
-          <div className="flex flex-col justify-center gap-2 pl-2">
+          <div className="flex flex-col justify-center gap-2 px-3">
             <ModeToggle />
             <LocaleChange />
           </div>
