@@ -11,9 +11,9 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Params }
 ) {
-  console.log("params", params);
+
   const { id } = params;
-  console.log("productId", id);
+  
 
   try {
     const { rows: product } = await sql`
@@ -62,7 +62,7 @@ export async function GET(
            ORDER BY
           p.creation_time DESC;`;
 
-    console.log("product", product);
+  
     return NextResponse.json({ product }, { status: 200 });
   } catch (error) {
     console.error(error);

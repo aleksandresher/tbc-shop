@@ -53,7 +53,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="flex flex-col py-12 items-center  h-screen ">
+    <section className="flex flex-col py-12 items-center pb-8  h-screen ">
       <div className="w-full flex flex-col md:flex-row rounded-[8px] ">
         <div className="w-full md:w-1/2 flex flex-col gap-12 justify-center items-center ">
           <h1 className="text-lg md:text-3xl text-center">

@@ -7,14 +7,14 @@ const StoreIcon: React.FC = () => {
       width="60px"
       height="60px"
       viewBox="-6.4 -6 76.80 76.80"
-      enable-background="new 0 0 64 64"
+      enableBackground="new 0 0 64 64"
       id="Layer_1"
       version="1.1"
       xmlSpace="preserve"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       xmlns="http://www.w3.org/2000/svg"
       stroke="#000000"
-      stroke-width="0.00064"
+      strokeWidth="0.00064"
       className="fill-[#000] dark:fill-[#fff] dark:stroke-white"
     >
       <g id="SVGRepo_iconCarrier">

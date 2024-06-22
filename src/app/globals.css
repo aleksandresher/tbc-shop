@@ -99,3 +99,18 @@ option {
   height: 80px;
 }
 
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/* .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+ */
+

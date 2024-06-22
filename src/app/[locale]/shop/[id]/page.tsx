@@ -16,14 +16,10 @@ export async function generateStaticParams() {
       throw new Error("Invalid response format: expected array of products");
     }
 
-    console.log("products fetched:", response);
-
     const params = response.flatMap((product: any) => [
       { id: product.product_id.toString(), locale: "en" },
       { id: product.product_id.toString(), locale: "ka" },
     ]);
-
-    console.log("Params generated:", params);
 
     return params;
   } catch (error) {
@@ -39,7 +35,6 @@ export async function generateMetadata(
   const { id, locale } = params;
 
   const product = await loadSingle({ id });
-  console.log("product", product);
 
   if (!product || !product[0]) {
     throw new Error(`Product with id ${id} not found`);

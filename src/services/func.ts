@@ -132,7 +132,6 @@ export async function updateUser({ avatar }: { avatar: Url }) {
 }
 
 export async function loadSingle({ id }: { id: string }) {
-  console.log("id from fetch", id);
   try {
     const response = await fetch(`${URL}/api/single/${id}`);
     const data = await response.json();
@@ -257,5 +256,21 @@ export async function getByCategory({ category }: { category: string }) {
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
+  }
+}
+
+export async function getMostPopular() {
+  try {
+    const response = await fetch(`${URL}/api/products/popular`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch popular products");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching popular products:", error);
+    throw error;
   }
 }
