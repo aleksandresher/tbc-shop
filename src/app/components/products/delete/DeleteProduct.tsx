@@ -8,7 +8,7 @@ export default function DeleteProduct({ productId }: { productId: number }) {
   const deleteProduct = async (productId: number) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/delete?productId=${productId}`,
+        `/api/products/delete?productId=${productId}`,
         {
           method: "DELETE",
         }
