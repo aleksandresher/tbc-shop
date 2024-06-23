@@ -91,7 +91,7 @@ export default function GenericCategory({ params }: { params: ParamsType }) {
     setSortBy(sortOption);
   };
   if (isLoading) {
-    return <ProductListSkeleton />;
+    return <ProductListSkeleton itemNumber={12} />;
   }
 
   return (

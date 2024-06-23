@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AddToCart from "../../cart/AddToCart";
 import { useState } from "react";
+import ProductListSkeleton from "../../skeletons/ProductListSkeleton";
 interface LanguageObject {
   title: string;
   category: string;
@@ -73,7 +74,7 @@ export default function ProductsByCategory({
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ProductListSkeleton itemNumber={4} />;
   }
 
   if (error instanceof Error) {
@@ -81,7 +82,7 @@ export default function ProductsByCategory({
   }
 
   if (!data || data.products.length === 0) {
-    return null; // Return null if no data or no products
+    return null;
   }
   return (
     <>

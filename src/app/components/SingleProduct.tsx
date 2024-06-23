@@ -11,6 +11,7 @@ import AddToCart from "./cart/AddToCart";
 import ProductsByCategory from "./products/category/ProductsByCategory";
 import SocialShareWrapper from "./products/share/SocialShare";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
+import SingleProductSkeleton from "./skeletons/SingleProductSkeleton";
 
 interface ProductProps {
   product_id: number;
@@ -64,7 +65,7 @@ export default function SingleProductPageCard({
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <SingleProductSkeleton />;
   }
 
   if (error instanceof Error) {
