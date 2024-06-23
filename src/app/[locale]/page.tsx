@@ -1,4 +1,4 @@
-import Gallery from "../components/landing/CategorySlidesWrapper";
+import Gallery from "../components/landing/Gallery";
 import PartnersSlider from "../components/landing/PartnersSlider";
 import MostPopularProduct from "../components/landing/MostPopular";
 

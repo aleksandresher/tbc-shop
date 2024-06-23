@@ -1,15 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Gallery() {
   return (
-    <section className="flex flex-col items-center pt-14 px-14 gap-y-14 mb-12">
-      <div className="flex">
-        <div className="flex rounded-[10px] shadow-lg w-fit mr-14">
+    <section className="flex flex-col items-center pt-14 px-14  gap-y-5 gap-y-14 mb-5 lg:mb-12">
+      <div className="flex flex-col gap-5 md:gap-0 md:flex-row items-center">
+        <div className="flex rounded-[10px] shadow-lg w-fit">
           <div className="flex flex-col items-center justify-around p-2">
             <p className="text-center">Skincare youll stick with</p>
             <p className="text-lg font-bold">Skin</p>
             <button className="border border-yellow-700 p-2 rounded-[5px] hover:bg-[#f5b886] hover:text-white">
-              Shop now
+              <Link href={`/en/shop`}> Shop now</Link>
             </button>
           </div>
           <div>
@@ -23,7 +24,7 @@ export default function Gallery() {
             />
           </div>
         </div>
-        <div className="flex rounded-[10px] shadow-lg w-fit ml-14">
+        <div className="flex rounded-[10px] shadow-lg w-fit">
           <div>
             <Image
               src="/bodycare.jpg"
@@ -38,20 +39,20 @@ export default function Gallery() {
             <p className="text-center">Body care is a choice</p>
             <p className="text-lg font-bold">Body</p>
             <button className="border border-yellow-700 p-2 rounded-[5px] hover:bg-[#f5b886] hover:text-white">
-              Shop now
+              <Link href={`/en/shop`}> Shop now</Link>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex rounded-[10px] shadow-lg w-fit mr-14 ">
+      <div className="flex rounded-[10px] shadow-lg w-fit ">
         <div className="flex flex-col items-center justify-around p-2">
           <p className="text-center">
             Life isnt perfect but your <br></br>hair can be
           </p>
           <p className="text-lg font-bold">Hair</p>
           <button className="border border-yellow-700 p-2 rounded-[5px] hover:bg-[#f5b886] hover:text-white">
-            Shop now
+            <Link href={`/en/shop`}> Shop now</Link>
           </button>
         </div>
 
