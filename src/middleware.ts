@@ -70,7 +70,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     }
 
     if (adminRoutes.some((path) => pathname.startsWith(path))) {
-      if (token.sub === adminId) {
+      if (String(token.sub) === String(adminId)) {
         console.log("Admin access granted");
         return NextResponse.next();
       } else {
