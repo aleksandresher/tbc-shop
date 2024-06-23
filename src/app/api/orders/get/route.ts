@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   try {
     const token = await getToken({ req, secret });
 
-    if (!token?.id) {
+    if (!token) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
       userIdQuery = sql`
                 SELECT id
                 FROM users
-                WHERE providerid = ${token.id}
+                 WHERE providerid = ${token.sub}
               `;
     }
 

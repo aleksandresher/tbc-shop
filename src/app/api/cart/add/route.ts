@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const token = await getToken({ req, secret });
   console.log("token", token);
 
-  if (!productId || !token?.id) {
+  if (!productId || !token) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 }
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     userIdQuery = sql`
       SELECT id
       FROM users
-      WHERE providerid = ${token.id}
+       WHERE providerid = ${token.sub}
     `;
   }
 

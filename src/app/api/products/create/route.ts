@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
 
     console.log("All required fields are present");
 
-    if (!token?.id) {
+    if (!token) {
       console.log("Token or user ID is missing");
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
       userIdQuery = sql`
         SELECT id
         FROM users
-        WHERE providerid = ${token.id}
+         WHERE providerid = ${token.sub}
       `;
     }
 

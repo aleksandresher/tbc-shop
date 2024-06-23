@@ -37,7 +37,7 @@ export async function DELETE(req: NextRequest) {
       userIdQuery = sql`
         SELECT id
         FROM users
-        WHERE providerid = ${token.id}
+          WHERE providerid = ${token.sub}
       `;
     }
 

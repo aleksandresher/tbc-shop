@@ -7,7 +7,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 export async function POST(req: NextRequest) {
   const token = await getToken({ req, secret });
 
-  if (!token?.id) {
+  if (!token) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     userIdQuery = sql`
       SELECT id
       FROM users
-      WHERE providerid = ${token.id}
+      WHERE providerid = ${token.sub}
     `;
   }
 

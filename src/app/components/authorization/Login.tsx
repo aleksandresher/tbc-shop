@@ -22,7 +22,7 @@ interface Provider {
   clientId?: string;
 }
 
-export default function Login() {
+export default function Login({ locale }: { locale: string }) {
   const router = useRouter();
   const { data, status: session } = useSession();
   const [providers, setProviders] = useState<Provider[]>([]);
@@ -137,7 +137,7 @@ export default function Login() {
       </div>
       <div className="flex p-6 mt-8 gap-2">
         <p className="text-[#9f9d9b] font-tbc-medium">{t("notregister")} - </p>
-        <Link href="/register">
+        <Link href={`/${locale}/register`}>
           <p className="text-[#101114] font-tbc-medium dark:text-white">
             {t("create")}
           </p>

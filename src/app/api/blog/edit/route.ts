@@ -7,6 +7,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 export async function PUT(req: NextRequest) {
   const token = await getToken({ req, secret });
   const { data } = await req.json();
+  console.log("token from blog edit", token);
 
   try {
     console.log("Received data:", data);
@@ -17,7 +18,7 @@ export async function PUT(req: NextRequest) {
       throw new Error("Required fields are missing");
     }
 
-    if (!token?.id) {
+    if (!token) {
       console.log("Token or user ID is missing");
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -36,7 +37,7 @@ export async function PUT(req: NextRequest) {
       userIdQuery = sql`
         SELECT id, role
         FROM users
-        WHERE providerid = ${token.id}
+        WHERE providerid = ${token.sub}
       `;
     }
 
