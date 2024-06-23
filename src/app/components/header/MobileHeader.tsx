@@ -32,7 +32,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
 
   return (
     <section className="md:hidden relative bg-[#fae9f2] ">
-      <section className="py-5 px-8 grid grid-cols-5 items-center">
+      <section className="py-3 px-8 grid grid-cols-5 items-center">
         <div className=" h-[60px] flex justify-center">
           <button
             className="flex flex-col justify-center items-center z-40"

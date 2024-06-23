@@ -6,11 +6,11 @@ export default function ProductListSkeleton({
   return (
     <section className="w-full flex flex-col justify-center items-center">
       <div className="h-[80px] animate-pulse "></div>
-      <div className="w-11/12 grid grid-cols-1 md:grid-cols-4 mt-10 p-12 gap-y-6 gap-x-6">
+      <div className=" w-full md:grid grid-cols-1 md:grid-cols-4 mt-10 p-12 gap-y-6 gap-x-6">
         {Array.from({ length: itemNumber }).map((_, index) => (
           <div
             key={index}
-            className="px-4 py-8 flex flex-col h-[480px] w-[350px] rounded-xl bg-[#f7f8fa] dark:bg-[#1c1c1e]"
+            className="px-4 py-8 flex flex-col h-[480px] w-[320px] rounded-xl bg-[#f7f8fa] dark:bg-[#1c1c1e]"
           >
             <div className="h-[200px] w-[300px] bg-[#f1f3f6] mb-6 animate-pulse"></div>
             <div className="flex flex-col items-center gap-3 h-[200px] ">
