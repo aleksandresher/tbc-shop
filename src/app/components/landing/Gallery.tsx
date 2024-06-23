@@ -19,7 +19,7 @@ export default function Gallery() {
               width={300}
               height={300}
               alt="image of girl making skin care cream"
-              className="h-[250px] w-auto  md:w-auto md:h-[250px]"
+              className="h-[200px] w-auto  md:w-auto md:h-[250px]"
               priority={true}
             />
           </div>
@@ -31,7 +31,7 @@ export default function Gallery() {
               width={300}
               height={300}
               alt="image of girl making skin care cream"
-              className="h-[250px] w-auto  md:w-auto md:h-[250px]"
+              className="h-[200px] w-auto  md:w-auto md:h-[250px]"
               priority={true}
             />
           </div>
@@ -62,7 +62,7 @@ export default function Gallery() {
             width={300}
             height={300}
             alt="image of girl making skin care cream"
-            className="h-[250px] w-auto  md:w-auto md:h-[250px]"
+            className="h-[200px] w-auto  md:w-auto md:h-[250px]"
             priority={true}
           />
         </div>
