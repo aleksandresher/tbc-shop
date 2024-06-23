@@ -46,7 +46,11 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) "
               priority={true}
             />
-            <Link href={`blog/${blog.id}`} className="mt-3">
+            <Link
+              href={`blog/${blog.id}`}
+              className="mt-3"
+              aria-label={`read more about ${blog.title}`}
+            >
               <button className="border border-gray-200 bg-[#000] p-2 rounded-[4px]">
                 <p className="text-white">Read more</p>
               </button>
