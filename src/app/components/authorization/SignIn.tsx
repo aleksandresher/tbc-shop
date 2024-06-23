@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function SignIn({ locale }: { locale: string }) {
   return (
     <section className="flex items-center   p-2 gap-2 ">
-      <Link href={`/login`}>
+      <Link href={`/${locale}/login`}>
         <Image
           src="/auth.png"
           width={48}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,8 +23,10 @@ interface User {
 }
 
 export default function ProfileButton({ locale }: { locale: string }) {
+  const router = useRouter();
   const { data, status: session } = useSession();
   const [user, setUser] = useState<User | null>(null);
+  console.log("locale", locale);
 
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
@@ -44,6 +47,12 @@ export default function ProfileButton({ locale }: { locale: string }) {
     }
   }, [email]);
 
+  let url = "";
+  if (user?.role === "admin") {
+    url = `${locale}/admin`;
+  } else {
+    url = `${locale}/dashboard`;
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -63,7 +72,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={user?.role === "admin" ? `/admin` : `/dashboard`}>
+          <Link href={url}>
             {user?.role === "admin" ? "Admin Dashboard" : "Dashboard"}
           </Link>
         </DropdownMenuItem>
