@@ -29,11 +29,11 @@ export default function PartnersSlider() {
       <Slider {...settings}>
         <div>
           <Image
-            src="/olaprex.png"
+            src="/svrlogo.webp"
             alt="svr brand image"
             width={1740}
             height={440}
-            className=" w-200 lg:w-[400px] h-[200px]"
+            className=" w-100 lg:w-[400px] h-[100px]"
           />
         </div>
         <div>

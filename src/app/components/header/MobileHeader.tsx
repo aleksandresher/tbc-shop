@@ -11,6 +11,7 @@ import { useI18n } from "@/app/locales/client";
 import LocaleChange from "../language/LocalChange";
 import CartWrapper from "../cart/CartWrapper";
 import AuthorizationWrapper from "../authorization/AuthorizationWrapper";
+import { getLocalePath } from "@/utils/getLocalePath";
 
 export default function MobileHeader({ locale }: { locale: string }) {
   const router = useRouter();
@@ -75,17 +76,35 @@ export default function MobileHeader({ locale }: { locale: string }) {
           <nav>
             <ul className="flex flex-col gap-4 px-3">
               <li>
-                <Link href={"/shop"} onClick={() => toggleMenu()}>
+                <Link
+                  href={getLocalePath(locale, "/shop")}
+                  onClick={() => toggleMenu()}
+                >
                   {t("store")}
                 </Link>
+                {/* <Link href={`${locale}/shop`} onClick={() => toggleMenu()}>
+                  {t("store")}
+                </Link> */}
               </li>
               <li>
-                <Link href={"/blog"} onClick={() => toggleMenu()}>
+                {/* <Link href={`/blog`} onClick={() => toggleMenu()}>
+                  {t("blog")}
+                </Link> */}
+                <Link
+                  href={getLocalePath(locale, "/blog")}
+                  onClick={() => toggleMenu()}
+                >
                   {t("blog")}
                 </Link>
               </li>
               <li>
-                <Link href={"/contact"} onClick={() => toggleMenu()}>
+                {/* <Link href={`/contact`} onClick={() => toggleMenu()}>
+                  {t("contact")}
+                </Link> */}
+                <Link
+                  href={getLocalePath(locale, "/contact")}
+                  onClick={() => toggleMenu()}
+                >
                   {t("contact")}
                 </Link>
               </li>

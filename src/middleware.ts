@@ -15,6 +15,14 @@ const loggedInRoutes = [
 ];
 const adminRoutes = ["/ka/admin", "/en/admin"];
 const loggedOutRoutes = ["/login", "/register"];
+const publicRoutes = [
+  "/ka/shop",
+  "/en/shop",
+  "/ka/blog",
+  "/en/blog",
+  "/ka/contact",
+  "/en/contact",
+];
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["ka", "en"],
@@ -22,10 +30,15 @@ const I18nMiddleware = createI18nMiddleware({
 });
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {
-  const token = await getToken({ req, secret });
-
   const url = req.nextUrl.clone();
   const { pathname } = url;
+
+  if (publicRoutes.some((path) => pathname.startsWith(path))) {
+    console.log("Applying i18n middleware for public route", pathname);
+    return I18nMiddleware(req);
+  }
+
+  const token = await getToken({ req, secret });
 
   if (pathname === "/") {
     console.log("Redirecting root path '/' to '/ka'");
@@ -44,8 +57,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
       i18nResponse.headers.get("x-next-locale") || "ka"
     );
   }
-
-  const myCookie = cookies();
 
   if (loggedInRoutes.some((path) => pathname.startsWith(path)) && !token) {
     console.log(
@@ -98,8 +109,10 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     pathname === "/en/admin" ||
     pathname === "/ka/admin"
   ) {
-    const localePrefix = req.headers.get("x-next-locale") || "ka";
-    const redirectUrl = new URL(`/${localePrefix}/login`, url.origin);
+    const redirectUrl = new URL(
+      `/${req.headers.get("x-next-locale") || "ka"}/login`,
+      req.url
+    );
     return NextResponse.redirect(redirectUrl);
   }
 
