@@ -11,6 +11,8 @@ import FullProductOnHover from "./FullProductOnHover";
 import Link from "next/link";
 import StripeProducts from "./StripeProducts";
 import StripeProductList from "../stripe/StripeProductList";
+import BeatLoader from "react-spinners/BeatLoader";
+import { useI18n } from "@/app/locales/client";
 
 interface CartItem {
   cart_id: number;
@@ -43,6 +45,7 @@ interface CartResponse {
 }
 
 export default function Cart({ locale }: { locale: string }) {
+  const t = useI18n();
   const [language, setLanguage] = useState(locale);
   const { data, isLoading, error } = useQuery<CartResponse>({
     queryKey: ["cart"],
@@ -50,46 +53,102 @@ export default function Cart({ locale }: { locale: string }) {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BeatLoader />;
   }
 
   if (error instanceof Error) {
     return <div>Error: {error.message}</div>;
   }
 
-  return (
-    <section className="w-[600px] flex flex-col gap-2">
-      <h1 className="font-bold">Shopping cart</h1>
+  // shoppingBag: "კალათა",
+  // remove: "წაშლა",
+  // proceedCheckout: "გადახდა",
+  // items: "ნივთი",
 
-      <div className="flex gap-5">
-        <p>You have {data?.items?.length} item(s) in your cart</p>
+  return (
+    <section className=" w-[300px] md:w-[750px] flex flex-col gap-2 p-8">
+      <div className="flex gap-5 items-end mb-5">
+        <h1 className="font-bold text-2xl">{t("shoppingBag")}</h1>
+        <p>
+          {data?.items?.length} {t("items")}
+        </p>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4 ">
         {data?.items?.map((cartItem) => (
           <div
             key={cartItem.cart_id}
-            className="grid grid-cols-5 items-center border border-gray-400 rounded-lg p-3"
+            className="flex flex-col md:flex-row justify-between p-4 border  border-b-2"
           >
-            {/* <h2>
-              {
-                cartItem.languages[locale as keyof typeof cartItem.languages]
-                  .title
-              }
-            </h2> */}
-            <span className="flex items-center gap-2 justify-center">
-              <DecreaseButton
-                productId={cartItem.product_id}
-                quantity={cartItem.quantity}
+            <div className="w-full md:w-1/4 flex justify-center bg-[#f1f3f6] mb-3">
+              <Image
+                src={cartItem.image}
+                alt={
+                  cartItem.languages[locale as keyof typeof cartItem.languages]
+                    .title
+                }
+                width={200}
+                height={100}
+                className="w-[200px] h-[150px]"
               />
-              <p>{cartItem.quantity}</p>
-              <IncreaseButton productId={cartItem.product_id} />
+            </div>
+
+            <span className="w-full md:w-3/4 flex flex-col px-3  ">
+              <div className="flex flex-col w-[200px] md:flex-row justify-between items-center h-1/2 ">
+                <div className="flex flex-col md:flex-row gap-3">
+                  <h1>
+                    {
+                      cartItem?.languages[
+                        locale as keyof typeof cartItem.languages
+                      ].brand
+                    }
+                  </h1>
+                  <h2 className=" font-bold">
+                    {
+                      cartItem?.languages[
+                        locale as keyof typeof cartItem.languages
+                      ].title
+                    }
+                  </h2>
+                </div>
+                <div className=" self-end">
+                  <DeleteButton product_id={cartItem.product_id} />
+                </div>
+              </div>
+              {/* <div className="flex">
+                <p>
+                  {
+                    cartItem.languages[
+                      locale as keyof typeof cartItem.languages
+                    ].price
+                  }
+                </p>
+                <p>
+                  {
+                    cartItem.languages[
+                      locale as keyof typeof cartItem.languages
+                    ].currency
+                  }
+                </p>
+              </div> */}
+              <span className="flex justify-between items-center  h-1/2 mt-4">
+                {" "}
+                <span className="flex items-center gap-1">
+                  <DecreaseButton
+                    productId={cartItem.product_id}
+                    quantity={cartItem.quantity}
+                  />
+                  <p>{cartItem.quantity}</p>
+                  <IncreaseButton productId={cartItem.product_id} />
+                </span>
+                <span className="flex justify-center">
+                  {Number(cartItem.languages.en.price) * cartItem.quantity}
+                </span>
+              </span>
             </span>
 
-            <span className="flex justify-center">
-              {/* ${Number(cartItem.languages.en.price) * cartItem.quantity} */}
-            </span>
-            <DeleteButton product_id={cartItem.product_id} />
-            <FullProductOnHover locale={locale} cartItem={cartItem} />
+            <span></span>
+
+            {/* <FullProductOnHover locale={locale} cartItem={cartItem} />  */}
           </div>
         ))}
       </div>
@@ -97,7 +156,7 @@ export default function Cart({ locale }: { locale: string }) {
         <button>Checkout</button>
       </Link> */}
       {/* <StripeProductList /> */}
-      <StripeProducts />
+      {/* <StripeProducts /> */}
     </section>
   );
 }

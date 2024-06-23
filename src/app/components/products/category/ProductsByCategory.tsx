@@ -98,7 +98,7 @@ export default function ProductsByCategory({
 
             return (
               <div key={item.product_id} className="sm:hidden">
-                <Link href={`/shop/${item.product_id}`}>
+                <Link href={`/${locale}/shop/${item.product_id}`}>
                   <div className="w-full flex flex-col items-center  ">
                     <div className="w-[300px] h-[300px] md:w-[350px] flex justify-center items-center relative">
                       <Image
@@ -141,6 +141,7 @@ export default function ProductsByCategory({
 
           return (
             <RelatedProductCard
+              locale={locale}
               key={item.product_id}
               productId={item.product_id}
               image={selectedLanguage.image}

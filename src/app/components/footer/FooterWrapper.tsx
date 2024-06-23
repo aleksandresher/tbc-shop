@@ -1,8 +1,8 @@
 import Footer from "./Footer";
-export default function FooterWrapper() {
+export default function FooterWrapper({ locale }: { locale: string }) {
   return (
     <section className="">
-      <Footer />
+      <Footer locale={locale} />
     </section>
   );
 }

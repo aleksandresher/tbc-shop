@@ -3,8 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getMostPopular } from "@/services/func";
 import Single from "../products/card/Single";
 import PopularProductsSkeleton from "../skeletons/PopularProductSkeleton";
+import { useI18n } from "@/app/locales/client";
 
 export default function MostPopularProduct({ locale }: { locale: string }) {
+  const t = useI18n();
   const { data, isLoading, error } = useQuery({
     queryKey: ["popular"],
     queryFn: () => getMostPopular(),
@@ -32,15 +34,21 @@ export default function MostPopularProduct({ locale }: { locale: string }) {
   }));
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-14">
-      {filteredProducts.map((product: any) => (
-        <Single
-          locale={locale}
-          item={product}
-          productId={product.product_id}
-          key={product.product_id}
-        />
-      ))}
+    <section className="mt-8 flex flex-col gap-8">
+      {" "}
+      <div className="px-14">
+        <h2 className=" text-2xl">{t("popularProducts")}</h2>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-14">
+        {filteredProducts.map((product: any) => (
+          <Single
+            locale={locale}
+            item={product}
+            productId={product.product_id}
+            key={product.product_id}
+          />
+        ))}
+      </div>
     </section>
   );
 }

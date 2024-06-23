@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Gallery() {
   return (
     <section className="flex flex-col items-center pt-14 px-14  gap-y-5 md:gap-y-14 mb-5 lg:mb-12">
-      <div className="flex flex-col gap-5 md:gap-0 md:flex-row items-center">
-        <div className="flex rounded-[10px] shadow-lg w-fit">
+      <div className="flex flex-col gap-5 md:gap-6 md:flex-row items-center">
+        <div className="flex rounded-[10px] shadow-lg w-fit dark:border dark:border-white">
           <div className="flex flex-col items-center justify-around p-2">
             <p className="text-center">Skincare youll stick with</p>
             <p className="text-lg font-bold">Skin</p>
@@ -24,7 +24,7 @@ export default function Gallery() {
             />
           </div>
         </div>
-        <div className="flex rounded-[10px] shadow-lg w-fit">
+        <div className="flex rounded-[10px] shadow-lg w-fit dark:border dark:border-white">
           <div>
             <Image
               src="/bodycare.jpg"
@@ -45,7 +45,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className="flex rounded-[10px] shadow-lg w-fit ">
+      <div className="flex rounded-[10px] shadow-lg w-fit dark:border dark:border-white ">
         <div className="flex flex-col items-center justify-around p-2">
           <p className="text-center">
             Life isnt perfect but your <br></br>hair can be

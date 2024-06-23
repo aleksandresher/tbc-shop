@@ -26,6 +26,29 @@ export default {
   priceDown: "ფასი, კლებადობით",
   sort: "სორტირება",
 
+  
+  shoppingBag: "კალათა",
+  remove: "წაშლა",
+  proceedCheckout: "გადახდა",
+  items: "ნივთი",
+
+  myCart: "ჩემი კალათა",
+  myOrders: "ჩემი შეკვეთები",
+  accountDetails: "ანგარიშის რედაქტირება",
+
+  support: "დახმარება",
+  links: "სასარგებლო ბმულები",
+  contactUs: "დაგვიკავშირდი",
+  allRight: "ყველა უფლება დაცულია",
+  terms: "წესები და პირობები",
+  privacy: "Privacy Policy",
+  readMore: "წაიკითხე მეტი",
+
+  myaccount: "ჩემი პროფილი",
+  dashboard: "მართვა",
+  admindashboard: "ადმინის პანელი",
+  popularProducts: "პოპულარული პროდუქტები",
+
   bath: "აბაზანა & ტანი",
   blog: "ბლოგი",
   store: "მაღაზია",

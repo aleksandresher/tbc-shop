@@ -26,8 +26,8 @@ export async function POST(req: Request) {
     const token = bcrypt.genSaltSync();
     // console.log("token while creating user", token);
 
-    const newUser =
-      await sql`INSERT INTO users (name, email, password, token) VALUES (${body.name}, ${body.email}, ${hashedPassword}, ${token});`;
+    const { rows: newUser } =
+      await sql`INSERT INTO users (name, email, password, token) VALUES (${body.name}, ${body.email}, ${hashedPassword}, ${token}) RETURNING *`;
 
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",

@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyProducts } from "@/services/func";
 import MySingle from "./MySingle";
+import BeatLoader from "react-spinners/BeatLoader";
 
 interface LanguageObject {
   title: string;
@@ -56,7 +57,7 @@ export default function MyProductList({ locale }: MyProductListProps) {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BeatLoader />;
   }
 
   if (error || !data || !data.items) {

@@ -12,16 +12,18 @@ export default function RelatedProductCard({
   averageRating,
   totalVotes,
   title,
+  locale,
 }: {
   productId: number;
   image: string;
   averageRating: number;
   totalVotes: number;
   title: string;
+  locale: string;
 }) {
   return (
     <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#f1f3f6]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
-      <Link href={`shop/${productId}`}>
+      <Link href={`/${locale}/shop/${productId}`}>
         <div className="w-full flex flex-col items-center  ">
           <div className="w-[300px] h-[300px] md:w-[350px] flex justify-center items-center relative">
             <Image

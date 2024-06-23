@@ -6,7 +6,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret });
-  const userId = token?.id;
+  const userId = token?.sub;
 
   if (userId) {
     return NextResponse.json({ message: "authenticated" }, { status: 200 });

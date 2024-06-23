@@ -1,10 +1,7 @@
 "use client";
-import Image from "next/image";
 import { useCart } from "@/app/providers/ContextProvider";
 import { checkUserAuthentication } from "@/services/func";
 import { useRouter } from "next/navigation";
-import CartHoverCard from "./CartHoverCard";
-import Cart from "./Cart";
 import BasketIcon from "../svg/BasketIcon";
 
 export default function CartWrapper({ locale }: { locale: string }) {
@@ -15,22 +12,16 @@ export default function CartWrapper({ locale }: { locale: string }) {
     const authStatus = await checkUserAuthentication();
     if (authStatus === "authenticated") {
       setOpened(true);
-      router.push(`/dashboard`);
+      router.push(`/${locale}/dashboard`);
     } else {
       console.log("User is unauthenticated");
     }
   };
   return (
     <section>
-      <CartHoverCard handleClick={handleClick} locale={locale} />
+      <div onClick={() => handleClick()} className=" cursor-pointer">
+        <BasketIcon />
+      </div>
     </section>
-
-    // <Image
-    //   src="/basket.svg"
-    //   width={30}
-    //   height={30}
-    //   alt="cart icon"
-    //   onClick={handleClick}
-    // />
   );
 }

@@ -48,7 +48,7 @@ export default function RootLayout({
                     {children}
                   </main>
 
-                  <FooterWrapper />
+                  <FooterWrapper locale={locale} />
 
                   <Toaster />
                 </ThemeProvider>

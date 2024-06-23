@@ -1,9 +1,11 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
 import DeleteIcon from "../svg/DeleteIcon";
+import { useI18n } from "@/app/locales/client";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function DeleteButton({ product_id }: { product_id: number }) {
+  const t = useI18n();
   const queryClient = useQueryClient();
   const handleClick = async (productId: number) => {
     try {
@@ -29,9 +31,10 @@ export default function DeleteButton({ product_id }: { product_id: number }) {
   return (
     <button
       onClick={() => handleClick(product_id)}
-      className="flex justify-center"
+      className="flex justify-center items-center"
     >
       <DeleteIcon />
+      <p>{t("remove")}</p>
     </button>
   );
 }

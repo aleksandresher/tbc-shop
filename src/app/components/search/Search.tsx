@@ -26,7 +26,7 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
   const t = useI18n();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<SearchResult[]>([]);
-  const debouncedInputValue = useDebounce(inputValue, 500);
+  const debouncedInputValue = useDebounce(inputValue, 400);
   const ulRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
 
   return (
     <section className="flex flex-col gap-2 relative">
-      <div className="relative h-[50px] sm:w-[250px] md:w-[400px] flex border border-gray-300 rounded-[30px] bg-gray-50 placeholder-gray-700 focus:border-green-600 outline-none p-2">
+      <div className="bg-white relative h-[50px] sm:w-[250px] md:w-[400px] flex border border-gray-300 rounded-[30px]  placeholder-gray-700 focus:border-green-600 outline-none p-2">
         <Image
           src="/search2.svg"
           width={30}
@@ -92,7 +92,7 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
       >
         {suggestions?.map((suggestion, index) => (
           <Link
-            href={`/shop/${suggestion.id}`}
+            href={`/${locale}/shop/${suggestion.id}`}
             key={index}
             onClick={() => {
               setInputValue(
@@ -106,7 +106,9 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
               key={index}
               className="flex justify-between items-center gap-2  p-4 px-8"
             >
-              <p>{locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}</p>
+              <p className="dark:text-black">
+                {locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}
+              </p>
               <Image
                 src={suggestion.image}
                 alt={locale === "ka" ? suggestion.kaTitle : suggestion.enTitle}

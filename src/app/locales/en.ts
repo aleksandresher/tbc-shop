@@ -28,6 +28,15 @@ export default {
   brands: "Brands",
   skincare: "Skincare",
 
+  myaccount: "My Account",
+  dashboard: "Dashboard",
+  admindashboard: "Admin dashboard",
+
+  shoppingBag: "Shooping Bad",
+  remove: "Remove",
+  proceedCheckout: "Proceed To Checkout",
+  items: "Items",
+
   bath: "Body",
   blog: "Blog",
   store: "Store",
@@ -39,8 +48,21 @@ export default {
   anotation: "Anotation",
   ldescription: "Description",
   add: "Add",
+  popularProducts: "Popular Products",
 
   relatedProducts: "Related Products",
+
+  support: "Support",
+  links: "Helpfull Links",
+  contactUs: "Contact Us",
+  allRight: "All rights reserved",
+  terms: "Terms & Conditions",
+  privacy: "Privacy Policy",
+  readMore: "Read more",
+
+  myCart: "My Cart",
+  myOrders: "My Orders",
+  accountDetails: "Account Details",
 
   email: "Email",
   password: "Password",

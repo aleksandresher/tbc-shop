@@ -16,7 +16,7 @@ import { getLocalePath } from "@/utils/getLocalePath";
 export default function MobileHeader({ locale }: { locale: string }) {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  console.log("menu", menuOpen);
+
   const t = useI18n();
 
   const toggleMenu = () => {
@@ -60,7 +60,9 @@ export default function MobileHeader({ locale }: { locale: string }) {
           </button>
         </div>
 
-        <h1 className=" col-span-3 text-center">Beauty Bounty</h1>
+        <Link href="/" className=" col-span-3 text-center">
+          <h1 className=" col-span-3 text-center">Beauty Bounty</h1>
+        </Link>
         <span className="flex gap-3 items-center ">
           <CartWrapper locale={locale} />
           <AuthorizationWrapper locale={locale} />

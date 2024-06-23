@@ -8,8 +8,10 @@ import { useCart } from "@/app/providers/ContextProvider";
 import MyInfoPage from "./MyInfo";
 import Cart from "../cart/Cart";
 import OrderList from "../order/OrdersList";
+import { useI18n } from "@/app/locales/client";
 
 export default function UserSideBar({ locale }: { locale: string }) {
+  const t = useI18n();
   const [active, setActive] = useState("addproduct");
   const { opened } = useCart();
 
@@ -32,7 +34,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
               active === "addproduct" ? "text-[#fb8500]" : ""
             }`}
           >
-            პროდუქტის დამატება
+            {t("addProduct")}
           </p>
         </TabsTrigger>
         <TabsTrigger value="myproducts" className="text-lg">
@@ -41,7 +43,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
               active === "myproducts" ? "text-[#fb8500]" : ""
             }`}
           >
-            ჩემი განცხადებები
+            {t("myProducts")}
           </p>
         </TabsTrigger>
         <TabsTrigger value="mycart" className="text-lg">
@@ -50,7 +52,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
               active === "mycart" ? "text-[#fb8500]" : ""
             }`}
           >
-            ჩემი კალათა
+            {t("myCart")}
           </p>
         </TabsTrigger>
         <TabsTrigger value="myorders" className="text-lg">
@@ -59,7 +61,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
               active === "myorders" ? "text-[#fb8500]" : ""
             }`}
           >
-            ჩემი შეკვეთები
+            {t("myOrders")}
           </p>
         </TabsTrigger>
         <TabsTrigger value="editaccount" className="text-lg">
@@ -68,7 +70,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
               active === "editaccount" ? "text-[#fb8500]" : ""
             }`}
           >
-            ანგარიშის რედაქტირება
+            {t("accountDetails")}
           </p>
         </TabsTrigger>
       </TabsList>

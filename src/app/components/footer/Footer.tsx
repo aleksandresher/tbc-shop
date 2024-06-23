@@ -1,10 +1,16 @@
-export default function Footer() {
+"use client";
+import { useI18n } from "@/app/locales/client";
+import { getLocalePath } from "@/utils/getLocalePath";
+import Link from "next/link";
+
+export default function Footer({ locale }: { locale: string }) {
+  const t = useI18n();
   return (
     <footer className="bg-black">
       <div className="max-w-screen-xl px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div>
-            <div className="flex justify-center text-teal-300 sm:justify-start">
+          <div className="flex flex-col">
+            <div className="flex justify-center text-white sm:justify-start">
               <svg
                 className="h-8"
                 viewBox="0 0 118 24"
@@ -54,18 +60,20 @@ export default function Footer() {
               </svg>
             </div>
 
-            <p className="max-w-[330px] mx-auto mt-6  px-6 leading-relaxed text-center text-[#fae9f2] sm:max-w-xs sm:mx-0 sm:text-left">
-              Discover premium cosmetics and self-care essentials for radiant
-              beauty and well-being.
-            </p>
+            <span className="max-w-[330px] mx-auto mt-6   sm:max-w-xs sm:mx-0 sm:text-left">
+              <p className="leading-relaxed text-[#fae9f2]">
+                Discover premium cosmetics and self-care essentials for radiant
+                beauty and well-being.
+              </p>
+            </span>
 
             <ul className="flex justify-center gap-6 mt-8 md:gap-8 sm:justify-start">
               <li>
-                <a
+                <Link
                   href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-teal-500 transition hover:text-teal-500/75"
+                  className="text-white transition hover:text-gray-200"
                 >
                   <span className="sr-only">Facebook</span>
                   <svg
@@ -80,15 +88,15 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-teal-500 transition hover:text-teal-500/75"
+                  className="text-white transition hover:text-gray-200"
                 >
                   <span className="sr-only">Instagram</span>
                   <svg
@@ -103,15 +111,15 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-teal-500 transition hover:text-teal-500/75"
+                  className="text-white transition hover:text-gray-200"
                 >
                   <span className="sr-only">Twitter</span>
                   <svg
@@ -122,15 +130,15 @@ export default function Footer() {
                   >
                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                   </svg>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-teal-500 transition hover:text-teal-500/75"
+                  className="text-white transition hover:text-gray-200"
                 >
                   <span className="sr-only">GitHub</span>
                   <svg
@@ -145,15 +153,15 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a
+                <Link
                   href="/"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-teal-500 transition hover:text-teal-500/75"
+                  className="text-white transition hover:text-gray-200"
                 >
                   <span className="sr-only">Dribbble</span>
                   <svg
@@ -168,50 +176,53 @@ export default function Footer() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 md:grid-cols-4">
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-[#fae9f2]">Shop</p>
+              <Link href={getLocalePath(locale, "/shop")}>
+                {" "}
+                <p className="text-lg font-medium text-[#fae9f2]">
+                  {t("store")}
+                </p>
+              </Link>
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-[#fae9f2]">
-                Helpful Links
-              </p>
+              <p className="text-lg font-medium text-[#fae9f2]">{t("links")}</p>
 
               <nav className="mt-8">
                 <ul className="space-y-4 text-sm">
                   <li>
-                    <a
+                    <Link
                       className="text-[#fae9f2] transition hover:text-white/75"
-                      href="/"
+                      href={getLocalePath(locale, "/blog")}
                     >
-                      Blogs
-                    </a>
+                      {t("blog")}
+                    </Link>
                   </li>
 
                   <li>
-                    <a
+                    <Link
                       className="text-[#fae9f2] transition hover:text-white/75"
-                      href="/"
+                      href={getLocalePath(locale, "/contact")}
                     >
-                      Support
-                    </a>
+                      {t("support")}
+                    </Link>
                   </li>
                 </ul>
               </nav>
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-white">Contact Us</p>
+              <p className="text-lg font-medium text-white">{t("contactUs")}</p>
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
-                  <a
+                  <Link
                     className="flex items-center justify-center sm:justify-start gap-1.5 group"
                     href="/"
                   >
@@ -233,7 +244,7 @@ export default function Footer() {
                     <span className="text-[#fae9f2] transition group-hover:text-white/75">
                       john@doe.com
                     </span>
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
@@ -293,28 +304,21 @@ export default function Footer() {
         </div>
 
         <div className="pt-6 mt-12 border-t border-gray-800">
-          <div className="text-center sm:flex sm:justify-between sm:text-left">
-            <p className="text-sm text-gray-400">
+          <div className="text-center sm:flex sm:justify-between sm:text-left gap-4">
+            <div className="flex gap-3 text-sm">
               <span className="block sm:inline text-[#fae9f2]">
-                All rights reserved.
+                {t("allRight")}
               </span>
 
               <a
                 className="inline-block text-teal-500 underline transition hover:text-teal-500/75"
                 href="/"
               >
-                Terms & Conditions
+                {t("terms")}
               </a>
 
               <span>&middot;</span>
-
-              <a
-                className="inline-block text-teal-500 underline transition hover:text-teal-500/75"
-                href="/"
-              >
-                Privacy Policy
-              </a>
-            </p>
+            </div>
 
             <p className="mt-4 text-sm text-gray-500 sm:order-first sm:mt-0">
               &copy; 2024 Beauty Bounty

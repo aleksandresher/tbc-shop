@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import ProfileIcon from "../svg/Profile";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { useI18n } from "@/app/locales/client";
 
 interface User {
   email: string;
@@ -23,10 +24,10 @@ interface User {
 }
 
 export default function ProfileButton({ locale }: { locale: string }) {
+  const t = useI18n();
   const router = useRouter();
   const { data, status: session } = useSession();
   const [user, setUser] = useState<User | null>(null);
-  console.log("locale", locale);
 
   const email = data?.user.email as string;
   async function getUser({ email }: { email: string }) {
@@ -69,14 +70,16 @@ export default function ProfileButton({ locale }: { locale: string }) {
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-8 bg-gray-50">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("myaccount")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link href={url}>
-            {user?.role === "admin" ? "Admin Dashboard" : "Dashboard"}
+            {user?.role === "admin" ? t("admindashboard") : t("dashboard")}
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()}>
+          {t("logout")}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
