@@ -104,7 +104,7 @@ export default function AddMyProduct() {
           asChild
           className="border-2 rounded-[8px] flex justify-center w-[120px] md:w-[200px] border-outset border-opacity-50 border-[#f1a45d] p-2 cursor-pointer"
         >
-          <p className="dark:text-black">{t("addProduct")}</p>
+          <p className="">{t("addProduct")}</p>
         </DialogTrigger>
         <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
           <form onSubmit={handleSubmit(onSubmit)}>

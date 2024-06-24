@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import ProfileIcon from "../svg/Profile";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { useI18n } from "@/app/locales/client";
+import { getLocalePath } from "@/utils/getLocalePath";
 
 interface User {
   email: string;
@@ -50,9 +51,9 @@ export default function ProfileButton({ locale }: { locale: string }) {
 
   let url = "";
   if (user?.role === "admin") {
-    url = `${locale}/admin`;
+    url = `${getLocalePath(locale, "/admin")}`;
   } else {
-    url = `${locale}/dashboard`;
+    url = `${getLocalePath(locale, "/dashboard")}`;
   }
   return (
     <DropdownMenu>
