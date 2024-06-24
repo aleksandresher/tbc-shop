@@ -26,7 +26,13 @@ export default {
   priceDown: "ფასი, კლებადობით",
   sort: "სორტირება",
 
-  
+  alreadyexistmail: "მომხმარებელი უკვე რეგისტრირებულია მითითებული მეილით",
+  registeredSuccess: "მომხმარებელი წარმატებით დარეგისტრირდა",
+  requiredField: "მოცემული ველი სავალდებულოა",
+  invalidFormat: "ფორმატი არასწორია",
+  userUpdated: "მომხმარებლის ინფორმაცია წარმატებით შეიცვალა",
+  save: "შენახვა",
+
   shoppingBag: "კალათა",
   remove: "წაშლა",
   proceedCheckout: "გადახდა",

@@ -27,11 +27,11 @@ export default function UserSideBar({ locale }: { locale: string }) {
       defaultValue="myproducts"
       className="w-full  flex flex-col md:flex-row justify-center gap-3"
     >
-      <TabsList className="flex flex-col items-start px-6 py-8 gap-2 border border-gray-100 h-full shadow-xl bg-[#fff]">
-        <TabsTrigger value="addproduct">
+      <TabsList className="flex flex-col items-start px-6 py-8 gap-2 border border-gray-100 h-full shadow-xl bg-[#fff] dark:bg-black">
+        <TabsTrigger value="addproduct" className=" ">
           <p
-            className={`text-lg hover:text-[#418ea5] ${
-              active === "addproduct" ? "text-[#fb8500]" : ""
+            className={` cursor-pointer text-lg hover:text-[#418ea5] ${
+              active === "addproduct" ? "text-[#fb8500]" : " "
             }`}
           >
             {t("addProduct")}
@@ -39,7 +39,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
         </TabsTrigger>
         <TabsTrigger value="myproducts" className="text-lg">
           <p
-            className={`text-lg hover:text-[#418ea5] ${
+            className={` text-lg hover:text-[#418ea5] ${
               active === "myproducts" ? "text-[#fb8500]" : ""
             }`}
           >
@@ -48,7 +48,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
         </TabsTrigger>
         <TabsTrigger value="mycart" className="text-lg">
           <p
-            className={`text-lg hover:text-[#418ea5] ${
+            className={` text-lg hover:text-[#418ea5] ${
               active === "mycart" ? "text-[#fb8500]" : ""
             }`}
           >
@@ -57,7 +57,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
         </TabsTrigger>
         <TabsTrigger value="myorders" className="text-lg">
           <p
-            className={`text-lg hover:text-[#418ea5] ${
+            className={` text-lg hover:text-[#418ea5] ${
               active === "myorders" ? "text-[#fb8500]" : ""
             }`}
           >
@@ -66,7 +66,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
         </TabsTrigger>
         <TabsTrigger value="editaccount" className="text-lg">
           <p
-            className={`text-lg hover:text-[#418ea5] ${
+            className={` text-lg hover:text-[#418ea5] ${
               active === "editaccount" ? "text-[#fb8500]" : ""
             }`}
           >
@@ -74,7 +74,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
           </p>
         </TabsTrigger>
       </TabsList>
-      <div className="w-full bg-[#fff]">
+      <div className="w-full bg-[#fff] dark:bg-black">
         <TabsContent value="myproducts" className="mt-0">
           <MyProducts locale={locale} />
         </TabsContent>

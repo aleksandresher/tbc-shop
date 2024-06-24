@@ -52,6 +52,13 @@ export default {
 
   relatedProducts: "Related Products",
 
+  alreadyexistmail: "User with this email already exists",
+  registeredSuccess: "User registered successfully",
+  requiredField: "This field is required",
+  invalidFormat: "Invalid Email Address",
+  userUpdated: "User information updated successfully",
+  save: "Save",
+
   support: "Support",
   links: "Helpfull Links",
   contactUs: "Contact Us",

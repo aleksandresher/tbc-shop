@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import ProductImageUpload from "../ImageUpload/ProductImageUploader";
 import { useToast } from "@/components/ui/use-toast";
+import { useI18n } from "@/app/locales/client";
 
 import { useForm } from "react-hook-form";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -90,7 +91,8 @@ const EditMyProduct = ({
   } = useForm<UserType>();
 
   const [open, setOpen] = useState(false);
-  const [productImageUrl, setProductImageUrl] = useState<string | null>(null);
+  const [productImageUrl, setProductImageUrl] = useState<string>(image);
+  const t = useI18n();
 
   const queryClient = useQueryClient();
 
@@ -541,7 +543,7 @@ const EditMyProduct = ({
                 type="submit"
                 className="bg-green-400 rounded-full p-2 uppercase"
               >
-                Edit
+                {t("save")}
               </button>
             </form>
           </DialogContent>

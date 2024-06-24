@@ -2,19 +2,23 @@
 import { useForm } from "react-hook-form";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { useI18n } from "@/app/locales/client";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 interface UserProps {
   name: string;
   email: string;
   password: string;
 }
 
-export default function SignUp() {
+export default function SignUp({ locale }: { locale: string }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserProps>();
   const t = useI18n();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const onSubmit = async (data: UserProps) => {
     try {
@@ -26,10 +30,24 @@ export default function SignUp() {
         },
         body: JSON.stringify(data),
       });
+      if (response.status === 409) {
+        toast({
+          description: t("alreadyexistmail"),
+          variant: "destructive",
+        });
+        throw new Error("User with this email already exists");
+      }
       if (!response.ok) {
+        console.log(response);
+        toast({ description: "Registration failed", variant: "destructive" });
         throw new Error("Failed to create user");
       }
       const userData = await response.json();
+      toast({
+        description: t("registeredSuccess"),
+        variant: "default",
+      });
+      router.push(`/${locale}/login`);
     } catch (error) {
       console.log("Error creating user", error);
     }
@@ -56,11 +74,11 @@ export default function SignUp() {
                 className="p-2  rounded-[8px] w-full h-[55px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="name"
                 {...register("name", {
-                  required: "this field is required",
+                  required: t("requiredField"),
                 })}
               />
               {errors.name?.message && (
-                <span className="text-red-300">{errors.name?.message}</span>
+                <span className="text-red-400">{errors.name?.message}</span>
               )}
             </div>
             <div className="w-full flex flex-col items-center gap-2">
@@ -72,11 +90,15 @@ export default function SignUp() {
                 className="p-2  rounded-[8px] w-full h-[55px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="email"
                 {...register("email", {
-                  required: "this field is required",
+                  required: t("requiredField"),
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: t("invalidFormat"),
+                  },
                 })}
               />
               {errors.email?.message && (
-                <span className="text-red-300">{errors.email?.message}</span>
+                <span className="text-red-400">{errors.email?.message}</span>
               )}
             </div>
 
@@ -90,11 +112,11 @@ export default function SignUp() {
                 className="w-full p-2 h-[55px]  rounded-[8px] border-[2px] border-[#dbdbdb] focus:border-[#3c74ff] focus:border-2 py-4 outline-none"
                 id="password"
                 {...register("password", {
-                  required: "this field is required",
+                  required: t("requiredField"),
                 })}
               />
               {errors.password?.message && (
-                <span className="text-red-300">{errors.password?.message}</span>
+                <span className="text-red-400">{errors.password?.message}</span>
               )}
             </div>
           </div>

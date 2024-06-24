@@ -4,8 +4,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import UserImageUpload from "../ImageUpload/UserImageUploader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { useToast } from "@/components/ui/use-toast";
+import { useI18n } from "@/app/locales/client";
 
 interface UserTypes {
   name?: string | null;
@@ -14,14 +16,22 @@ interface UserTypes {
 }
 
 export default function EditUser({ name, email, image }: UserTypes) {
+  const t = useI18n();
+  const { toast } = useToast();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [username, setUserName] = useState(name);
   const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<UserTypes>({ defaultValues: { name: name } });
+  } = useForm<UserTypes>({ defaultValues: { name, email } });
+
+  useEffect(() => {
+    setValue("name", name ?? "");
+    setValue("email", email ?? "");
+  }, [name, email, setValue]);
 
   const onSubmit = async (data: UserTypes) => {
     try {
@@ -38,7 +48,10 @@ export default function EditUser({ name, email, image }: UserTypes) {
       }
 
       const userData = await response.json();
-      console.log(userData);
+      toast({
+        description: t("userUpdated"),
+        variant: "default",
+      });
 
       queryClient.invalidateQueries({ queryKey: ["user"] });
 
@@ -58,10 +71,7 @@ export default function EditUser({ name, email, image }: UserTypes) {
           <input
             type="text"
             {...register("name", { required: true })}
-            // placeholder={username ?? ""}
-            // value={username ?? ""}
             placeholder={name ?? ""}
-            onChange={(event) => setUserName(event.target.value)}
             className="border p-1 h-[40px] rounded-sm"
             id="username"
           />
@@ -75,10 +85,10 @@ export default function EditUser({ name, email, image }: UserTypes) {
           </label>
           <input
             type="email"
-            placeholder={email ?? ""}
             className="border p-1"
             id="email"
-            value={email ?? ""}
+            readOnly
+            placeholder={email ?? ""}
           />
         </div>
         <div className="flex gap-3">
@@ -91,7 +101,9 @@ export default function EditUser({ name, email, image }: UserTypes) {
           />
         </div>
         <UserImageUpload onUploadComplete={(url) => setImageUrl(url)} />
-        <button className="bg-green-600 p-2 mt-4 rounded-[10px]">Edit</button>
+        <button className="bg-green-600 p-2 mt-4 rounded-[10px]">
+          {t("save")}
+        </button>
       </form>
     </section>
   );
