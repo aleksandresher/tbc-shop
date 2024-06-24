@@ -64,7 +64,7 @@ option {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -73,7 +73,7 @@ option {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000;
+  background: #7a7878;
   border-radius: 5px;
   height: 5px;
 }

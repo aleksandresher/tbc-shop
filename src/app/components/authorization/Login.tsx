@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useSession, getProviders, signOut, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useI18n } from "@/app/locales/client";
+import FadeLoader from "react-spinners/FadeLoader";
 
 export type UserProps = {
   email: string;
@@ -24,8 +25,10 @@ interface Provider {
 
 export default function Login({ locale }: { locale: string }) {
   const router = useRouter();
-  const { data, status: session } = useSession();
+  const { data, status } = useSession();
   const [providers, setProviders] = useState<Provider[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const t = useI18n();
 
   useEffect(() => {
@@ -53,7 +56,6 @@ export default function Login({ locale }: { locale: string }) {
   } = useForm<UserProps>();
 
   const onSubmit = async (formData: UserProps) => {
-    console.log(formData);
     signIn("credentials", {
       email: formData.email,
       password: formData.password,
@@ -64,6 +66,7 @@ export default function Login({ locale }: { locale: string }) {
       <div className="w-fulll sm:w-4/5 flex justify-center ">
         <h1 className="text-[32px] font-tbc-bold">{t("authorization")}</h1>
       </div>
+      {status === "loading" && <FadeLoader />}
       <form
         className="w-full max-w-[800px] sm:w-4/5 mt-7"
         onSubmit={handleSubmit(onSubmit)}
