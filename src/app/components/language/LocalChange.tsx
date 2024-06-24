@@ -21,7 +21,7 @@ export default function LocaleChange() {
         <LanguageIcon />
       </DropdownMenuTrigger>
       <DropdownMenuContent className=" bg-gray-100 z-50">
-        <DropdownMenuItem className="">
+        <DropdownMenuItem className="hover:text-black">
           <button onClick={() => changeLocale("en")}>English</button>
         </DropdownMenuItem>
         <DropdownMenuItem>

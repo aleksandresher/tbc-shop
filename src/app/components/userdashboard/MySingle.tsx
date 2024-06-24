@@ -43,7 +43,7 @@ export default function MySingle({
   numberofvotes,
 }: MySingleProps) {
   return (
-    <section className="flex flex-col gap-3  border border-gray-200 p-3  mb-8">
+    <section className="flex flex-col gap-3  rounded-[4px] border-2 dark:border-none dark:bg-[#1c1c1e] p-3  mb-8">
       <div className="w-[200px] h-[230px] flex justify-center items-center relative overflow-hidden">
         <Image
           src={image}

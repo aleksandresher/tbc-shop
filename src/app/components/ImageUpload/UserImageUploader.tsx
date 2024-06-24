@@ -70,7 +70,13 @@ export default function UserImageUpload({
       {modal && <BeatLoader />}
       {blob && (
         <div>
-          <Image src={blob.url} width={100} height={100} alt="Uploaded image" />
+          <Image
+            src={blob.url}
+            width={150}
+            height={100}
+            className="w-[100px] h-[100px]"
+            alt="Uploaded image"
+          />
         </div>
       )}
     </>

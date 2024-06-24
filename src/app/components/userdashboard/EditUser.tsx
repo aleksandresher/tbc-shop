@@ -93,18 +93,19 @@ export default function EditUser({ name, email, image }: UserTypes) {
         </div>
         <div className="flex gap-3">
           <Image
-            src={image ?? ""}
+            src={image ?? "/no-image.svg"}
             alt="user image"
             width={200}
             height={200}
             className="rounded-[10px]"
           />
         </div>
-        <UserImageUpload onUploadComplete={(url) => setImageUrl(url)} />
+
         <button className="bg-green-600 p-2 mt-4 rounded-[10px]">
           {t("save")}
         </button>
       </form>
+      <UserImageUpload onUploadComplete={(url) => setImageUrl(url)} />
     </section>
   );
 }

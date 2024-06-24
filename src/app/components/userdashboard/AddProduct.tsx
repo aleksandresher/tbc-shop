@@ -106,7 +106,7 @@ export default function AddMyProduct() {
         >
           <p className="">{t("addProduct")}</p>
         </DialogTrigger>
-        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
+        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 dark:bg-[#1c1c1e] overflow-x-hidden">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row w-full">
               <section className="flex flex-col p-3 gap-4 sm:w-1/2 ">
@@ -132,7 +132,7 @@ export default function AddMyProduct() {
                   <div className="w-full flex items-center justify-between md:justify-center  gap-2">
                     <label htmlFor="brand">ბრენდი</label>
                     <input
-                      className="p-2  rounded-[4px] w-full border border-[#0c0c0c] outline-none focus:border-[#48a850]"
+                      className="p-2  rounded-[4px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                       id="kabrand"
                       {...register("kabrand", {
                         required: "ბრენდი სავალდებულოა",

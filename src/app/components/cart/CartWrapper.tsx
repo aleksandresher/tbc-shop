@@ -3,17 +3,24 @@ import { useCart } from "@/app/providers/ContextProvider";
 import { checkUserAuthentication } from "@/services/func";
 import { useRouter } from "next/navigation";
 import BasketIcon from "../svg/BasketIcon";
-
+import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { getCart } from "@/services/func";
 
 export default function CartWrapper({ locale }: { locale: string }) {
+  const { data: sessionData, status } = useSession();
+
   const { setOpened, itemCount } = useCart();
   const router = useRouter();
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: cartData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["cart"],
     queryFn: () => getCart(),
+    enabled: !!sessionData?.user,
   });
 
   const handleClick = async () => {
@@ -30,7 +37,7 @@ export default function CartWrapper({ locale }: { locale: string }) {
       <div onClick={() => handleClick()} className=" cursor-pointer">
         <BasketIcon />
         <span className="absolute bottom-4 text-black font-bold">
-          {data?.items.length}
+          {cartData?.items.length}
         </span>
       </div>
     </section>

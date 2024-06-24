@@ -31,7 +31,7 @@ export default function RootLayout({
 }: PageProps) {
   return (
     <html lang={locale} suppressContentEditableWarning suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen relative">
+      <body className="flex flex-col min-h-screen relative bg-[#f1f3f8] dark:bg-[#000]">
         <ReactQueryProvider>
           <I18nProviderClient locale={locale}>
             <MainProvider>
@@ -42,11 +42,9 @@ export default function RootLayout({
                   enableSystem
                   disableTransitionOnChange
                 >
-                  <main className="flex-1 bg-[#f1f3f8] dark:bg-[#000] mb-24 ">
-                    <MobileHeader locale={locale} />
-                    <HeaderWrapper locale={locale} />
-                    {children}
-                  </main>
+                  <MobileHeader locale={locale} />
+                  <HeaderWrapper locale={locale} />
+                  <main className="flex-1  mt-16 md:mt-0 ">{children}</main>
 
                   <FooterWrapper locale={locale} />
 

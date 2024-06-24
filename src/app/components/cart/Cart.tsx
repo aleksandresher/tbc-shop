@@ -53,7 +53,6 @@ export default function Cart({ locale }: { locale: string }) {
     queryKey: ["cart"],
     queryFn: () => getCart(),
   });
-  console.log("items num", data?.items.length);
 
   useEffect(() => {
     if (data?.items) {
@@ -69,11 +68,6 @@ export default function Cart({ locale }: { locale: string }) {
     return <div>Error: {error.message}</div>;
   }
 
-  // shoppingBag: "კალათა",
-  // remove: "წაშლა",
-  // proceedCheckout: "გადახდა",
-  // items: "ნივთი",
-
   return (
     <section className=" w-[300px] md:w-[750px] flex flex-col gap-2 p-8">
       <div className="flex gap-5 items-end mb-5">
@@ -86,7 +80,7 @@ export default function Cart({ locale }: { locale: string }) {
         {data?.items?.map((cartItem) => (
           <div
             key={cartItem.cart_id}
-            className="flex flex-col md:flex-row justify-between p-4 border  border-b-2"
+            className="flex flex-col md:flex-row justify-between p-4 border  border-b-2 dark:bg-[#1c1c1e]"
           >
             <div className="w-full md:w-1/4 flex justify-center bg-[#f1f3f6] mb-3">
               <Image

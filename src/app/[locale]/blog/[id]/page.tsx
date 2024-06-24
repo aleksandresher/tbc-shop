@@ -11,7 +11,7 @@ interface Props {
 export async function generateStaticParams() {
   try {
     const response = await getAllBlog();
-
+    console.log(JSON.stringify(response));
     if (!Array.isArray(response)) {
       throw new Error("Invalid response format: expected array of blogs");
     }

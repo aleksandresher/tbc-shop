@@ -46,10 +46,13 @@ export async function POST(req: NextRequest) {
           INSERT INTO orders (user_id, product_id, amount, created_at)
           VALUES (${userId}, ${item.product_id}, ${item.quantity}, NOW())
         `;
+    }
+
+    for (const item of items) {
       await sql`
-        DELETE FROM cart
-        WHERE user_id = ${userId}
-      `;
+      DELETE FROM cart
+      WHERE user_id = ${userId} AND product_id = ${item.product_id}
+    `;
     }
 
     return NextResponse.json(

@@ -10,7 +10,7 @@ interface BlogLayoutProps {
 export default function BlogLayout({ params, children }: BlogLayoutProps) {
   return (
     <section>
-      <main>{children}</main>
+      <main className="mt-4">{children}</main>
     </section>
   );
 }

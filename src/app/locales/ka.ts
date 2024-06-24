@@ -32,6 +32,7 @@ export default {
   invalidFormat: "ფორმატი არასწორია",
   userUpdated: "მომხმარებლის ინფორმაცია წარმატებით შეიცვალა",
   save: "შენახვა",
+  mainpage: "მთავარი გვერდი",
 
   shoppingBag: "კალათა",
   remove: "წაშლა",

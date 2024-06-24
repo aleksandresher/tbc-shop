@@ -35,7 +35,11 @@ export default function MyProducts({ locale }: { locale: string }) {
             <p>/</p>
             <button
               onClick={() => handleLanguageChange("en")}
-              className={`${language === "en" ? "text-red-400" : "text-black"}`}
+              className={`${
+                language === "en"
+                  ? "text-red-400"
+                  : "text-black dark:text-white"
+              }`}
             >
               EN
             </button>

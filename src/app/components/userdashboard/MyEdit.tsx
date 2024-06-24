@@ -146,11 +146,11 @@ const EditMyProduct = ({
           </button>
         </DialogTrigger>
         <div className="">
-          <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden">
+          <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 overflow-x-hidden dark:bg-[#1c1c1e]">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col md:flex-row w-full">
                 {kaExists && (
-                  <section className="flex flex-col p-3 gap-4 sm:w-1/2 ">
+                  <section className="flex flex-col p-3 gap-6 sm:w-1/2 ">
                     <div className="w-[320px] md:w-full flex flex-col gap-1">
                       <div className=" flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="katitle">სათაური</label>
@@ -260,7 +260,7 @@ const EditMyProduct = ({
                     <div className=" w-[320px] sm:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kasdescription">აღწერა</label>
-                        <input
+                        <textarea
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                           id="kasdescription"
                           defaultValue={wholeItem.ka.sdescription}
@@ -280,7 +280,7 @@ const EditMyProduct = ({
                     <div className=" w-[320px] sm:w-full flex flex-col gap-1">
                       <div className="w-full flex items-center justify-between md:justify-center gap-2">
                         <label htmlFor="kaldescription">მოკლე აღწერა</label>
-                        <input
+                        <textarea
                           className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                           id="kaldescription"
                           defaultValue={wholeItem.ka.ldescription}

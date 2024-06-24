@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import BlogListMain from "@/app/components/blogs/BlogListMain";
 import { getAllBlog } from "@/services/func";
+import BlogsGallerySkeleton from "@/app/components/skeletons/BlogsSkeleton";
 
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -12,7 +13,11 @@ export default function BlogPage() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <BlogsGallerySkeleton />
+      </div>
+    );
   }
 
   if (error instanceof Error) {

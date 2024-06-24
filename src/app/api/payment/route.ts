@@ -8,10 +8,9 @@ const URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function POST(req: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
   let { items } = await req.json();
-  console.log("Received items:", items);
+  console.log("items in payment", JSON.stringify(items));
 
   const token = await getToken({ req, secret });
-  console.log("token from cart get", token);
 
   if (!token) {
     return NextResponse.json(
@@ -56,8 +55,6 @@ export async function POST(req: NextRequest) {
       quantity: item.quantity,
     }));
 
-    console.log("Line items for Stripe session:", lineItems);
-
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       payment_intent_data: {
@@ -69,7 +66,7 @@ export async function POST(req: NextRequest) {
       success_url: `${URL}/en/dashboard/payment/success`,
       cancel_url: `${URL}/en/dashboard/payment/cancel`,
     });
-
+    console.log("payment was successfull");
     return NextResponse.json(session.url);
   } catch (error) {
     console.error("Error creating Stripe Checkout session:", error);

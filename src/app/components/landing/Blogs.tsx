@@ -31,8 +31,12 @@ export default function BlogsGallery({ locale }: { locale: string }) {
   }
 
   return (
-    <section className="flex flex-col md:p-12 gap-8">
-      <h2 className="text-2xl">{t("blog")}</h2>
+    <section className="flex flex-col md:p-12 gap-8 mt-6">
+      <div className="px-14">
+        {" "}
+        <h2 className="text-2xl">{t("blog")}</h2>
+      </div>
+
       <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3   gap-x-3 gap-y-4">
         {data?.map((blog: Blog) => (
           <div

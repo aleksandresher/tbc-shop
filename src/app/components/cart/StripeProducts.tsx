@@ -30,6 +30,8 @@ export default function StripeProducts() {
     queryKey: ["stripe"],
     queryFn: () => getStripeProducts(),
   });
+  console.log("stripe products", stripeProducts);
+  console.log("cart data", cartData);
 
   const [filteredProducts, setFilteredProducts] = useState<
     ProductWithQuantity[]
@@ -68,15 +70,22 @@ export default function StripeProducts() {
           items: filteredProducts,
         }),
       });
+      console.log("here i am");
 
       if (!response.ok) {
         throw new Error("Failed to pay");
       }
 
       const url = await response.json();
-      if (cartData?.items) {
-        await saveOrder(cartData.items);
+      console.log(url);
+      console.log(
+        "url equality",
+        url === `${URL}/en/dashboard/payment/success`
+      );
+      if (url === `${URL}/en/dashboard/payment/success` && cartData?.items) {
+        await saveOrder(cartData?.items);
       }
+
       router.push(`${url}`);
     } catch (error) {
       console.error("Error in payment:", error);
@@ -104,8 +113,13 @@ export default function StripeProducts() {
     }
   };
   return (
-    <section>
-      <button onClick={handlePayment}>Checkout</button>
+    <section className="flex w-[300px] md:w-[700px] md:py-4 justify-center ">
+      <button
+        onClick={handlePayment}
+        className=" border-2 px-5 py-2 dark:text-white dark:bg-black font-bold"
+      >
+        Checkout
+      </button>
     </section>
   );
 }

@@ -31,7 +31,7 @@ export default function MobileHeader({ locale }: { locale: string }) {
   }, [menuOpen]);
 
   return (
-    <section className="md:hidden relative bg-[#fae9f2] ">
+    <section className="md:hidden fixed z-10 w-full mb-5 bg-[#fae9f2] ">
       <section className="py-3 px-8 grid grid-cols-5 items-center">
         <div className=" h-[60px] flex justify-center">
           <button
@@ -79,19 +79,21 @@ export default function MobileHeader({ locale }: { locale: string }) {
             <ul className="flex flex-col gap-4 px-3">
               <li>
                 <Link
+                  href={getLocalePath(locale, "/")}
+                  onClick={() => toggleMenu()}
+                >
+                  {t("mainpage")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={getLocalePath(locale, "/shop")}
                   onClick={() => toggleMenu()}
                 >
                   {t("store")}
                 </Link>
-                {/* <Link href={`${locale}/shop`} onClick={() => toggleMenu()}>
-                  {t("store")}
-                </Link> */}
               </li>
               <li>
-                {/* <Link href={`/blog`} onClick={() => toggleMenu()}>
-                  {t("blog")}
-                </Link> */}
                 <Link
                   href={getLocalePath(locale, "/blog")}
                   onClick={() => toggleMenu()}
@@ -100,9 +102,6 @@ export default function MobileHeader({ locale }: { locale: string }) {
                 </Link>
               </li>
               <li>
-                {/* <Link href={`/contact`} onClick={() => toggleMenu()}>
-                  {t("contact")}
-                </Link> */}
                 <Link
                   href={getLocalePath(locale, "/contact")}
                   onClick={() => toggleMenu()}

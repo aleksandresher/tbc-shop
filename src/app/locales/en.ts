@@ -58,6 +58,7 @@ export default {
   invalidFormat: "Invalid Email Address",
   userUpdated: "User information updated successfully",
   save: "Save",
+  mainpage: "Main Page",
 
   support: "Support",
   links: "Helpfull Links",

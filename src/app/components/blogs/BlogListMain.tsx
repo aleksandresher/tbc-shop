@@ -14,7 +14,6 @@ interface Blog {
 
 export default function BlogListMain({ data }: { data: Blog[] }) {
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("blogs", data);
 
   const filteredBlogs = data.filter(
     (blog) =>
@@ -22,9 +21,9 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
       blog.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log("filtered blogs", filteredBlogs);
+
   return (
-    <section>
+    <section className="py-6">
       <div className="flex justify-start px-12">
         <BlogSearchBar onSearch={setSearchTerm} />
       </div>
