@@ -93,7 +93,7 @@ export default function Cart({ locale }: { locale: string }) {
             </div>
 
             <span className="w-full md:w-3/4 flex flex-col px-3  ">
-              <div className="flex flex-col w-[200px] md:flex-row justify-between items-center h-1/2 ">
+              <div className="flex flex-col w-[200px] md:flex-row md:w-full justify-between items-center h-1/2 ">
                 <div className="flex flex-col md:flex-row gap-3">
                   <h1>
                     {
@@ -110,7 +110,7 @@ export default function Cart({ locale }: { locale: string }) {
                     }
                   </h2>
                 </div>
-                <div className=" self-end">
+                <div className=" self-end md:self-center">
                   <DeleteButton product_id={cartItem.product_id} />
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function Cart({ locale }: { locale: string }) {
         <button>Checkout</button>
       </Link> */}
       {/* <StripeProductList /> */}
-      {/* <StripeProducts /> */}
+      <StripeProducts />
     </section>
   );
 }
