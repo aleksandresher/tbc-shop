@@ -4,9 +4,17 @@ import { checkUserAuthentication } from "@/services/func";
 import { useRouter } from "next/navigation";
 import BasketIcon from "../svg/BasketIcon";
 
+import { useQuery } from "@tanstack/react-query";
+import { getCart } from "@/services/func";
+
 export default function CartWrapper({ locale }: { locale: string }) {
-  const { setOpened } = useCart();
+  const { setOpened, itemCount } = useCart();
   const router = useRouter();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["cart"],
+    queryFn: () => getCart(),
+  });
 
   const handleClick = async () => {
     const authStatus = await checkUserAuthentication();
@@ -18,9 +26,12 @@ export default function CartWrapper({ locale }: { locale: string }) {
     }
   };
   return (
-    <section>
+    <section className="relative">
       <div onClick={() => handleClick()} className=" cursor-pointer">
         <BasketIcon />
+        <span className="absolute bottom-4 text-black font-bold">
+          {data?.items.length}
+        </span>
       </div>
     </section>
   );

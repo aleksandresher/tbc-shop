@@ -1,12 +1,17 @@
 "use client";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 import { useI18n } from "@/app/locales/client";
-
+import { getCart } from "@/services/func";
+import { useQuery } from "@tanstack/react-query";
 import BasketIcon from "../svg/BasketIcon";
 
 export default function AddToCart({ productId }: { productId: number }) {
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["cart"],
+    queryFn: getCart,
+  });
+
   const queryClient = useQueryClient();
   const t = useI18n();
 
@@ -22,6 +27,8 @@ export default function AddToCart({ productId }: { productId: number }) {
     if (!response.ok) {
       throw new Error("Failed to add product to cart");
     }
+
+    await refetch();
 
     return response.json();
   };
@@ -68,6 +75,10 @@ export default function AddToCart({ productId }: { productId: number }) {
         <BasketIcon />
         <span className=" flex items-center h-3">
           <p className=" leading-3 font-tbc-regular">{t("add")}</p>
+
+          {data?.items && (
+            <span className="ml-1 text-gray-500">({data.items.length})</span>
+          )}
         </span>
       </div>
     </button>

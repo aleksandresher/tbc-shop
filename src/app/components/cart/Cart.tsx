@@ -5,7 +5,7 @@ import { getCart } from "@/services/func";
 import DecreaseButton from "./DecreaseBtn";
 import IncreaseButton from "./IncreaseBtn";
 import DeleteButton from "./DeleteBtn";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import FullProductOnHover from "./FullProductOnHover";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import StripeProducts from "./StripeProducts";
 import StripeProductList from "../stripe/StripeProductList";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useI18n } from "@/app/locales/client";
+import { useCart } from "@/app/providers/ContextProvider";
 
 interface CartItem {
   cart_id: number;
@@ -46,11 +47,19 @@ interface CartResponse {
 
 export default function Cart({ locale }: { locale: string }) {
   const t = useI18n();
+  const { setItemCount } = useCart();
   const [language, setLanguage] = useState(locale);
   const { data, isLoading, error } = useQuery<CartResponse>({
     queryKey: ["cart"],
     queryFn: () => getCart(),
   });
+  console.log("items num", data?.items.length);
+
+  useEffect(() => {
+    if (data?.items) {
+      setItemCount(data.items.length);
+    }
+  }, [data, setItemCount]);
 
   if (isLoading) {
     return <BeatLoader />;
