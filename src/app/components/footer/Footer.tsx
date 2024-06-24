@@ -7,7 +7,7 @@ export default function Footer({ locale }: { locale: string }) {
   const t = useI18n();
   return (
     <footer className="bg-black">
-      <div className="max-w-screen-xl px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-24">
+      <div className="max-w-screen-xl px-4 pt-16 pb-6 mx-auto sm:px-6 lg:px-8 lg:pt-24 bo">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="flex flex-col">
             <div className="flex justify-center text-white sm:justify-start">
