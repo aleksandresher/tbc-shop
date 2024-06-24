@@ -5,7 +5,6 @@ import { getToken } from "next-auth/jwt";
 
 const secret = process.env.NEXTAUTH_SECRET;
 const adminId = process.env.ADMIN_ID;
-console.log("Admin ID:", adminId);
 
 const loggedInRoutes = [
   "/ka/dashboard",
@@ -34,19 +33,16 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
   const { pathname } = url;
 
   if (publicRoutes.some((path) => pathname.startsWith(path))) {
-    console.log("Applying i18n middleware for public route", pathname);
     return I18nMiddleware(req);
   }
 
   const token = await getToken({ req, secret });
 
   if (pathname === "/") {
-    console.log("Redirecting root path '/' to '/ka'");
     return NextResponse.redirect(new URL("/ka", req.url));
   }
 
   if (pathname === "/ka" || pathname === "/en") {
-    console.log("Applying i18n middleware for", pathname);
     return I18nMiddleware(req);
   }
 
@@ -59,9 +55,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
   }
 
   if (loggedInRoutes.some((path) => pathname.startsWith(path)) && !token) {
-    console.log(
-      "User not authenticated for loggedInRoutes, redirecting to login"
-    );
     return NextResponse.redirect(
       new URL(`/${req.headers.get("x-next-locale") || "ka"}/login`, req.url)
     );
@@ -69,9 +62,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 
   if (token) {
     if (loggedOutRoutes.some((path) => pathname.startsWith(path))) {
-      console.log(
-        "Redirecting to dashboard for authenticated user on loggedOutRoutes"
-      );
       return NextResponse.redirect(
         new URL(
           `/${req.headers.get("x-next-locale") || "ka"}/dashboard`,
@@ -82,12 +72,8 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 
     if (adminRoutes.some((path) => pathname.startsWith(path))) {
       if (String(token.sub) === String(adminId)) {
-        console.log("Admin access granted");
         return NextResponse.next();
       } else {
-        console.log(
-          "User not authorized for adminRoutes, redirecting to dashboard"
-        );
         return NextResponse.redirect(
           new URL(
             `/${req.headers.get("x-next-locale") || "ka"}/dashboard`,
@@ -98,7 +84,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     }
 
     if (loggedInRoutes.some((path) => pathname.startsWith(path))) {
-      console.log("Access granted to loggedInRoutes");
       return NextResponse.next();
     }
   }

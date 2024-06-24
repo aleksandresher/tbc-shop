@@ -96,23 +96,10 @@ export const authOptions: NextAuthOptions = {
         isverified: token.isverified,
       };
       return session;
-
-      //   110762457640271535622
     },
-    // async jwt({ token, user }) {
-    //   if (user) {
-    //     token = {
-    //       ...token,
-    //       id: user.id,
-    //       email: user.email,
-    //       name: user.name,
-    //       isverified: user.isverified,
-    //     };
-    //   }
-    //   return token;
-    // },
   },
   session: {
     strategy: "jwt",
+    maxAge: 3 * 60 * 60,
   },
 };
