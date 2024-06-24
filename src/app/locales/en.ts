@@ -39,7 +39,7 @@ export default {
   checkout: "Checkout",
   send: "Send",
   buy: "Shop now",
-
+  invalidPassword: "Password is incorrect",
   bath: "Body",
   blog: "Blog",
   store: "Store",

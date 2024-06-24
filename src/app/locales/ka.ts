@@ -35,6 +35,7 @@ export default {
   save: "შენახვა",
   mainpage: "მთავარი გვერდი",
   buy: "ყიდვა",
+  invalidPassword: "პაროლი არასწორია",
 
   shoppingBag: "კალათა",
   remove: "წაშლა",

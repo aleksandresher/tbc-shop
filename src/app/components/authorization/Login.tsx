@@ -28,6 +28,7 @@ export default function Login({ locale }: { locale: string }) {
   const { data, status } = useSession();
   const [providers, setProviders] = useState<Provider[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const t = useI18n();
 
@@ -56,10 +57,20 @@ export default function Login({ locale }: { locale: string }) {
   } = useForm<UserProps>();
 
   const onSubmit = async (formData: UserProps) => {
-    signIn("credentials", {
+    setIsLoading(true);
+    setError(null);
+    const result = await signIn("credentials", {
+      redirect: false,
       email: formData.email,
       password: formData.password,
     });
+    setIsLoading(false);
+
+    if (result?.error) {
+      setError(result.error);
+    } else {
+      router.push("/en");
+    }
   };
   return (
     <div className="flex flex-col items-center p-12 gap-4">
@@ -87,7 +98,7 @@ export default function Login({ locale }: { locale: string }) {
             {errors.email?.message && <span>{errors.email?.message}</span>}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-2">
             <label htmlFor="password" hidden>
               {t("password")}
             </label>
@@ -100,8 +111,8 @@ export default function Login({ locale }: { locale: string }) {
                 required: "this field is required",
               })}
             />
-            {errors.password?.message && (
-              <span>{errors.password?.message}</span>
+            {error && (
+              <span className="text-red-400">{t("invalidPassword")}</span>
             )}
           </div>
         </div>
