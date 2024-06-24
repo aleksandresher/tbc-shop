@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Cosmetics Store",
   description:
     "Discover top cosmetics and skincare products from brands like Avene, Nuxe, and Isispharma. Shop now for the best in beauty and skincare.",
+  icons: {
+    icon: "/favicon-32x32.png",
+  },
 };
 
 interface PageProps {

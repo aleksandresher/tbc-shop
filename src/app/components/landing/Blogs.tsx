@@ -32,7 +32,7 @@ export default function BlogsGallery({ locale }: { locale: string }) {
 
   return (
     <section className="flex flex-col md:p-12 gap-8 mt-6">
-      <div className="px-14">
+      <div className="px-14 md:px-0">
         {" "}
         <h2 className="text-2xl">{t("blog")}</h2>
       </div>
@@ -41,7 +41,7 @@ export default function BlogsGallery({ locale }: { locale: string }) {
         {data?.map((blog: Blog) => (
           <div
             key={blog.id}
-            className="flex flex-col gap-2 items-center justify-between px-4 bg-[#fff] rounded-[10px] py-8 "
+            className="flex flex-col gap-2 items-center justify-between px-4 bg-[#fff] dark:bg-[#1c1c1e] rounded-[10px] py-8 "
           >
             <h1 className="text-center">{blog.title}</h1>
 
@@ -55,6 +55,7 @@ export default function BlogsGallery({ locale }: { locale: string }) {
               priority={true}
             />
             <Link href={`/${locale}/blog/${blog.id}`} className="mt-3">
+              <span className="hidden">{blog.title}</span>
               <button className="border border-gray-200 bg-[#000] p-2 rounded-[4px]">
                 <p className="text-white">{t("readMore")}</p>
               </button>

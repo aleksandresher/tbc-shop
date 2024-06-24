@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
 
   const category = query.get("category");
-  console.log("category", category);
+
   try {
     const { rows: products } = await sql`
       SELECT
@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
           (pt_en.category = ${category} OR pt_ka.category = ${category})
       LIMIT 4;
     `;
-    console.log("product", JSON.stringify(products));
+
     return NextResponse.json({ products }, { status: 200 });
   } catch (error) {
     console.error("Error fetching products:", error);

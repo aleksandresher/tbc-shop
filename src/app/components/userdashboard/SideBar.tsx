@@ -84,7 +84,7 @@ export default function UserSideBar({ locale }: { locale: string }) {
         <TabsContent value="editaccount">
           <MyInfoPage />
         </TabsContent>
-        <TabsContent value="mycart">
+        <TabsContent value="mycart" className="flex justify-center">
           <Cart locale={locale} />
         </TabsContent>
         <TabsContent value="myorders">

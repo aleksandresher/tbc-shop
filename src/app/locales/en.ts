@@ -36,6 +36,9 @@ export default {
   remove: "Remove",
   proceedCheckout: "Proceed To Checkout",
   items: "Items",
+  checkout: "Checkout",
+  send: "Send",
+  buy: "Shop now",
 
   bath: "Body",
   blog: "Blog",

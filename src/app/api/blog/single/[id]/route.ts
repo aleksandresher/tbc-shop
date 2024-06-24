@@ -13,7 +13,6 @@ export async function GET(
   { params }: { params: Params }
 ) {
   const { id } = params;
-  console.log("id", id);
 
   try {
     if (!id) {
@@ -25,10 +24,9 @@ export async function GET(
     FROM blog_posts
     WHERE id = ${id}
   `;
-    console.log("blog", blog);
+
     return NextResponse.json({ blog }, { status: 200 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
       { error: "Failed to retrieve user" },
       { status: 500 }

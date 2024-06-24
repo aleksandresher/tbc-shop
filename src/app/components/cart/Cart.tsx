@@ -95,9 +95,9 @@ export default function Cart({ locale }: { locale: string }) {
               />
             </div>
 
-            <span className="w-full md:w-3/4 flex flex-col px-3  ">
-              <div className="flex flex-col w-[200px] md:flex-row md:w-full justify-between items-center h-1/2 ">
-                <div className="flex flex-col md:flex-row gap-3">
+            <span className="w-full md:w-3/4 flex flex-col px-3 gap-3  ">
+              <div className="flex flex-col w-[200px] md:flex-row md:w-full  md:justify-between md:items-center h-1/2 ">
+                <div className="w-full flex flex-col md:flex-row gap-3">
                   <h1>
                     {
                       cartItem?.languages[
@@ -113,8 +113,17 @@ export default function Cart({ locale }: { locale: string }) {
                     }
                   </h2>
                 </div>
-                <div className=" self-end md:self-center">
-                  <DeleteButton product_id={cartItem.product_id} />
+                <div className="flex gap-1">
+                  <span className="flex justify-center">
+                    {Number(cartItem.languages.en.price)}
+                  </span>
+                  <p>
+                    {
+                      cartItem.languages[
+                        locale as keyof typeof cartItem.languages
+                      ].currency
+                    }
+                  </p>
                 </div>
               </div>
               {/* <div className="flex">
@@ -125,13 +134,7 @@ export default function Cart({ locale }: { locale: string }) {
                     ].price
                   }
                 </p>
-                <p>
-                  {
-                    cartItem.languages[
-                      locale as keyof typeof cartItem.languages
-                    ].currency
-                  }
-                </p>
+                
               </div> */}
               <span className="flex justify-between items-center  h-1/2 mt-4">
                 {" "}
@@ -143,22 +146,13 @@ export default function Cart({ locale }: { locale: string }) {
                   <p>{cartItem.quantity}</p>
                   <IncreaseButton productId={cartItem.product_id} />
                 </span>
-                <span className="flex justify-center">
-                  {Number(cartItem.languages.en.price) * cartItem.quantity}
-                </span>
+                <DeleteButton product_id={cartItem.product_id} />
               </span>
             </span>
-
-            <span></span>
-
-            {/* <FullProductOnHover locale={locale} cartItem={cartItem} />  */}
           </div>
         ))}
       </div>
-      {/* <Link href={`dashboard/payment`}>
-        <button>Checkout</button>
-      </Link> */}
-      {/* <StripeProductList /> */}
+
       <StripeProducts />
     </section>
   );

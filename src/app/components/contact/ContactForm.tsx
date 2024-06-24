@@ -162,7 +162,7 @@ export default function ContactForm() {
               type="submit"
               className="w-full bg-green-400 rounded-[4px] p-2 uppercase"
             >
-              გაგზავნა
+              {t("send")}
             </button>
           </span>
         </form>

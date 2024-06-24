@@ -4,9 +4,9 @@ export default function ProductListSkeleton({
   itemNumber: number;
 }) {
   return (
-    <section className="w-full flex flex-col justify-center items-center">
+    <section className="w-full flex flex-col justify-center items-center ">
       <div className="h-[80px] animate-pulse "></div>
-      <div className=" w-full md:grid grid-cols-1 md:grid-cols-4 mt-10 p-12 gap-y-6 gap-x-6">
+      <div className=" w-full md:grid grid-cols-1 md:grid-cols-4 mt-10 md:p-12 gap-y-6 gap-x-6">
         {Array.from({ length: itemNumber }).map((_, index) => (
           <div
             key={index}

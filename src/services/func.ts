@@ -57,56 +57,12 @@ export async function getAllProduct() {
   }
 }
 
-export async function loadProductsByCategory({
-  category,
-}: {
-  category: string;
-}) {
-  try {
-    const response = await fetch(`${URL}/api/${category}/all`);
-    const { items } = await response.json();
-
-    return items;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-}
-
 export async function getCart() {
   const response = await fetch(`${URL}/api/cart/get`);
   if (!response.ok) {
     throw new Error("Failed to fetch cart items");
   }
   return response.json();
-}
-
-export async function getFaceProducts() {
-  try {
-    const response = await fetch(`${URL}/api/get-products/face`, {
-      cache: "no-cache",
-    });
-    const { products } = await response.json();
-
-    return products;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-}
-
-export async function getBodyProducts() {
-  try {
-    const response = await fetch(`${URL}/api/get-products/body`, {
-      cache: "no-cache",
-    });
-    const { products } = await response.json();
-
-    return products;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
 }
 
 export async function updateUser({ avatar }: { avatar: Url }) {

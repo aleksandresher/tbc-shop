@@ -34,19 +34,19 @@ export function ModeToggle() {
       >
         <DropdownMenuItem
           onClick={() => setTheme("light")}
-          className="dark:hover:text-black"
+          className="dark:hover:text-black cursor-pointer"
         >
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
-          className="dark:hover:text-black"
+          className="dark:hover:text-black cursor-pointer"
         >
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
-          className="dark:hover:text-black"
+          className="dark:hover:text-black cursor-pointer"
         >
           System
         </DropdownMenuItem>

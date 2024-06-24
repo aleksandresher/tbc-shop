@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BlogSearchBar from "./BlogSearch";
 import { useState } from "react";
+import { useI18n } from "@/app/locales/client";
 
 interface Blog {
   id: string;
@@ -13,6 +14,7 @@ interface Blog {
 }
 
 export default function BlogListMain({ data }: { data: Blog[] }) {
+  const t = useI18n();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredBlogs = data.filter(
@@ -50,8 +52,9 @@ export default function BlogListMain({ data }: { data: Blog[] }) {
               className="mt-3"
               aria-label={`read more about ${blog.title}`}
             >
+              <span className="hidden">{blog.title}</span>
               <button className="border border-gray-200 bg-[#000] p-2 rounded-[4px]">
-                <p className="text-white">Read more</p>
+                <p className="text-white">{t("readMore")}</p>
               </button>
             </Link>
           </div>

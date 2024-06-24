@@ -25,6 +25,7 @@ export default {
   priceUp: "ფასი, ზრდადობით",
   priceDown: "ფასი, კლებადობით",
   sort: "სორტირება",
+  checkout: "გადახდა",
 
   alreadyexistmail: "მომხმარებელი უკვე რეგისტრირებულია მითითებული მეილით",
   registeredSuccess: "მომხმარებელი წარმატებით დარეგისტრირდა",
@@ -33,11 +34,13 @@ export default {
   userUpdated: "მომხმარებლის ინფორმაცია წარმატებით შეიცვალა",
   save: "შენახვა",
   mainpage: "მთავარი გვერდი",
+  buy: "ყიდვა",
 
   shoppingBag: "კალათა",
   remove: "წაშლა",
   proceedCheckout: "გადახდა",
   items: "ნივთი",
+  send: "გაგზავნა",
 
   myCart: "ჩემი კალათა",
   myOrders: "ჩემი შეკვეთები",

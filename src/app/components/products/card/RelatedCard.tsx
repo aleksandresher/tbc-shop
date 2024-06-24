@@ -24,7 +24,7 @@ export default function RelatedProductCard({
   return (
     <section className="flex flex-col items-center border-b-2 border-[#ecb8ec55] bg-[#f1f3f6]  dark:border dark:border-white-1 rounded-[4px] dark:bg-[#1c1c1e] p-3">
       <Link href={`/${locale}/shop/${productId}`}>
-        <div className="w-full flex flex-col items-center  ">
+        <div className="w-full flex flex-col items-center justify-between  ">
           <div className="w-[300px] h-[300px] md:w-[350px] flex justify-center items-center relative">
             <Image
               src={image}
@@ -36,34 +36,11 @@ export default function RelatedProductCard({
               priority={true}
             />
           </div>
-          <div className="w-4/5 flex flex-col items-center gap-1">
+          <div className="w-4/5 h-[40px] flex flex-col items-center gap-1">
             <p className=" text-sm text-center  font-tbc-medium">{title}</p>
-          </div>
-          <div className="flex items-center mt-3 gap-2">
-            <div className="flex justify-center items-center gap-1 ">
-              {/* <p className="font-tbc-bold text-red-600">
-                {item.currency == "USD" ? "$" : "₾"}
-              </p>
-              <p className=" font-tbc-bold">{item.price}.00</p>
-            </div>
-            <div className="flex justify-center items-center">
-              <p className=" font-tbc-regular">
-                {item.size}
-                {locale === "ka" ? "მლ" : "ml"}
-              </p> */}
-            </div>
           </div>
         </div>
       </Link>
-      {/* <section className="flex p-2 items-center">
-        <div className="App">
-          <Rating initialValue={avarageRating} className="hidden" size={20} />
-        </div>
-        <div className="flex gap-1 items-center p-0">
-          <p className="text-sm">{avarageRating ? avarageRating : null}</p>
-          <p className="text-sm">({item.totalvotes})</p>
-        </div>
-      </section> */}
 
       <AddToCart productId={productId} />
     </section>

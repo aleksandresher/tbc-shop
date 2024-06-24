@@ -12,7 +12,7 @@ export const GET = async (
   response: NextResponse
 ) => {
   const { category, id } = params;
-  console.log("category", category);
+
   try {
     let items;
     switch (category) {

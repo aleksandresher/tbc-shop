@@ -114,7 +114,7 @@ export default function SingleProductPageCard({
       <div className="w-full md:w-11/12 px-3 md:px-8   rounded-[10px] py-8 bg-[#fff] dark:bg-[#1c1c1e]">
         <span className="flex flex-col md:flex-row justify-center p-2 gap-1 sm:gap-8">
           <Image
-            src={selectedLanguage.image}
+            src={selectedLanguage?.image}
             alt={selectedLanguage.title}
             width={200}
             height={250}

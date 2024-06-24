@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { useI18n } from "@/app/locales/client";
 import { toast } from "@/components/ui/use-toast";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -42,6 +43,7 @@ export default function AddMyProduct() {
   const [open, setOpen] = useState(false);
   const [productImageUrl, setProductImageUrl] = useState<string | null>(null);
   const [isEn, setIsEn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const t = useI18n();
 
   const {
@@ -52,6 +54,7 @@ export default function AddMyProduct() {
   } = useForm<UserType>();
 
   const onSubmit = async (data: UserType) => {
+    setIsLoading(true);
     try {
       if (isEn) {
         if (
@@ -79,14 +82,13 @@ export default function AddMyProduct() {
       if (!response.ok) {
         throw new Error("Failed to create product");
       }
+      setIsLoading(false);
 
       const productData = await response.json();
 
       queryClient.invalidateQueries({ queryKey: ["myproducts"] });
       setOpen(false);
       toast({ description: "Product created successfully" });
-
-      console.log("Product created successfully:", productData);
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -98,7 +100,12 @@ export default function AddMyProduct() {
   };
 
   return (
-    <div className="w-full pt-4 pl-4">
+    <div className="w-full pt-4 pl-4 relative">
+      <div className="absolute translate-x-2/4 z-50">
+        {" "}
+        {isLoading && <FadeLoader />}
+      </div>
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger
           asChild
