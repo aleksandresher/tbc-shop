@@ -61,20 +61,20 @@ export default function ProfileButton({ locale }: { locale: string }) {
   let imageUrl = user?.image || data?.user?.image || null;
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-none border-none">
         {imageUrl ? (
           <Image
             src={imageUrl}
             width={30}
             height={30}
             alt="user image"
-            className="rounded-[6px] h-[25px] w-[25px]"
+            className="rounded-[6px] h-[25px] w-[25px] outline-none"
           />
         ) : (
           <ProfileIcon />
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="z-8 bg-gray-50">
+      <DropdownMenuContent className="z-50 bg-gray-50">
         <DropdownMenuLabel>{t("myaccount")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

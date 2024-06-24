@@ -32,7 +32,7 @@ export default {
   dashboard: "Dashboard",
   admindashboard: "Admin dashboard",
 
-  shoppingBag: "Shooping Bad",
+  shoppingBag: "Shooping Bag",
   remove: "Remove",
   proceedCheckout: "Proceed To Checkout",
   items: "Items",
