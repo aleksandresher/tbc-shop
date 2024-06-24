@@ -21,6 +21,7 @@ import { getLocalePath } from "@/utils/getLocalePath";
 interface User {
   email: string;
   role: string;
+  image: string;
   // Add other user properties if needed
 }
 
@@ -35,6 +36,7 @@ export default function ProfileButton({ locale }: { locale: string }) {
     try {
       const response = await fetch(`${URL}/api/get-user?email=${email}`, {});
       const { user } = await response.json();
+      setUser(user);
 
       return user;
     } catch (error) {
@@ -55,16 +57,18 @@ export default function ProfileButton({ locale }: { locale: string }) {
   } else {
     url = `${getLocalePath(locale, "/dashboard")}`;
   }
+
+  let imageUrl = user?.image || data?.user?.image || null;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        {data?.user?.image ? (
+        {imageUrl ? (
           <Image
-            src={data?.user.image}
+            src={imageUrl}
             width={30}
             height={30}
             alt="user image"
-            className="rounded-[6px]"
+            className="rounded-[6px] h-[25px] w-[25px]"
           />
         ) : (
           <ProfileIcon />
