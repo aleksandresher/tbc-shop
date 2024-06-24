@@ -87,7 +87,7 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
         </form>
       </div>
       <ul
-        className="h-[400px] flex flex-col md:h-[300px] overflow-x-auto  rounded-[10px] bg-[#fff] top-14 shadow-lg absolute z-10"
+        className="h-[400px] flex flex-col md:h-[300px] overflow-x-auto  rounded-[10px] bg-[#fff] top-14 shadow-lg absolute z-50"
         ref={ulRef}
       >
         {suggestions?.map((suggestion, index) => (
@@ -95,9 +95,10 @@ export default function Search({ locale, toggleMenu }: SearchProps) {
             href={`/${locale}/shop/${suggestion.id}`}
             key={index}
             onClick={() => {
-              setInputValue(
-                locale === "ka" ? suggestion.kaTitle : suggestion.enTitle
-              );
+              setInputValue("");
+              // setInputValue(
+              //   locale === "ka" ? suggestion.kaTitle : suggestion.enTitle
+              // );
               if (toggleMenu) toggleMenu();
               setSuggestions([]);
             }}

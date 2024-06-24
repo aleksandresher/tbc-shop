@@ -115,7 +115,11 @@ export default function Cart({ locale }: { locale: string }) {
                 </div>
                 <div className="flex gap-1">
                   <span className="flex justify-center">
-                    {Number(cartItem.languages.en.price)}
+                    {
+                      cartItem?.languages[
+                        locale as keyof typeof cartItem.languages
+                      ].price
+                    }
                   </span>
                   <p>
                     {
@@ -126,16 +130,7 @@ export default function Cart({ locale }: { locale: string }) {
                   </p>
                 </div>
               </div>
-              {/* <div className="flex">
-                <p>
-                  {
-                    cartItem.languages[
-                      locale as keyof typeof cartItem.languages
-                    ].price
-                  }
-                </p>
-                
-              </div> */}
+
               <span className="flex justify-between items-center  h-1/2 mt-4">
                 {" "}
                 <span className="flex items-center gap-1">

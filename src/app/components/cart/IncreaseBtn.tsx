@@ -5,7 +5,7 @@ const URL = process.env.NEXT_PUBLIC_BASE_URL;
 export default function IncreaseButton({ productId }: { productId: number }) {
   const queryClient = useQueryClient();
 
-  const increaseQuantity = async (productId: number) => {
+  const increaseQuantity = async () => {
     const response = await fetch(`${URL}/api/cart/increase`, {
       method: "POST",
       headers: {
@@ -24,11 +24,11 @@ export default function IncreaseButton({ productId }: { productId: number }) {
   };
 
   const mutation = useMutation({
-    mutationFn: () => increaseQuantity(productId),
+    mutationFn: increaseQuantity,
     onSuccess: (data, variables) => {
       queryClient.setQueryData(["cart"], (oldData: any) => {
         const updatedItems = oldData.items.map((item: any) => {
-          if (item.productId === productId) {
+          if (item.product_id === productId) {
             return { ...item, quantity: item.quantity + 1 };
           }
           return item;

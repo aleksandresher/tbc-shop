@@ -12,7 +12,7 @@ import { ModeToggle } from "../ThemeToggle";
 export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
     <section
-      className="hidden sm:w-full md:grid bg-[#fae9f2]  py-4 dark:bg-[#70294a] opacity-80"
+      className="hidden sm:w-full md:grid bg-[#fae9f2]  py-4 dark:bg-[#70294a]"
       style={{ gridTemplateColumns: "3fr 1fr 1fr" }}
     >
       <span className=" flex items-center md:justify-end gap-10 col-span-1">

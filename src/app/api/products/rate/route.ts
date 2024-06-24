@@ -6,7 +6,6 @@ export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
 
   const productId = query.get("productId");
-  console.log("productId", productId);
 
   if (!productId) {
     return NextResponse.json(

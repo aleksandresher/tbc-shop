@@ -37,7 +37,7 @@ export default function Single({
           </div>
           <div className="w-full flex flex-col items-center gap-1">
             <h1 className="text-base font-tbc-medium">{item.brand}</h1>
-            <p className="w-full h-[40px] md:w-4/5 text-sm text-center font-tbc-medium">
+            <p className="w-4/5 h-[40px] lg:w-full text-sm text-center font-tbc-medium">
               {item.title}
             </p>
           </div>
@@ -57,11 +57,16 @@ export default function Single({
           </div>
         </div>
       </Link>
-      <section className="flex p-2 items-center">
+      <section className="flex p-2 gap-1 items-center">
         <div className="App">
-          <Rating initialValue={avarageRating} className="hidden" size={20} />
+          <Rating
+            initialValue={avarageRating}
+            className="hidden"
+            size={20}
+            readonly={true}
+          />
         </div>
-        <div className="flex gap-1 items-center p-0">
+        <div className="flex gap-1 items-center pt-2">
           <p className="text-sm">{avarageRating ? avarageRating : null}</p>
           <p className="text-sm">({item.numberofvotes})</p>
         </div>

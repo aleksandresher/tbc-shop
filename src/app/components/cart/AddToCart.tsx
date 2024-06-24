@@ -59,7 +59,7 @@ export default function AddToCart({ productId }: { productId: number }) {
 
   return (
     <button
-      className="border bg-[#fff] border-black rounded-[4px] mt-2 px-6 py-2  text-sm dark:bg-black font-tbc-regular flex justify-center items-center "
+      className="border bg-[#fff] border-black rounded-[4px] mt-2 px-6 py-2  text-sm dark:bg-black font-tbc-regular flex justify-center items-center hover:bg-[#f1f3f6] dark:hover:bg-[#252525] "
       onClick={() => clickHandler()}
     >
       <div className="flex items-center gap-2">

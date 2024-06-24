@@ -11,7 +11,7 @@ export default function DecreaseButton({
 }) {
   const queryClient = useQueryClient();
 
-  const decreaseQuantity = async (productId: number) => {
+  const decreaseQuantity = async () => {
     const response = await fetch(`${URL}/api/cart/decrease`, {
       method: "POST",
       headers: {
@@ -30,11 +30,11 @@ export default function DecreaseButton({
   };
 
   const mutation = useMutation({
-    mutationFn: () => decreaseQuantity(productId),
+    mutationFn: decreaseQuantity,
     onSuccess: (data, variables) => {
       queryClient.setQueryData(["cart"], (oldData: any) => {
         const updatedItems = oldData.items.map((item: any) => {
-          if (item.productId === productId) {
+          if (item.product_id === productId) {
             return { ...item, quantity: item.quantity - 1 };
           }
           return item;
@@ -43,7 +43,7 @@ export default function DecreaseButton({
       });
     },
     onError: (err) => {
-      console.error("Error decreasing quantity:", err);
+      console.error("Error increasing quantity:", err);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });

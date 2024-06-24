@@ -8,8 +8,6 @@ export async function POST(req: NextRequest) {
   const token = await getToken({ req, secret });
   const { data } = await req.json();
   try {
-    console.log("Received data:", data);
-
     const {
       entitle,
       enbrand,

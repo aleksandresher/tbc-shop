@@ -100,7 +100,7 @@ export default function SingleProductPageCard({
       }
 
       const productData = await response.json();
-      queryClient.invalidateQueries({ queryKey: ["SingleProduct"] });
+      queryClient.invalidateQueries({ queryKey: ["singleProduct"] });
       console.log("Product rated successfully:", productData);
     } catch (error) {
       console.error("Error rating product:", error);
@@ -148,7 +148,7 @@ export default function SingleProductPageCard({
                 <p className="text-sm">
                   {avarageRating ? avarageRating : null}
                 </p>
-                <p className="text-sm">({data[0]?.totalvotes})</p>
+                <p className="text-sm">({data[0]?.numberofvotes})</p>
               </span>
             </div>
             <span className="w-full">
