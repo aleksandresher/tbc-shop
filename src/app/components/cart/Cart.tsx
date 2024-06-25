@@ -37,7 +37,7 @@ interface LanguageDetails {
   brand: string;
   sdescription: string;
   ldescription: string;
-  price: string; // You may want to convert this to a number type if needed
+  price: number;
   currency: string;
 }
 
@@ -49,6 +49,7 @@ export default function Cart({ locale }: { locale: string }) {
   const t = useI18n();
   const { setItemCount } = useCart();
   const [language, setLanguage] = useState(locale);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const { data, isLoading, error } = useQuery<CartResponse>({
     queryKey: ["cart"],
     queryFn: () => getCart(),
@@ -57,8 +58,20 @@ export default function Cart({ locale }: { locale: string }) {
   useEffect(() => {
     if (data?.items) {
       setItemCount(data.items.length);
+
+      // Calculate total price
+      const totalPrice = data.items.reduce(
+        (accumulator, currentItem) =>
+          accumulator + currentItem.quantity * getPrice(currentItem, locale),
+        0
+      );
+      setTotalPrice(totalPrice);
     }
-  }, [data, setItemCount]);
+  }, [data, setItemCount, locale]);
+
+  function getPrice(item: CartItem, locale: string): number {
+    return item.languages[locale as keyof typeof item.languages].price;
+  }
 
   if (isLoading) {
     return <BeatLoader />;
@@ -69,7 +82,7 @@ export default function Cart({ locale }: { locale: string }) {
   }
 
   return (
-    <section className=" w-[300px] md:w-[750px] flex flex-col gap-2 p-8">
+    <section className=" w-[300px] md:w-[750px] flex flex-col gap-2 p-4 md:p-8">
       <div className="flex gap-5 items-end mb-5">
         <h1 className="font-bold text-2xl">{t("shoppingBag")}</h1>
         <p>
@@ -90,7 +103,7 @@ export default function Cart({ locale }: { locale: string }) {
                     .title
                 }
                 width={200}
-                height={100}
+                height={150}
                 className="w-[200px] h-[150px]"
               />
             </div>
@@ -147,8 +160,18 @@ export default function Cart({ locale }: { locale: string }) {
           </div>
         ))}
       </div>
-
-      <StripeProducts />
+      <span className="flex flex-col gap-4 justify-between md:flex-row md:gap-0 ">
+        <div className="flex items-center w-3/4 gap-4 px-4 ">
+          <h2 className=" text-md md:text-xl">{t("totalPrice")}:</h2>
+          <span className="flex gap-1">
+            <p className="text-md md:text-xl">{totalPrice}</p>
+            <p className="text-md md:text-xl">
+              {locale === "ka" ? "GEL" : "USD"}
+            </p>
+          </span>
+        </div>
+        <StripeProducts />
+      </span>
     </section>
   );
 }

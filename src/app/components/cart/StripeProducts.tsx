@@ -105,7 +105,7 @@ export default function StripeProducts() {
     }
   };
   return (
-    <section className="flex w-full md:w-[700px] md:py-4 justify-center  ">
+    <section className="flex   md:py-4 justify-center  ">
       <button
         onClick={handlePayment}
         className=" border-2 px-5 py-2 dark:text-white dark:bg-black font-bold"

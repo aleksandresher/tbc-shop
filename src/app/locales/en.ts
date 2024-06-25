@@ -54,6 +54,9 @@ export default {
   popularProducts: "Popular Products",
 
   relatedProducts: "Related Products",
+  totalPrice: "Total Price",
+  upload: "Upload Image",
+  chooseImage: "Choose Image",
 
   alreadyexistmail: "User with this email already exists",
   registeredSuccess: "User registered successfully",

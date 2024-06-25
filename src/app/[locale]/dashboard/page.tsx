@@ -7,7 +7,7 @@ interface ParamsType {
 
 export default function Dashboard({ params }: { params: ParamsType }) {
   return (
-    <div className="pt-8 mb-16 px-14 bg-[#f1f3f6] dark:bg-black">
+    <div className="pt-8 mb-16 px-6 md:px-14 bg-[#f1f3f6] dark:bg-black">
       <UserSideBar locale={params.locale} />
     </div>
   );

@@ -6,6 +6,8 @@ import Image from "next/image";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useQueryClient } from "@tanstack/react-query";
 const URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { useI18n } from "@/app/locales/client";
+import UploadIcon from "../svg/UploadIcon";
 
 interface ImageUploadPageProps {
   onUploadComplete: (url: string) => void;
@@ -18,41 +20,80 @@ export default function ProductImageUpload({
   const [modal, setModal] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  const t = useI18n();
 
   const handleUpload = async () => {
     setModal(true);
-    if (!inputFileRef.current?.files) {
-      throw new Error("No file selected");
-    }
 
-    const file = inputFileRef.current.files[0];
-
-    const response = await fetch(
-      `${URL}/api/avatar/upload?filename=${file.name}`,
-      {
-        method: "POST",
-        body: file,
+    try {
+      if (!inputFileRef.current?.files) {
+        throw new Error("No file selected");
       }
-    );
 
-    const newBlob = (await response.json()) as PutBlobResult;
+      const file = inputFileRef.current.files[0];
 
-    setBlob(newBlob);
+      const response = await fetch(
+        `${URL}/api/avatar/upload?filename=${file.name}`,
+        {
+          method: "POST",
+          body: file,
+        }
+      );
 
-    onUploadComplete(newBlob.url);
+      if (!response.ok) {
+        throw new Error("Failed to upload image");
+      }
 
-    setModal(false);
+      const newBlob = (await response.json()) as PutBlobResult;
+      setBlob(newBlob);
+      onUploadComplete(newBlob.url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    } finally {
+      setModal(false);
+    }
+  };
+
+  const handleClickLabel = () => {
+    if (inputFileRef.current) {
+      inputFileRef.current.click();
+    }
+  };
+
+  const handleInputChange = () => {
+    handleUpload();
   };
 
   return (
     <>
-      <form>
-        <input name="file" ref={inputFileRef} type="file" required />
+      <form className="flex w-3/5 gap-6 justify-start">
+        <input
+          name="file"
+          ref={inputFileRef}
+          type="file"
+          style={{ display: "none" }}
+          onChange={handleInputChange}
+          required
+          id="imageupload"
+        />
+
+        <span
+          className="flex items-center gap-3 border border-green-500 p-6 border-dashed cursor-pointer"
+          onClick={handleClickLabel}
+        >
+          <UploadIcon />
+          <label htmlFor="imageupload" className="file-upload-label">
+            {t("chooseImage")}
+          </label>
+        </span>
+
         <button type="button" onClick={handleUpload}>
-          Upload
+          {t("upload")}
         </button>
       </form>
+
       {modal && <BeatLoader />}
+
       {blob && (
         <div>
           <Image src={blob.url} width={100} height={100} alt="Uploaded image" />

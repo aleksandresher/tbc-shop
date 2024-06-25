@@ -36,6 +36,9 @@ export default {
   mainpage: "მთავარი გვერდი",
   buy: "ყიდვა",
   invalidPassword: "პაროლი არასწორია",
+  totalPrice: "სრული ღირებულება",
+  upload: "სურათის ატვირთვა",
+  chooseImage: "აირჩიეთ სურათი",
 
   shoppingBag: "კალათა",
   remove: "წაშლა",
