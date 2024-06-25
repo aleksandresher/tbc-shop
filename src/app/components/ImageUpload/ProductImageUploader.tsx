@@ -65,8 +65,19 @@ export default function ProductImageUpload({
   };
 
   return (
-    <>
-      <form className="flex w-3/5 gap-6 justify-start">
+    <section className="flex flex-col gap-4">
+      {blob && (
+        <div className="">
+          <Image
+            src={blob.url}
+            width={200}
+            height={200}
+            alt="Uploaded image"
+            className="w-[200px] h-[200px]"
+          />
+        </div>
+      )}
+      <form className="flex w-3/5 gap-6 justify-start ">
         <input
           name="file"
           ref={inputFileRef}
@@ -86,19 +97,9 @@ export default function ProductImageUpload({
             {t("chooseImage")}
           </label>
         </span>
-
-        <button type="button" onClick={handleUpload}>
-          {t("upload")}
-        </button>
       </form>
 
       {modal && <BeatLoader />}
-
-      {blob && (
-        <div>
-          <Image src={blob.url} width={100} height={100} alt="Uploaded image" />
-        </div>
-      )}
-    </>
+    </section>
   );
 }

@@ -43,6 +43,8 @@ export default function AddMyProduct() {
     register,
     handleSubmit,
     setValue,
+    resetField,
+    reset,
     formState: { errors },
   } = useForm<UserType>();
 
@@ -82,6 +84,8 @@ export default function AddMyProduct() {
       queryClient.invalidateQueries({ queryKey: ["myproducts"] });
       setOpen(false);
       toast({ description: "Product created successfully" });
+      reset();
+      resetField("image");
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -93,27 +97,19 @@ export default function AddMyProduct() {
   };
 
   return (
-    <div className="w-full pt-4 pl-4 relative">
-      <div className="absolute translate-x-2/4 z-50">
+    <div className="w-full lg:pt-4 lg:pl-4 relative  flex flex-col lg:flex-row ">
+      {/* <div className="absolute translate-x-2/4 z-50">
         {isLoading && <FadeLoader />}
-      </div>
+      </div> */}
 
-      {/* <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger
-          asChild
-          className="border-2 rounded-[8px] flex justify-center w-[120px] md:w-[200px] border-outset border-opacity-50 border-[#f1a45d] p-2 cursor-pointer"
-        >
-          <p className="">{t("addProduct")}</p>
-        </DialogTrigger>
-        <DialogContent className="max-h-screen h-screen overflow-y-auto bg-gray-300 dark:bg-[#1c1c1e] overflow-x-hidden"> */}
-      <form onSubmit={handleSubmit(onSubmit)} className="">
+      <form onSubmit={handleSubmit(onSubmit)} className=" w-full lg:w-4/5 ">
         <div className="flex flex-col items-center  w-full">
-          <section className="flex flex-col items-center p-3 gap-4 sm:w-4/5 ">
-            <div className="w-[320px] md:w-4/5 flex flex-col gap-1">
+          <section className="flex flex-col items-center lg:p-3 gap-4 sm:w-full border-b-2 border-black pb-7 relative  ">
+            <div className="w-[320px] px-4 md:w-4/5 flex flex-col gap-1 ">
               <div className=" flex flex-col  justify-between md:justify-center gap-2">
                 <label htmlFor="katitle">სათაური</label>
                 <input
-                  className="p-2  rounded-[8px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2  rounded-[8px] w-4/5 lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="katitle"
                   {...register("katitle", {
                     required: "სათაური სავალდებულოა",
@@ -128,10 +124,10 @@ export default function AddMyProduct() {
             </div>
 
             <div className="w-[320px] md:w-4/5 flex flex-col gap-1">
-              <div className="flex flex-col  justify-between md:justify-center gap-2">
+              <div className=" px-4 flex flex-col  justify-between md:justify-center gap-2">
                 <label htmlFor="brand">ბრენდი</label>
                 <input
-                  className="p-2  rounded-[4px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2 w-4/5  rounded-[4px] lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="kabrand"
                   {...register("kabrand", {
                     required: "ბრენდი სავალდებულოა",
@@ -146,7 +142,7 @@ export default function AddMyProduct() {
             </div>
 
             <div className="w-[320px] md:w-4/5 flex flex-col gap-1">
-              <div className="w-full flex  justify-start gap-14">
+              <div className="px-4 w-full flex  justify-start gap-14">
                 <label htmlFor="kacategory">კატეგორია</label>
                 <select
                   {...register("kacategory", {
@@ -166,10 +162,10 @@ export default function AddMyProduct() {
             </div>
 
             <div className="w-[320px] md:w-4/5 flex flex-col  gap-1">
-              <div className="w-full flex flex-col  gap-2">
+              <div className="px-4 w-full flex flex-col  gap-2">
                 <label htmlFor="kaprice">ფასი</label>
                 <input
-                  className="p-2  rounded-[8px] w-1/6 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2  rounded-[8px] w-1/2 lg:w-1/6 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="kaprice"
                   type="number"
                   {...register("kaprice", {
@@ -184,10 +180,10 @@ export default function AddMyProduct() {
               </span>
             </div>
             <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1">
-              <div className="flex flex-col  justify-between md:justify-center gap-2">
+              <div className="px-4 flex flex-col  justify-between md:justify-center gap-2">
                 <label htmlFor="kacountry">ქვეყანა</label>
                 <input
-                  className="p-2   w-2/6 rounded-[8px]  border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2  w-1/2  lg:w-2/6 rounded-[8px]  border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="kacountry"
                   {...register("kacountry", {
                     required: "ქვეყანა სავალდებულოა",
@@ -201,10 +197,10 @@ export default function AddMyProduct() {
               </span>
             </div>
             <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1">
-              <div className="flex flex-col  justify-between md:justify-center gap-2">
+              <div className="px-4 flex flex-col  justify-between md:justify-center gap-2">
                 <label htmlFor="kasdescription">აღწერა</label>
                 <textarea
-                  className="p-2  rounded-[8px] min-h-[120px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2  rounded-[8px] min-h-[120px] w-[90%] lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="kasdescription"
                   {...register("kasdescription", {
                     required: "აღწერა სავალდებულოა",
@@ -220,10 +216,10 @@ export default function AddMyProduct() {
               </span>
             </div>
             <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1">
-              <div className="flex flex-col  justify-between md:justify-center gap-22">
+              <div className=" px-4 flex flex-col  justify-between md:justify-center gap-22">
                 <label htmlFor="kaldescription">მოკლე აღწერა</label>
                 <textarea
-                  className="p-2 min-h-[120px]  rounded-[8px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2 min-h-[120px]  rounded-[8px] w-[90%] lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="kaldescription"
                   {...register("kaldescription", {
                     required: "მოკლე აღწერა სავალდებულოა",
@@ -239,7 +235,7 @@ export default function AddMyProduct() {
               </span>
             </div>
             <div className=" w-[320px] sm:w-4/5 flex flex-col md:flex-row gap-1">
-              <div className="flex flex-col  justify-between md:justify-center gap-2">
+              <div className="flex flex-col px-4  justify-between md:justify-center gap-2">
                 <label htmlFor="size">ზომა</label>
                 <input
                   className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
@@ -257,10 +253,10 @@ export default function AddMyProduct() {
               </span>
             </div>
             <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1 mb-5">
-              <div className="flex flex-col  justify-between md:justify-center gap-2">
+              <div className="flex flex-col px-4  justify-between md:justify-center gap-2">
                 <label htmlFor="image">ფოტო</label>
                 <input
-                  className="p-2  rounded-[8px] w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                  className="p-2  rounded-[8px] w-4/5 lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                   id="image"
                   value={productImageUrl || ""}
                   {...register("image", {
@@ -277,12 +273,12 @@ export default function AddMyProduct() {
           </section>
 
           {isEn && (
-            <section className="flex flex-col p-3 gap-4 sm:w-1/2">
-              <div className="w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+            <section className="flex flex-col items-center p-3 gap-4 sm:w-full ">
+              <div className="w-[320px] md:w-4/5 flex flex-col gap-1">
+                <div className="px-4 flex flex-col  justify-between md:justify-center gap-2">
                   <label htmlFor="entitle">Title</label>
                   <input
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-4/5 lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="entitle"
                     {...register("entitle")}
                   />
@@ -294,11 +290,11 @@ export default function AddMyProduct() {
                 </span>
               </div>
 
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className=" w-[320px] sm:w-4/5 flex flex-col  gap-1 ">
+                <div className="px-4 flex flex-col w-full  justify-between md:justify-center gap-2">
                   <label htmlFor="enbrand">Brand</label>
                   <input
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-4/5 lg:w-full border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="enbrand"
                     {...register("enbrand")}
                   />
@@ -310,8 +306,8 @@ export default function AddMyProduct() {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-1">
-                <div className="w-full flex items-center justify-start gap-14">
+              <div className="w-[320px] md:w-4/5 flex flex-col gap-1">
+                <div className="px-4 w-full flex  justify-start gap-14">
                   <label htmlFor="encategory">category</label>
                   <select {...register("encategory")}>
                     <option value="skin">skin</option>
@@ -326,11 +322,11 @@ export default function AddMyProduct() {
                 </span>
               </div>
 
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className="w-[320px] md:w-4/5 flex flex-col  gap-1">
+                <div className="px-4 w-full flex flex-col  gap-2">
                   <label htmlFor="enprice">price</label>
                   <input
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-1/2 lg:w-1/6 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="enprice"
                     type="number"
                     {...register("enprice")}
@@ -342,11 +338,11 @@ export default function AddMyProduct() {
                   )}
                 </span>
               </div>
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1">
+                <div className="px-4 flex flex-col  justify-between md:justify-center gap-2">
                   <label htmlFor="encountry">country</label>
                   <input
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-1/2 lg:w-2/6 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="encountry"
                     {...register("encountry")}
                   />
@@ -357,11 +353,11 @@ export default function AddMyProduct() {
                   )}
                 </span>
               </div>
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className=" w-[320px] sm:w-4/5 flex flex-col gap-1">
+                <div className=" px-4 flex flex-col  justify-between md:justify-center gap-22">
                   <label htmlFor="ensdescription">small description</label>
                   <textarea
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-[90%] lg:w-full min-h-[120px] border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="ensdescription"
                     {...register("ensdescription")}
                   />
@@ -374,11 +370,11 @@ export default function AddMyProduct() {
                   )}
                 </span>
               </div>
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className="  w-[320px] sm:w-4/5 flex flex-col gap-1">
+                <div className="px-4 flex flex-col  justify-between md:justify-center gap-22">
                   <label htmlFor="enldescription">large description</label>
                   <textarea
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2 rounded-[8px] w-[90%] lg:w-full min-h-[120px] border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="enldescription"
                     {...register("enldescription")}
                   />
@@ -391,11 +387,11 @@ export default function AddMyProduct() {
                   )}
                 </span>
               </div>
-              <div className=" w-[320px] sm:w-full flex flex-col gap-1">
-                <div className="w-full flex items-center justify-between  gap-2">
+              <div className=" w-[320px] sm:w-4/5 flex flex-col md:flex-row gap-1">
+                <div className="px-4 flex flex-col  justify-between md:justify-center gap-2">
                   <label htmlFor="size">size</label>
                   <input
-                    className="p-2  rounded-[8px] w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
+                    className="p-2  rounded-[8px] w-1/2 lg:w-4/5 border border-[#4fec5c] outline-none focus:border-[#48a850]"
                     id="ensize"
                     type="number"
                     {...register("ensize")}
@@ -411,27 +407,25 @@ export default function AddMyProduct() {
           )}
         </div>
 
-        <span className="flex gap-4  w-1/2 justify-evenly mt-8">
+        <span className="flex gap-4  w-1/2  px-20 mt-8 mb-4">
           <button
             type="submit"
             className="bg-green-400 rounded-full p-2 uppercase"
           >
             {t("createProduct")}
           </button>
-          {!isEn ? (
-            <button onClick={() => setIsEn((prev) => !prev)} type="button">
-              დაამატე პროდუქტი ინგლისურ ენაზე
-            </button>
-          ) : (
-            <button onClick={() => setIsEn((prev) => !prev)} type="button">
-              არ მსურს დამატება
-            </button>
-          )}
         </span>
+        {!isEn ? (
+          <button onClick={() => setIsEn((prev) => !prev)} type="button">
+            დაამატე პროდუქტი ინგლისურ ენაზე
+          </button>
+        ) : (
+          <button onClick={() => setIsEn((prev) => !prev)} type="button">
+            არ მსურს დამატება მეორე ენაზე
+          </button>
+        )}
       </form>
-      {/* </DialogContent>
-      </Dialog> */}
-      <div className="flex w-full  justify-center">
+      <div className="flex w-1/5 items-end py-32  bottom-0 right-0 ">
         <ProductImageUpload onUploadComplete={handleImageUpload} />
       </div>
     </div>
