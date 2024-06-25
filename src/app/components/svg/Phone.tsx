@@ -1,7 +1,8 @@
 export default function PhoneIcon() {
   return (
     <section>
-      <svg
+      <section></section>
+      {/* <svg
         width="30px"
         height="30px"
         viewBox="0 0 24 24"
@@ -14,7 +15,7 @@ export default function PhoneIcon() {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-      </svg>
+      </svg> */}
     </section>
   );
 }
