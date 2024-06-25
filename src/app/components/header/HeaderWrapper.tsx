@@ -24,7 +24,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
         <SearchWrapper locale={locale} />
       </span>
 
-      <span className="hidden sm:flex gap-6 justify-end items-center ">
+      <span className="hidden sm:flex gap-2 justify-end items-center ">
         <ShopWrapper locale={locale} />
         <BlogWrapper locale={locale} />
         <ContactWrapper locale={locale} />
