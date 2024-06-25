@@ -36,15 +36,15 @@ export default function CartWrapper({ locale }: { locale: string }) {
   return (
     <section className="relative">
       <div onClick={() => handleClick()} className=" cursor-pointer">
-        {/* <BasketIcon /> */}
-        <Image
+        <BasketIcon />
+        {/* <Image
           src="/bag.svg"
           alt="basket icon"
           width={25}
           height={25}
 
           // className="fill-[#000] dark:fill-[#fff] stroke-black dark:stroke-white"
-        />
+        /> */}
         <span className="absolute bottom-4 text-black font-bold">
           {cartData?.items.length}
         </span>

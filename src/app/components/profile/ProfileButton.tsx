@@ -71,7 +71,13 @@ export default function ProfileButton({ locale }: { locale: string }) {
             className="rounded-[6px] h-[25px] w-[25px] outline-none"
           />
         ) : (
-          <Image src="/user.svg" alt="auth icon" width={25} height={25} />
+          <Image
+            src="/user1.png"
+            alt="auth icon"
+            // width={40}
+            // height={40}
+            className="w-[60px] h-[60px]"
+          />
           // <ProfileIcon />
         )}
       </DropdownMenuTrigger>
