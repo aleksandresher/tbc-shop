@@ -7,8 +7,9 @@ import ContactIcon from "../svg/ContactIcon";
 export default function ContactWrapper({ locale }: { locale: string }) {
   const t = useI18n();
   return (
-    <Link href={`/${locale}/contact`} className="flex items-center gap-1">
-      <ContactIcon />
+    <Link href={`/${locale}/contact`} className="flex items-center gap-2">
+      <Image src="/contact2.svg" width={30} height={30} alt="contact icon" />
+      {/* <ContactIcon /> */}
       <h1>{t("contact")}</h1>
     </Link>
   );

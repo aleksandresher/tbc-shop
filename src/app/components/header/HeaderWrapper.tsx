@@ -13,7 +13,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
   return (
     <section
       className="hidden sm:w-full md:grid bg-[#fae9f2]  py-4 dark:bg-[#70294a]"
-      style={{ gridTemplateColumns: "3fr 1fr 1fr" }}
+      style={{ gridTemplateColumns: "3fr 2fr 1fr" }}
     >
       <span className=" flex items-center md:justify-end gap-10 col-span-1">
         <Link href={`/${locale}`}>
@@ -24,7 +24,7 @@ export default function HeaderWrapper({ locale }: { locale: string }) {
         <SearchWrapper locale={locale} />
       </span>
 
-      <span className="hidden sm:flex gap-4 justify-end items-center ">
+      <span className="hidden sm:flex gap-6 justify-end  items-center ">
         <ShopWrapper locale={locale} />
         <BlogWrapper locale={locale} />
         <ContactWrapper locale={locale} />

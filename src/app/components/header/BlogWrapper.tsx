@@ -9,7 +9,13 @@ export default function BlogWrapper({ locale }: { locale: string }) {
   return (
     <Link href={`/${locale}/blog`}>
       <section className="flex items-center gap-2">
-        <BlogIcon />
+        {/* <BlogIcon /> */}
+        <Image
+          src="/blog-svgrepo-com.svg"
+          width={30}
+          height={30}
+          alt="contact icon"
+        />
         <h1>{t("blog")}</h1>
       </section>
     </Link>

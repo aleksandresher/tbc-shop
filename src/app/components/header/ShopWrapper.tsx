@@ -8,8 +8,9 @@ export default function ShopWrapper({ locale }: { locale: string }) {
   const t = useI18n();
   return (
     <Link href={`/${locale}/shop`}>
-      <section className="flex items-center gap-1">
-        <StoreIcon />
+      <section className="flex items-center gap-0">
+        {/* <StoreIcon /> */}
+        <Image src="/storelast.svg" width={50} height={50} alt="contact icon" />
         <h1>{t("store")}</h1>
       </section>
     </Link>
